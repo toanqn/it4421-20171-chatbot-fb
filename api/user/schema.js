@@ -32,17 +32,11 @@ const userSchema = new schema({
     type: String,
     required: true,
   },
-  address: String,
-  fullname: {
-    type: String,
-    required: true,
-  },
   email: {
     type: String,
     required: true,
     validate: emailValidator,
   },
-  gender: Boolean,
   phone: String,
   role: {
     type: String,

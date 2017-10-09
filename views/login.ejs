@@ -7,12 +7,37 @@
     <title>SignUp/Login</title>
     
     
-    <link href="resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="resources/css/style.css" rel="stylesheet" type="text/css">
-    <script src="resources/js/jquery-3.1.1.min.js" type="text/javascript" > </script>
-    <script src="resources/js/script.js" type="text/javascript" > </script>
-    <script src="resources/bootstrap/js/bootstrap.min.js" type="text/javascript"> </script>
+    <link href="/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/resources/css/style.css" rel="stylesheet" type="text/css">
+    <script src="/resources/js/jquery-3.1.1.min.js" type="text/javascript" > </script>
+    <script src="/resources/js/script.js" type="text/javascript" > </script>
+    <script src="/resources/bootstrap/js/bootstrap.min.js" type="text/javascript"> </script>
+    <script>
+        var register = function() {
+           var username = document.getElementById('su-yourname').value;
+           var email = document.getElementById('su-email').value;
+           var password = document.getElementById('su-password').value;
+           var phone = document.getElementById('su-phone').value;
+           var role;
+           if(document.getElementById('su-r1').checked) {
+               role = 'personal';
+           } else {
+               role = 'business';
+           }
+           var xhr = new XMLHttpRequest();
+           var url = window.location.host+ '/api/user/createUser';
+           var params = `username=${username}&email=${email}&password=${password}&phone=${phone}&role=${role}`;
+           xhr.open("POST", url, true);
+           xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+           xhr.onload = function() {
+               if(xhr.readyState === 4 && xhr.status === 200){
+                   console.log(aaa);
+               }
+           }
+           xhr.send(params);
+        }
+    </script>
     
 </head>
 <body>
@@ -82,34 +107,37 @@
         </ul>
         <div class="tab-content">
             <div id="signup" class="tab-pane fade in active">
-                <br>
-                <div class="radioBtn row col-md-12">
-                    
-                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                        <label class="radio-inline"><input type="radio" name="accountType" checked="checked" value="personal">Personal Account</label>
-                    </div>
-                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                        <label class="radio-inline"><input type="radio" name="accountType" value="business">Business Account</label>
-                    </div>
-                
-                </div>
-                <br> <br>
                 <div id="signupPersonal">
-                    <form action="" method="POST" role="form">
+                    <form action="/api/user/createUser" method="POST" role="form">
+                        <br>
+                        <div class="radioBtn row col-md-12">
+                            
+                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                <label class="radio-inline"><input type="radio" id="su-r1" name="role" checked="checked" value="personal">Personal Account</label>
+                            </div>
+                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                <label class="radio-inline"><input type="radio" id="su-r1" name="role" value="business">Business Account</label>
+                            </div>
+                        
+                        </div>
+                        <br> <br>
                         <div class="form-group">
-                            <label>Your Name</label>
-                            <input type="text" class="form-control" id="" placeholder="Your name" required="required" name="name-signup">
+                            <label>Username</label>
+                            <input type="text" class="form-control" id="su-yourname" placeholder="Your username" required="required" name="username">
                         </div>
                         <div class="form-group">
                             <label >Email</label>
-                            <input type="email" class="form-control" id="" placeholder="Your Email" required="required" name="email-signup">
+                            <input type="email" class="form-control" id="su-email" placeholder="Your Email" required="required" name="email">
                         </div>
                         <div class="form-group">
                             <label >Password</label>
-                            <input type="password" class="form-control" id="" placeholder="Password" required="required" name="password-signup">
+                            <input type="password" class="form-control" id="su-password" placeholder="Password" required="required" name="password">
                         </div>
-
-                        <button id="registerBtn" type="submit" class="btn btn-success col-md-12">Register</button>
+                        <div class="form-group">
+                            <label >Phone number</label>
+                            <input type="phone" class="form-control" id="su-phone" placeholder="Phone number" required="required" name="phone">
+                        </div>
+                        <button id="registerBtn" type="submit" class="btn btn-success col-md-12" >Register</button>
                     </form>
                 </div>
 
@@ -140,15 +168,15 @@
             </div> 
             <div id="login" class="tab-pane fade">
                 <br> <br>
-                <form action="" method="POST" role="form">
+                <form action="/api/user/login" method="POST" role="form">
                     
                     <div class="form-group">
-                        <label for="">Email</label>
-                        <input type="text" class="form-control" id="" placeholder="Your Email" required="required" name="email-login">
+                        <label for="">Username</label>
+                        <input type="text" class="form-control" id="" placeholder="Your username" required="required" name="username">
                     </div>
                     <div class="form-group">
                         <label for="">Password</label>
-                        <input type="password" class="form-control" id="" placeholder="Password" required="required" name="password-login">
+                        <input type="password" class="form-control" id="" placeholder="Password" required="required" name="password">
                     </div>
                     <br>
                     <button id="loginBtn" type="submit" class="btn btn-success col-md-12">Log In</button>
@@ -156,10 +184,11 @@
             </div>
         </div>
     </div>
+    <% if (show) { %>
+        <script>
+           alert('<%- message %>')      
+        </script>
+    <% } %>
     <!-- End Tab -->
-
-
-
-
 </body>
 </html>
