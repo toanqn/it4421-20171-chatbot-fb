@@ -14,7 +14,7 @@ const bcryptUtility = require('./utility/bcrypt');
 
 app.use(express.static(`${__dirname}/public`));
 app.set('view engine', 'ejs');
-app.set('views', 'views/pages');
+app.set('views', 'views');
 app.use(bodyParser.json({ extended: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session({
@@ -58,6 +58,18 @@ passport.use(new LocalStrategy((username, password, done) => {
 }));
 
 app.use('/api/user', userRoute);
+
+app.get('/', (req, res) => {
+  res.render('index');
+});
+
+app.get('/login', (req, res) => {
+  res.render('login');
+});
+
+app.get('/detail', (req, res) => {
+  res.render('productDetail');
+});
 
 
 if (!process.env.NODE_ENV) {
