@@ -31,8 +31,9 @@ route.post('/login', passport.authenticate('local'), (req, res) => {
   res.redirect('/');
 });
 
-route.get('/test', (req, res) => {
-  res.send(req.isAuthenticated());
+route.get('/logout', (req, res) => {
+  req.logout();
+  res.redirect('/');
 });
 
 module.exports = route;

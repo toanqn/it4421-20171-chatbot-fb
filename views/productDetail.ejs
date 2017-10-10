@@ -68,10 +68,11 @@
             <!-- Nav right -->
             <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
 
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="/login"><button type="button" class="btn btn-primary" id="sign-up"> <span class="glyphicon glyphicon-user"></span> Sign Up </button></a>                        </li>
-                    <li><a href="/login"><button type="button" class="btn btn-success" id="log-in"> <span class="glyphicon glyphicon-log-in"></span> Log In</button> </a></li>
-                </ul>
+                    <ul class="nav navbar-nav navbar-right" >
+                        <li style="display:<%if(login) {%> none <%}%>"><a href="/login"><button type="button" class="btn btn-primary" id="sign-up"> <span class="glyphicon glyphicon-user"></span> Sign Up </button></a></li>
+                        <li style="display:<%if(login) {%> none <%}%>"><a href="/login"><button type="button" class="btn btn-success" id="log-in"> <span class="glyphicon glyphicon-log-in"></span> Log In</button> </a></li>
+                        <li style="display:<%if(!login) {%> none <%}%>"><a href="/api/user/logout"><button type="button" class="btn btn-success" id="log-out"> <span class="glyphicon glyphicon-log-in"></span> Log Out</button> </a></li>
+                    </ul>
 
             </div>
             <!-- End nav right -->

@@ -60,7 +60,7 @@ passport.use(new LocalStrategy((username, password, done) => {
 app.use('/api/user', userRoute);
 
 app.get('/', (req, res) => {
-  res.render('index');
+  res.render('index', { login: req.isAuthenticated() });
 });
 
 app.get('/login', (req, res) => {
@@ -68,9 +68,8 @@ app.get('/login', (req, res) => {
 });
 
 app.get('/detail', (req, res) => {
-  res.render('productDetail');
+  res.render('productDetail', { login: req.isAuthenticated() });
 });
-
 
 if (!process.env.NODE_ENV) {
   mongoose.connect(config.DB_Address);
