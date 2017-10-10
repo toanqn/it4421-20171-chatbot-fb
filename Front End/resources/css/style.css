@@ -7,7 +7,7 @@ body{
 }
 
 #searchText {
-	width: 260px;
+	width: 300px;
 
 }
 
@@ -31,13 +31,6 @@ body{
 	width: 360px;
 } */
 
-
-.content {
-	
-	margin-left: 100px;
-	margin-right: 100px;
-
-}
 
 #auctionbg {
 	height: 270px;
@@ -126,6 +119,13 @@ h4 {
 .starRating div {
 	display: inline-block;
 	/* margin-bottom: 5px; */
+}
+
+.logo  {
+	position: absolute;
+}
+.navbar-header {
+	padding-left: 50px;
 }
 
 #sellerInfo {
