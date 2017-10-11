@@ -32,7 +32,7 @@
                         <span class="icon-bar"></span>
                     </button>
                     
-                    <a class="navbar-brand" href="#">Bk Auction</a>
+                    <a class="navbar-brand" href="index.html">Bk Auction</a>
                 </div>
                 <ul class="nav navbar-nav navbar-collapse collapse">
                     <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Category<span class="caret"></span></a>
@@ -56,8 +56,8 @@
                     </div>
                 </form>
                 <ul class="nav navbar-nav navbar-right navbar-collapse collapse">
-                    <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                    <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                    <li><a href="signup.html"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                    <li><a href="signup.html"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
                 </ul>
             </div>
         </nav>
@@ -124,24 +124,25 @@
                             <div class="itemTitle">Current Bid: <span id="currentBid"> US $50</span></div>
                             <a href="#">[6 bids]</a>
                             
-                            <form action="" method="POST" class="form-inline" role="form">
-                            
-                                <div class="form-group">
-                                    <input type="number" class="form-control" id="inputBid" placeholder="Enter US $">
-                                </div>
-                                <button type="submit" class="btn btn-primary btnBid">Place Bid</button>
-                            </form>
+                                <form action="" method="" class="input-group" role="form">
+                                    <span class="input-group-addon">$</span>
+                                    <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-primary" type="submit">Bid Place</button>
+                                    </span>
+                                </form>
                             <div>Enter US $51 or More</div>
                             
                         </div>
                     </div>
                     
-                    <div class="    col-md-4 col-lg-4">
+                    <div class="col-md-4 col-lg-4">
                         <div id="sellerInfo">
-                            <a href="#">Top-rated Seller</a>
-                            <p id="sellerAcc"> <a href="#">Minhnbpink</a> <span id="numStars"> (450 <span class="glyphicon glyphicon-star"></span>)</span></p>
+                            <!-- <a href="#">Top-rated Seller</a> -->
+                            <p id="sellerAcc"> <a href="#">Minhnb</a> <span id="numStars"> (450 <span class="glyphicon glyphicon-star"></span>)</span></p>
                             
-                            <img class="img-responsive toprateimg" src="resources/images/verified.jpg" alt="">
+                            <img class="img-responsive verifedimg" src="resources/images/verified.jpg" alt="">
+                            <br>
                             <hr>
                             <p class="feedback">100% Positive feedback</p>
                             <ul>

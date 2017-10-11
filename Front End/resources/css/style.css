@@ -158,13 +158,17 @@ h4 {
 
 p.feedback {
 	color: green;
-	font-size: 20px;
+	font-size: 18px;
+	margin-top: 40px;
 }
 
 p#sellerAcc {
 	/* color: #0026FF; */
 	font-weight: bold;
 	font-style: italic;
+	float: right;
+	margin-top: 10px;
+	position: relative;
 	/* display: inline-block; */
 }
 
@@ -172,14 +176,13 @@ p#sellerAcc {
 	color: #BEBE06;	
 }
 
-.toprateimg {
+.verifedimg {
 	display: inline-block;
 	width: 70px;
 	height: 70px;
-	float: right;
 	position: absolute;
-	margin-top: -50px;
-	margin-left: 180px;
+	/* margin-top: -50px; */
+	/* margin-left: 180px; */
 }
 
 #numStars {
