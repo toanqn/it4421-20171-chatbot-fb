@@ -7,7 +7,7 @@ body{
 }
 
 #searchText {
-	width: 260px;
+	width: 300px;
 
 }
 
@@ -32,20 +32,6 @@ body{
 } */
 
 
-.content {
-	
-	margin-left: 100px;
-	margin-right: 100px;
-
-}
-
-#auctionbg {
-	height: 270px;
-	width: 1320px;
-	margin: auto;
-	border: 1px solid gray;
-
-}
 
 h3 {
 	font-weight: bold;
@@ -67,6 +53,11 @@ h4 {
 	border: 0.7px solid #5E0202;
 }
 
+.carousel-inner{
+    max-height: 360px;
+}
+
+
 .selectCategoryMenu li a.cName {
 	font-weight: bold;
 	color: brown;
@@ -76,23 +67,34 @@ h4 {
 
 .img-display {
 
-	height: 300px;
-	width: 350px;
+	height: 270px;
+	max-width: 600px;
 	border-radius: 10px;
+	width:100%;
 }
 
 .productPreview {
 	border-radius: 10px;
-	height: 520px;
+	max-height: 520px;
+	padding: 5px;
 }
 
 .btnDetail {
-	width: 300px;
+	width: 1000px;
+	max-width: 100%;
 	
 }
 
 .textPreview {
-	height: 80px;
+	height: 70px;
+	color: red;
+	
+}
+
+#timeLeft {
+	font-size: 16px;
+	font-style: italic;
+	font-weight: bold;
 }
 
 /* .imgPreview {
@@ -128,6 +130,13 @@ h4 {
 	/* margin-bottom: 5px; */
 }
 
+.logo  {
+	position: absolute;
+}
+.navbar-header {
+	padding-left: 50px;
+}
+
 #sellerInfo {
 	background-color:white  ;
 	height: 300px;
@@ -149,13 +158,17 @@ h4 {
 
 p.feedback {
 	color: green;
-	font-size: 20px;
+	font-size: 18px;
+	margin-top: 40px;
 }
 
 p#sellerAcc {
 	/* color: #0026FF; */
 	font-weight: bold;
 	font-style: italic;
+	float: right;
+	margin-top: 10px;
+	position: relative;
 	/* display: inline-block; */
 }
 
@@ -163,14 +176,13 @@ p#sellerAcc {
 	color: #BEBE06;	
 }
 
-.toprateimg {
+.verifedimg {
 	display: inline-block;
 	width: 70px;
 	height: 70px;
-	float: right;
 	position: absolute;
-	margin-top: -50px;
-	margin-left: 180px;
+	/* margin-top: -50px; */
+	/* margin-left: 180px; */
 }
 
 #numStars {
