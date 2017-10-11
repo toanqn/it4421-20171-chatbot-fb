@@ -10,7 +10,10 @@ const LocalStrategy = require('passport-local').Strategy;
 const config = require('./config');
 const userRoute = require('./api/user');
 const userController = require('./api/user/controller');
+const productRoute = require('./api/product');
+const productController = require('./api/product/controller');
 const bcryptUtility = require('./utility/bcrypt');
+const isAuthenticated = require('./utility/isAuthenticated');
 
 app.use(express.static(`${__dirname}/public`));
 app.set('view engine', 'ejs');
@@ -58,17 +61,38 @@ passport.use(new LocalStrategy((username, password, done) => {
 }));
 
 app.use('/api/user', userRoute);
+app.use('/api/product', productRoute);
 
 app.get('/', (req, res) => {
-  res.render('index', { login: req.isAuthenticated() });
+  const page_number =  req.query.page_number; // eslint-disable-line
+  productController.get6Products(page_number)
+    .then((success) => {
+      res.render('index', { login: req.isAuthenticated(), username: req.user ? req.user.username : '', products: success });
+    })
+    .catch((err) => {
+      res.send(err);
+    });
 });
 
 app.get('/login', (req, res) => {
-  res.render('login', { show: false });
+  res.render('login', { login: req.isAuthenticated(), username: req.user ? req.user.username : '', message: false });
 });
 
 app.get('/detail', (req, res) => {
-  res.render('productDetail', { login: req.isAuthenticated() });
+  const id = req.query.id;
+  productController.getProductById(id)
+    .then((success) => {
+      console.log('aaa', success);
+      res.render('productDetail', { login: req.isAuthenticated(), username: req.user ? req.user.username : '', product: success });
+    })
+    .catch((err) => {
+      res.send(err);
+    })
+  
+});
+
+app.get('/userInfo', isAuthenticated, (req, res) => {
+  res.render('userInfor', { login: req.isAuthenticated(), username: req.user ? req.user.username : '' });
 });
 
 if (!process.env.NODE_ENV) {

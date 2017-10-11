@@ -44,7 +44,7 @@ h4 {
 
 .navLeft {
 	border: 1px solid gray;
-	border-left-width: 0px;
+	/* border-left-width: 0px; */
 	/* border-bottom-width: 0px; */
 }
 

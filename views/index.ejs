@@ -16,63 +16,8 @@
     
     </head>
 <body>
-    <!-- Header -->
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container-fluid">
-            
-            <img src="resources/images/logoBK.png" alt="logo" class="logo img-responsive" width="30px" height="45px">
-            <div class="navbar-header">
-                
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse" >
-                    
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                
-                <a class="navbar-brand" href="/">Bk Auction</a>
-            </div>
-            <ul class="nav navbar-nav navbar-collapse collapse">
-                <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Category<span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#"> Faction</a></li>
-                        <li><a href="#"> Home & Garden</a></li>
-                        <li><a href="#"> Electronic</a></li>
-                    </ul>
-                </li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Help & Contact</a></li>
-            </ul>
-            <form class="navbar-form navbar-left navbar-collapse collapse">
-                <div class="input-group">
-                    <input type="text" class="form-control" id="searchText" placeholder="Search">
-                    <div class="input-group-btn">
-                        <button class="btn btn-default" type="submit">
-                          <i class="glyphicon glyphicon-search"></i>
-                        </button>
-                    </div>
-                </div>
-            </form>
-
-            <!-- Nav right -->
-                <ul class="nav navbar-nav navbar-right navbar-collapse collapse">
-                    <li style="display:<%if(login) {%> none <%}%>"><a href="/login"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                    <li style="display:<%if(login) {%> none <%}%>"><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-                    <li style="display:<%if(!login) {%> none <%}%>"><a href="#">Hi: Minh Nguyen Binh</a></li>
-                    <li class="dropdown" style="display:<%if(!login) {%> none <%}%>"><a class="dropdown-toggle" data-toggle="dropdown" href="#"> My Account<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li class="active "><a class="glyphicon glyphicon-user" href="#"> Minhnb</a></li>
-                            <li><a class="glyphicon glyphicon-info-sign" href="#"> User Information</a></li>
-                            <li id="logout1"><a class="glyphicon glyphicon-log-out" href="/api/user/logout"> LogOut</a></li>
-                        </ul>
-                    </li>
-                </ul>
-
-            <!-- End nav right -->
-
-        </div>
-    </nav>
-    <!-- End header -->
+    <!-- header -->
+    <%- include('partition/header.ejs') %>
 
     <!-- Content -->
     <div class="content container">
@@ -142,90 +87,22 @@
             <!-- Product List -->
             <div class="col-md-9 col-lg-9">
                 <div class="row">
-                    
-                    <div class="col-sm-6 col-md-4 col-lg-4">
-                        <div class="table-bordered productPreview">
-                            <img src="resources/images/jewelry.jpg" alt="jewelry" class="img-display table-bordered img-responsive">
-                            <div class="caption">
-                                <h4 class="textPreview"> Vintage Sterling Silver Silpada Beautiful Large Garnet Ring Size 7</h3>
-                                <h4> Bid: 300$ </h4>
-                                <div id="timeLeft"> Time: 10/10, 9PM (8d 21h left) </div>
-                                <div class="text-center">
-                                    <a href="/detail"><button  class="btn btn-info btnDetail">Detail</button></a> 
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="col-sm-6 col-md-4 col-lg-4">
-                        <div class="table-bordered productPreview">
-                            <img src="resources/images/ipad.jpg" alt="ipad" class="img-display table-bordered img-responsive">
-                            <div class="caption">
-                                <h4 class="textPreview"> Apple iPad Pro 12.9' With Retina Display</h3>
-                                <h4> Bid: 300$ </h4>
-                                <div id="timeLeft"> Time: 10/10, 9PM (8d 21h left) </div>
-                                <div class="text-center">
-                                        <a href="/detail"><button  class="btn btn-info btnDetail">Detail</button></a> 
+                    <% products.forEach((product) => { %>
+                        <div class="col-sm-6 col-md-4 col-lg-4">
+                            <div class="table-bordered productPreview">
+                                <img src="<%- product.image %>" alt="jewelry" class="img-display table-bordered img-responsive">
+                                <div class="caption">
+                                    <h4 class="textPreview"> <%- product.name %></h3>
+                                    <h4> <%- product.price %>$ </h4>
+                                    <div id="timeLeft"> Time: <%- product.start_time %> (8d 21h left) </div>
+                                    <div class="text-center">
+                                        <a href="/detail?id=<%-product._id%>"><button  class="btn btn-info btnDetail">Detail</button></a> 
                                     </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-6 col-md-4 col-lg-4">
-                        <div class="table-bordered productPreview">
-                            <img src="resources/images/jewelry.jpg" alt="jewelry" class="img-display table-bordered img-responsive">
-                            <div class="caption">
-                                <h4 class="textPreview"> Vintage Sterling Silver Silpada Beautiful Large Garnet Ring Size 7</h3>
-                                <h4> Bid: 300$ </h4>
-                                <div id="timeLeft"> Time: 10/10, 9PM (8d 21h left) </div>
-                                <div class="text-center">
-                                    <a href="/detail"><button  class="btn btn-info btnDetail">Detail</button></a> 
                                 </div>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="col-sm-6 col-md-4 col-lg-4">
-                        <div class="table-bordered productPreview">
-                            <img src="resources/images/ipad.jpg" alt="ipad" class="img-display table-bordered img-responsive">
-                            <div class="caption">
-                                <h4 class="textPreview"> Apple iPad Pro 12.9' With Retina Display</h3>
-                                <h4> Bid: 300$ </h4>
-                                <div id="timeLeft"> Time: 10/10, 9PM (8d 21h left) </div>
-                                <div class="text-center">
-                                    <a href="/detail"><button  class="btn btn-info btnDetail">Detail</button></a> 
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-6 col-md-4 col-lg-4">
-                        <div class="table-bordered productPreview">
-                            <img src="resources/images/jewelry.jpg" alt="jewelry" class="img-display table-bordered img-responsive">
-                            <div class="caption">
-                                <h4 class="textPreview"> Vintage Sterling Silver Silpada Beautiful Large Garnet Ring Size 7</h3>
-                                <h4> Bid: 300$ </h4>
-                                <div id="timeLeft"> Time: 10/10, 9PM (8d 21h left) </div>
-                                <div class="text-center">
-                                    <a href="/detail"><button  class="btn btn-info btnDetail">Detail</button></a> 
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-6 col-md-4 col-lg-4">
-                        <div class="table-bordered productPreview">
-                            <img src="resources/images/ipad.jpg" alt="ipad" class="img-display table-bordered img-responsive">
-                            <div class="caption">
-                                <h4 class="textPreview"> Apple iPad Pro 12.9' With Retina Display</h3>
-                                <h4> Bid: 300$ </h4>
-                                <div id="timeLeft"> Time: 10/10, 9PM (8d 21h left) </div>
-                                <div class="text-center">
-                                    <a href="/detail"><button  class="btn btn-info btnDetail">Detail</button></a> 
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <%}) %>
                     
                 </div>   
                 
@@ -237,11 +114,11 @@
                               <span aria-hidden="true">&laquo;</span>
                             </a>
                         </li>
-                        <li><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">5</a></li>
+                        <li><a href="/?page_number=1">1</a></li>
+                        <li><a href="/?page_number=2">2</a></li>
+                        <li><a href="/?page_number=3">3</a></li>
+                        <li><a href="/?page_number=4">4</a></li>
+                        <li><a href="/?page_number=5">5</a></li>
                         <li>
                             <a href="#" aria-label="Next">
                               <span aria-hidden="true">&raquo;</span>

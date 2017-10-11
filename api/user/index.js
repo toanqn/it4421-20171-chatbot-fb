@@ -19,10 +19,10 @@ route.post('/createUser', (req, res) => {
       userInfo.password = encodePassword;
       controller.createUser(userInfo)
         .then((success) => {
-          res.render('login', { show: true, message: 'Đăng kí thành công' });
+          res.render('login', { login: false, username: '', message: 'Đăng kí thành công' });
         })
         .catch((err) => {
-          res.render('login', { show: true, message: 'Đăng kí thất bại' });
+          res.render('login', { login: false, username: '', message: 'Đăng kí thất bại' });
         });
     });
 });
