@@ -32,13 +32,6 @@ body{
 } */
 
 
-#auctionbg {
-	height: 270px;
-	width: 1320px;
-	margin: auto;
-	border: 1px solid gray;
-
-}
 
 h3 {
 	font-weight: bold;
@@ -60,6 +53,11 @@ h4 {
 	border: 0.7px solid #5E0202;
 }
 
+.carousel-inner{
+    max-height: 360px;
+}
+
+
 .selectCategoryMenu li a.cName {
 	font-weight: bold;
 	color: brown;
@@ -69,23 +67,34 @@ h4 {
 
 .img-display {
 
-	height: 300px;
-	width: 350px;
+	height: 270px;
+	max-width: 600px;
 	border-radius: 10px;
+	width:100%;
 }
 
 .productPreview {
 	border-radius: 10px;
-	height: 520px;
+	max-height: 520px;
+	padding: 5px;
 }
 
 .btnDetail {
-	width: 300px;
+	width: 1000px;
+	max-width: 100%;
 	
 }
 
 .textPreview {
-	height: 80px;
+	height: 70px;
+	color: red;
+	
+}
+
+#timeLeft {
+	font-size: 16px;
+	font-style: italic;
+	font-weight: bold;
 }
 
 /* .imgPreview {
