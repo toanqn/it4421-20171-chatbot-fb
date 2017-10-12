@@ -31,7 +31,7 @@
              <li data-target="#carousel-id" data-slide-to="2"></li>
             </ol>
   
-            <div class="carousel-inner">
+            <div class="carousel-inner carousel-slide">
               <div class="item active">
                 <img src="resources/images/slide1.png" width="100%" class="center-block">
               </div>
@@ -91,13 +91,14 @@
                     <% products.forEach((product) => { %>
                         <div class="col-sm-6 col-md-4 col-lg-4">
                             <div class="table-bordered productPreview">
-                                <img src="<%- product.image %>" alt="jewelry" class="img-display table-bordered img-responsive">
+                                <img src="<%- product.image %>" alt="<%- product.image %>" class="img-display table-bordered img-responsive">
                                 <div class="caption">
-                                    <h4 class="textPreview"> <%- product.name %></h3>
-                                    <h4> <%- product.price %>$ </h4>
-                                    <div id="timeLeft"> Time: <%- product.start_time %> (8d 21h left) </div>
-                                    <div class="text-center">
-                                        <a href="/detail?id=<%-product._id%>"><button  class="btn btn-info btnDetail">Detail</button></a> 
+                                    <a href="/detail?id=<%-product._id%>">
+                                        <h4 class="textPreview"> <%- product.name %></h4>
+                                    </a>
+                                    <div class="bidTimePreview">
+                                        <h4> Current Bid: <%- product.price %>$ </h4>
+                                        <div id="timeLeft"> Time: <%- product.start_time %></div>
                                     </div>
                                 </div>
                             </div>

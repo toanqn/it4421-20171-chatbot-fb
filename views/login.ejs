@@ -56,10 +56,10 @@
                         <br>
                         <div class="radioBtn row col-md-12">
                             
-                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                            <div class="col-md-6 col-lg-6">
                                 <label class="radio-inline"><input type="radio" id="su-r1" name="role" checked="checked" value="personal">Personal Account</label>
                             </div>
-                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                            <div class="col-md-6 col-lg-6">
                                 <label class="radio-inline"><input type="radio" id="su-r1" name="role" value="business">Business Account</label>
                             </div>
                         
@@ -79,37 +79,13 @@
                         </div>
                         <div class="form-group">
                             <label >Phone number</label>
-                            <input type="phone" class="form-control" id="su-phone" placeholder="Phone number" required="required" name="phone">
+                            <input type="number" class="form-control" id="su-phone" placeholder="Phone number" required="required" name="phone">
                         </div>
-                        <button id="registerBtn" type="submit" class="btn btn-success col-md-12" >Register</button>
+                        <button id="registerBtn" type="submit" class="btn btn-success" >Register</button>
                     </form>
                 </div>
-
-                <div id="signupBusiness" class="hide">
-                    <form action="" method="POST" role="form">
-                        <div class="form-group">
-                            <label>Legal Business Name</label>
-                            <input type="text" class="form-control" id="" placeholder="Legal Business Name" required="required" name="bName-signup">
-                        </div>
-                        <div class="form-group">
-                            <label >Legal Business Email</label>
-                            <input type="email" class="form-control" id="" placeholder="Legal business email" required="required" name="bEmail-signup">
-                        </div>
-                        <div class="form-group">
-                            <label >Password</label>
-                            <input type="password" class="form-control" id="" placeholder="Password" required="required" name="bPassword-signup">
-                        </div>
-                        <div class="form-group">
-                            <label>Legal Business Phone</label>
-                            <input type="number" class="form-control" id="" placeholder="Legal business phone" required="required" name="bPhone-signup">
-                        </div>
-
-                        <button id="bRegisterBtn" type="submit" class="btn btn-success col-md-12">Register</button>
-                    </form>
-                </div>
-                
-                
             </div> 
+
             <div id="login" class="tab-pane fade">
                 <br> <br>
                 <form action="/api/user/login" method="POST" role="form">
@@ -123,7 +99,7 @@
                         <input type="password" class="form-control" id="" placeholder="Password" required="required" name="password">
                     </div>
                     <br>
-                    <button id="loginBtn" type="submit" class="btn btn-success col-md-12">Log In</button>
+                    <button id="loginBtn" type="submit" class="btn btn-success">Log In</button>
                 </form>
             </div>
         </div>
