@@ -11,3 +11,15 @@
 |Bcrypt| Dùng để mã hóa password khi lưu vào database|
 |MomentJS| Giúp đồng bộ hóa thời gian|
 |Ejs| Đóng vai trò là view engine giúp trong quá trình render html|
+---
+> Cách import export db của mongo:
+
+Điều kiện tiên quyết: Cài đặt biến môi trường của mongodb vào window (linux không rõ): 
+[Link youtube hướng dẫn](https://www.youtube.com/watch?v=0ws3oIyqieY)
+Sau khi cài xong thì mở 1 tab cmd và gõ mongod.exe để chạy db (tab này phải luôn chạy trong quá trình làm việc với db)
+* Cách export dữ liệu:
+Vào thư mục chứa project mở cmd: mongodump --host localhost --port 27017
+Khi này trong thư mục sẽ xuất hiện folder dump chứa dữ liệu đã được export
+* Cách import dữ liêu:
+mongorestore -d project3 dump/project3
+
