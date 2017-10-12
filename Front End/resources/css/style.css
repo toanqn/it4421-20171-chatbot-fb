@@ -11,9 +11,10 @@ body{
 
 }
 
+/* Sign up/login */
 #signupLoginTab {
-	width: 440px;
-	height: 500px;
+	max-width: 440px;
+	max-height: 600px;
 	margin: auto;
 	border: 1px solid green;
 	border-radius: 7px;
@@ -23,16 +24,17 @@ body{
 	font-size: 16px;
 }
 
-#registerBtn ,#bRegisterBtn , #loginBtn {
-	height: 50px;
+#registerBtn , #loginBtn {
+	height: 45px;
+	width: 1000px;
+	max-width: 100%;
+	
 }
-
-/* #login form div input {
-	width: 360px;
-} */
+/* End signup/login */
 
 
 
+/* Index */
 h3 {
 	font-weight: bold;
 	color: red;
@@ -48,7 +50,7 @@ h4 {
 	/* border-bottom-width: 0px; */
 }
 
-.navLeft hr {
+.navLeft hr  {
 	
 	border: 0.7px solid #5E0202;
 }
@@ -96,12 +98,12 @@ h4 {
 	font-style: italic;
 	font-weight: bold;
 }
+/* End index */
 
-/* .imgPreview {
-	width: 500px;
-	height: 500px;
-} */
 
+
+
+/* Product Detail */
 .productPreviewDetail {
 	border-radius: 10px;
 	height: 400px;
@@ -141,20 +143,14 @@ h4 {
 	background-color:white  ;
 	height: 300px;
 	border-radius: 10px;
-	
-	/* box-shadow: 5px 5px 5px #888888; */
 	box-shadow:  0px 2px 5px 5px #BDBDBD;
 	padding: 10px;
 }
 
 #sellerInfo ul li {
 	margin-left: -35px;
-	/* font-size: 14px; */
 }
 
-/* #sellerInfo a {
-	display: inline-block;
-} */
 
 p.feedback {
 	color: green;
@@ -193,7 +189,7 @@ p#sellerAcc {
 .bidPlace {
 	margin-top: 10px;
 	padding: 30px;
-	height: 150px;
+	max-height: 200px;
 	background-color: #BBBBBB;
 	color: white;
 	box-shadow: 0px 2px 5px 5px #D1CFCF;
@@ -217,14 +213,6 @@ p#sellerAcc {
 	display: inline-block;
 }
 
-#inputBid {
-	width: 300px;
-}
-.btnBid {
-	width: 150px;
-	height: 40px;
-}
-
 
 #information {
 	font-size: 30px;
@@ -234,3 +222,43 @@ p#sellerAcc {
 .nameTitle {
 	color: red ;
 }
+/* End Product Detail */
+
+
+/* Bid History */
+
+#bidHeader {
+	margin-bottom: 15px;
+}
+
+.bidInfoTitle {
+	display: inline-block;
+	margin-right: 30px;
+	font-size: 20px;
+	
+}
+
+.hrBidHistory {
+	border-top: 3px double #8c8b8b;
+}
+
+h2 {
+	color: red;
+}
+
+.bidInfor {
+	font-size: 25px;
+	color: #090080;
+}
+.bidSucess {
+	font-weight: bold;
+	font-size: 17px;
+}
+
+.productTitle {
+	font-size: 25px;
+	color: red;
+	font-style: italic;
+}
+
+/* End Bid History */

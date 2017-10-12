@@ -71,57 +71,38 @@
         </ul>
         <div class="tab-content">
             <div id="signup" class="tab-pane fade in active">
-                <br>
-                <div class="radioBtn row col-md-12">
-                    
-                    <div class="col-md-6 col-lg-6">
-                        <label class="radio-inline"><input type="radio" name="accountType" checked="checked" value="personal">Personal Account</label>
-                    </div>
-                    <div class="col-md-6 col-lg-6">
-                        <label class="radio-inline"><input type="radio" name="accountType" value="business">Business Account</label>
-                    </div>
-                
-                </div>
-                <br> <br>
                 <div id="signupPersonal">
                     <form action="" method="POST" role="form">
+                        <br>
+                        <div class="radioBtn row col-md-12">
+
+                            <div class="col-md-6 col-lg-6">
+                                <label class="radio-inline"><input type="radio" name="accountType" checked="checked" value="personal">Personal Account</label>
+                            </div>
+                            <div class="col-md-6 col-lg-6">
+                                <label class="radio-inline"><input type="radio" name="accountType" value="business">Business Account</label>
+                            </div>
+
+                        </div>
+                        <br> <br>
                         <div class="form-group">
                             <label>Your Name</label>
                             <input type="text" class="form-control" id="" placeholder="Your name" required="required" name="name-signup">
                         </div>
                         <div class="form-group">
-                            <label >Email</label>
+                            <label>Email</label>
                             <input type="email" class="form-control" id="" placeholder="Your Email" required="required" name="email-signup">
                         </div>
                         <div class="form-group">
-                            <label >Password</label>
+                            <label>Password</label>
                             <input type="password" class="form-control" id="" placeholder="Password" required="required" name="password-signup">
                         </div>
-
-                        <button id="registerBtn" type="submit" class="btn btn-success col-md-12">Register</button>
-                    </form>
-                </div>
-
-                <div id="signupBusiness" class="hide">
-                    <form action="" method="POST" role="form">
                         <div class="form-group">
-                            <label>Legal Business Name</label>
-                            <input type="text" class="form-control" id="" placeholder="Legal Business Name" required="required" name="bName-signup">
-                        </div>
-                        <div class="form-group">
-                            <label >Legal Business Email</label>
-                            <input type="email" class="form-control" id="" placeholder="Legal business email" required="required" name="bEmail-signup">
-                        </div>
-                        <div class="form-group">
-                            <label >Password</label>
-                            <input type="password" class="form-control" id="" placeholder="Password" required="required" name="bPassword-signup">
-                        </div>
-                        <div class="form-group">
-                            <label>Legal Business Phone</label>
-                            <input type="number" class="form-control" id="" placeholder="Legal business phone" required="required" name="bPhone-signup">
+                            <label>Phone</label>
+                            <input type="number" class="form-control" id="" placeholder="Your number" required="required" name="number-signup">
                         </div>
 
-                        <button id="bRegisterBtn" type="submit" class="btn btn-success col-md-12">Register</button>
+                        <button id="registerBtn" type="submit" class="btn btn-success">Register</button>
                     </form>
                 </div>
                 
@@ -140,7 +121,7 @@
                         <input type="password" class="form-control" id="" placeholder="Password" required="required" name="password-login">
                     </div>
                     <br>
-                    <button id="loginBtn" type="submit" class="btn btn-success col-md-12">Log In</button>
+                    <button id="loginBtn" type="submit" class="btn btn-success">Log In</button>
                 </form>
             </div>
         </div>
