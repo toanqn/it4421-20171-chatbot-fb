@@ -106,3 +106,15 @@ app.listen(config.PORT, (err, success) => {
     console.log(`Server is runing at ${config.PORT}`);
   }
 });
+
+
+// LINHPHAN EDIT TO SHOW IN PROJECT
+app.get('/userProfile', (req, res) => {
+  res.render('userProfile', { login: req.isAuthenticated(), username: req.user ? req.user.username : '' });
+});
+
+app.get('/bidHistory', (req, res) => {
+  res.render('bidHistory', { login: req.isAuthenticated(), username: req.user ? req.user.username : '' });
+});
+
+// END LINHPHAN EDIT

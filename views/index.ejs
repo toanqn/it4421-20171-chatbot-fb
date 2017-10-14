@@ -50,38 +50,54 @@
 
         <hr>
         <div class="row">
-            <div class="col-sm-12 col-md-3 col-lg-3 well navLeft">
-                <h3> BK Live Auction</h3>
-                <hr>
-                <ul class="nav nav-pills nav-stacked selectCategoryMenu" >
-                    <li class="selectCategory active"> <a href="#" class="cName">New Product</a></li>
-                    <li class="selectCategory"> 
-                        <a href="#" class="cName">Electronic</a>
-                        <ul class="dropdownStatic" role="menu">
-                            <li class="subCategory"><a href="#">Computer</a></li>
-                            <li class="subCategory"><a href="#">TV</a></li>
-                            <li class="subCategory"><a href="#">Smart Phone</a></li>
-                        </ul>
-                    </li>
-                    <li class="selectCategory"> 
-                        <a href="#" class="cName">Fashion</a>
-                        <ul class="dropdownStatic" role="menu">
-                            <li class="subCategory"><a href="#">Men</a></li>
-                            <li class="subCategory"><a href="#">Women</a></li>
-                            <li class="subCategory"><a href="#">Watches</a></li>
-                            <li class="subCategory"><a href="#">Shoes</a></li>
-                        </ul>
-                    </li>
-                    <li class="selectCategory"> 
-                        <a href="#" class="cName">Other Category</a>
-                        <ul class="dropdownStatic" role="menu">
-                            <li class="subCategory"><a href="#">Toy</a></li>
-                            <li class="subCategory"><a href="#">Baby</a></li>
-                            <li class="subCategory"><a href="#">Other</a></li>
-                        </ul>
-                    </li>
-                
-                </ul>
+            <div class="col-md-3">
+
+                <nav class="navbar navbar-default navLeft">
+
+                        
+                        <h3> BK Live Auction</h3>
+                        <div class="navbar-header">
+                            <button id="btnCollapse" type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navLeftCollapse">
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>                        
+                            </button>
+                            
+                        </div>
+                        <hr>
+                        <div class="collapse navbar-collapse" id="navLeftCollapse">
+                            <ul class="nav nav-pills nav-stacked selectCategoryMenu">
+                                    <li class="selectCategory active"> <a href="#" class="cName">New Product</a></li>
+                                    <li class="selectCategory"> 
+                                        <a href="#" class="cName">Electronic</a>
+                                        <ul class="dropdownStatic" role="menu">
+                                            <li class="subCategory"><a href="#">Computer</a></li>
+                                            <li class="subCategory"><a href="#">TV</a></li>
+                                            <li class="subCategory"><a href="#">Smart Phone</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="selectCategory"> 
+                                        <a href="#" class="cName">Fashion</a>
+                                        <ul class="dropdownStatic" role="menu">
+                                            <li class="subCategory"><a href="#">Men</a></li>
+                                            <li class="subCategory"><a href="#">Women</a></li>
+                                            <li class="subCategory"><a href="#">Watches</a></li>
+                                            <li class="subCategory"><a href="#">Shoes</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="selectCategory"> 
+                                        <a href="#" class="cName">Other Category</a>
+                                        <ul class="dropdownStatic" role="menu">
+                                            <li class="subCategory"><a href="#">Toy</a></li>
+                                            <li class="subCategory"><a href="#">Baby</a></li>
+                                            <li class="subCategory"><a href="#">Other</a></li>
+                                        </ul>
+                                    </li>
+                            </ul>
+                            
+                        </div>
+                   
+                </nav>
             </div>
 
             <!-- Product List -->
@@ -98,7 +114,7 @@
                                     </a>
                                     <div class="bidTimePreview">
                                         <h4> Current Bid: <%- product.price %>$ </h4>
-                                        <div id="timeLeft"> Time: <%- product.start_time %></div>
+                                        <div id="timeLeft"><span class="glyphicon glyphicon-time"></span> Time: <%- product.start_time %></div>
                                     </div>
                                 </div>
                             </div>
