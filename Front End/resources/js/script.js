@@ -6,8 +6,12 @@ $(document).ready(function(){
         $(this).addClass('active');
     })
     
-  
-
+    // search Form:
+    $('#selectCateSearch').change(function(){
+        var valSelected = $('#selectCateSearch').val();
+        // console.log(valSelected);
+        $('#iSelectedCategory').val(valSelected);
+    });
 
     
 });

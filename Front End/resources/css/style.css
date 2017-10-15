@@ -129,6 +129,15 @@ h4 {
 	margin-top: 15px;
 	border-radius: 5px;
 }
+
+.inputPrice > span {
+	display: inline-block ;
+}
+
+.inputPrice  input {
+	display: inline-block;
+}
+
 /* End index */
 
 
