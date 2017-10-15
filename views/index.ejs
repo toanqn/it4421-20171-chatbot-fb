@@ -103,6 +103,38 @@
             <!-- Product List -->
             <div class="col-md-9 col-lg-9">
                 <div class="row">
+                    <!-- <div id="findProduct"> Find Product by </div> -->
+                    <br>
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <div>Category: </div>
+                        <select class="form-control" id="selectCateSearch">
+                            <option value="*"></option>
+                            <option value="electronic">Electronic</option>
+                            <option value="fashion">Fashion</option>
+                            <option value="watches">Watches</option>
+                        </select>
+                    </div>
+                    <div class="col-xs-8 col-sm-8 col-md-7 col-lg-7">
+                        <div>Price: </div>
+
+                        <form action="" method="" class="input-group" role="form">
+                            <span class="input-group-addon">From</span>
+                            <input type="number" class="form-control">
+                            
+                            <span class="input-group-addon">To</span>
+                            <input type="number" class="form-control">
+                            <span class="input-group-addon">$</span>
+
+                            <input name="iSelectedC" id="iSelectedCategory" type="hidden" name="category" value="">
+                            <span class="input-group-btn">
+                                <button class="btn btn-primary" type="submit">Search</button>
+                            </span>
+                        </form>
+                    
+                    </div>
+                </div>
+                <br>
+                <div class="row">
 
                     <% products.forEach((product) => { %>
                         <div class="col-sm-6 col-md-4 col-lg-4">
