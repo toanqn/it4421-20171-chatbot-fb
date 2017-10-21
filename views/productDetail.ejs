@@ -5,7 +5,7 @@
         
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width initial-scale=1">
-        <title>Home Page</title>
+        <title>Product Detail</title>
         
         
         <link href="/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -72,6 +72,9 @@
                             <div class="itemTitle">Item Describe: </div>
                             <span class="describe"><i>"Vintage Sterling Silver Silpada Beautiful Large Garnet Ring Size 7" </i></span>
                             <br>
+                            <div>
+                                <span class="itemTitle"> Time Left: </span><div id="timeleft"> </div> 
+                            </div>
                             <span id="timeout">Time Out!</span>
                             <div class="countTime">
                                 <div class="itemTitle" id="titleTimeLeft">Time left: </div>
@@ -84,6 +87,7 @@
                             </div>
                             <br>
                             <button type="button" class="btn btn-info btn-lg checkStt" data-toggle="modal" data-target="#modalCheckStt">Check Your Status</button>
+                            
                         </div>
                         
                         <div class="bidPlace">
@@ -152,7 +156,7 @@
                     <span style="color:green;">Waiting for pay</span>
                     <hr>
                     <h4>You have 2 days to complete buy this item by click following link: </h4>
-                    <a href="#"> Go to buy this item</a>
+                    <a href="/buyItem"> Go to buy this item</a>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -170,6 +174,12 @@
     </div>
     
     <!-- End footer -->
+
+    <script src="/resources/js/moment.js"></script>
+    <script>
+        const end_time = "<%- product.end_time %>";
+    </script>
+    <script src="/resources/js/detailpage.js"></script>
 </body>
 
 </html>

@@ -1,7 +1,7 @@
 $(document).ready(function(){
     
     var minute = 0;
-    var second = 2;
+    var second = 10;
     var secondVal =0;
     $("#timeout, .checkStt").hide();
     secondVal = window.setInterval(timeSecond,1000);

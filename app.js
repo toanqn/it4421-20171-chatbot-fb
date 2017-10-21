@@ -127,4 +127,8 @@ app.get('/sellProduct', (req, res) => {
   res.render('sellProduct', { login: req.isAuthenticated(), username: req.user ? req.user.username : '' });
 });
 
+app.get('/buyItem', (req, res) => {
+  res.render('buyItem', { login: req.isAuthenticated(), username: req.user ? req.user.username : '' });
+});
+
 // END LINHPHAN EDIT

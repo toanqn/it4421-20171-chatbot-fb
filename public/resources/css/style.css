@@ -283,6 +283,12 @@ p#sellerAcc {
 	font-weight: bold;
 	color: red;
 }
+
+#timeleft {
+	font-size: 2em;
+	color: #0099CC;
+}
+
 /* End Product Detail */
 
 
@@ -329,7 +335,6 @@ h2 {
 
 .verifiedInfo {
 	margin-top: 20px;
-	/* border: 1px solid gray; */
 	border-radius: 10px;
 }
 
@@ -348,4 +353,5 @@ h1 {
 	font-weight: bold;
 }
 /* End user Profile */
+
 
