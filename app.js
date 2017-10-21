@@ -105,7 +105,7 @@ if (!process.env.NODE_ENV) {
   mongoose.connect(config.DB_Address);
 }
 
-app.listen(config.PORT, (err, success) => {
+app.listen(config.PORT, (err) => {
   if (err) {
     console.log('have error occur');
   } else {
@@ -121,6 +121,10 @@ app.get('/userProfile', (req, res) => {
 
 app.get('/bidHistory', (req, res) => {
   res.render('bidHistory', { login: req.isAuthenticated(), username: req.user ? req.user.username : '' });
+});
+
+app.get('/sellProduct', (req, res) => {
+  res.render('sellProduct', { login: req.isAuthenticated(), username: req.user ? req.user.username : '' });
 });
 
 // END LINHPHAN EDIT
