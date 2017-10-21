@@ -14,6 +14,7 @@ const productRoute = require('./api/product');
 const productController = require('./api/product/controller');
 const bcryptUtility = require('./utility/bcrypt');
 const isAuthenticated = require('./utility/isAuthenticated');
+const dateValidate = require('./utility/dateValidate');
 
 app.use(express.static(`${__dirname}/public`));
 app.set('view engine', 'ejs');
@@ -67,7 +68,13 @@ app.get('/', (req, res) => {
   const page_number =  req.query.page_number; // eslint-disable-line
   productController.get6Products(page_number)
     .then((success) => {
-      res.render('index', { login: req.isAuthenticated(), username: req.user ? req.user.username : '', products: success });
+      const filteredProduct = [];
+      success.forEach((e) => {
+        if (dateValidate.compareDate(e.end_time)) {
+          filteredProduct.push(e);
+        }
+      });
+      res.render('index', { login: req.isAuthenticated(), username: req.user ? req.user.username : '', products: filteredProduct });
     })
     .catch((err) => {
       res.send(err);
@@ -79,7 +86,7 @@ app.get('/login', (req, res) => {
 });
 
 app.get('/detail', (req, res) => {
-  const id = req.query.id;
+  const { id } = req.query;
   productController.getProductById(id)
     .then((success) => {
       console.log('aaa', success);
@@ -87,8 +94,7 @@ app.get('/detail', (req, res) => {
     })
     .catch((err) => {
       res.send(err);
-    })
-  
+    });
 });
 
 app.get('/userInfo', isAuthenticated, (req, res) => {
