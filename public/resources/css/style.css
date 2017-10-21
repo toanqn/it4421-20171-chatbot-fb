@@ -265,6 +265,24 @@ p#sellerAcc {
 .nameTitle {
 	color: red ;
 }
+
+.time-left {
+	
+	font-size: 25px;
+	font-weight: bold;
+	margin-left: 5px;
+	display: inline-block;
+}
+
+#titleTimeLeft {
+	display: inline-block;
+}
+
+#timeout {
+	font-size: 25px;
+	font-weight: bold;
+	color: red;
+}
 /* End Product Detail */
 
 

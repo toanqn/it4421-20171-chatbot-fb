@@ -13,6 +13,7 @@
         <script src="/resources/js/jquery-3.1.1.min.js" type="text/javascript"> </script>
         <script src="/resources/bootstrap/js/bootstrap.min.js" type="text/javascript"> </script>
         <script src="/resources/js/script.js" type="text/javascript"></script>
+        <script src="/resources/js/countTime.js" type="text/javascript"></script>
     
     </head>
 <body>
@@ -53,7 +54,7 @@
 
             
             <div class="col-md-8 col-lg-8 well" id="productDetail8">
-                <h3><%- product.name %></h4>
+                <h3><%- product.name %></h3>
                 <div class="starRating">
                     <div class="stars">
                         <span class="glyphicon glyphicon-star"></span>
@@ -62,7 +63,6 @@
                         <span class="glyphicon glyphicon-star"></span>
                         <span class="glyphicon glyphicon-star-empty"></span>
                     </div>
-                    <!-- <div><b>5/5 Stars</b></div> -->
                 </div>
                 <hr >
                 <div class="row">
@@ -72,8 +72,18 @@
                             <div class="itemTitle">Item Describe: </div>
                             <span class="describe"><i>"Vintage Sterling Silver Silpada Beautiful Large Garnet Ring Size 7" </i></span>
                             <br>
-                            <div class="itemTitle">Time left: </div> 
-                            <span class="time-left"> 10/10, 9:06PM (7d 23h)</span>
+                            <span id="timeout">Time Out!</span>
+                            <div class="countTime">
+                                <div class="itemTitle" id="titleTimeLeft">Time left: </div>
+                                <div class="time-left">
+                                        <span id="minute">0</span>
+                                        <span id=twodot>:</span>
+                                        <span id="second">00</span>
+                                </div>
+                                
+                            </div>
+                            <br>
+                            <button type="button" class="btn btn-info btn-lg checkStt" data-toggle="modal" data-target="#modalCheckStt">Check Your Status</button>
                         </div>
                         
                         <div class="bidPlace">
@@ -82,7 +92,7 @@
                             
                                 <form action="" method="" class="input-group" role="form">
                                     <span class="input-group-addon">$</span>
-                                    <input type="number" class="form-control" aria-label="Amount (to the nearest dollar)">
+                                    <input type="number" class="form-control" min="570">
                                     <span class="input-group-btn">
                                         <button class="btn btn-primary" type="submit">Bid Place</button>
                                     </span>
@@ -122,6 +132,37 @@
 
     </div>
     <!-- End content -->
+
+    <!-- Modal check stt -->
+    <div id="modalCheckStt" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">Congratulations!</h3>
+                </div>
+                <div class="modal-body">
+                    <h4>You've just won this Auction!</h4>
+                    <div class="itemTitle">Item:  </div>
+                    <span class="productName"><i> <%- product.name %> </i></span>
+                    <br>
+                    <div class="itemTitle">Your Bid: <span id="currentBid"> US $560</span></div>
+                    <br>
+                    <div class="itemTitle">Status:  </div>
+                    <span style="color:green;">Waiting for pay</span>
+                    <hr>
+                    <h4>You have 2 days to complete buy this item by click following link: </h4>
+                    <a href="#"> Go to buy this item</a>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- /Modal check stt -->
+
     <br>
     <!-- Footer -->
     <div align="center">
