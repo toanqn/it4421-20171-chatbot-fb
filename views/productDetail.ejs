@@ -72,8 +72,7 @@
                             <div class="itemTitle">Item Describe: </div>
                             <span class="describe"><i>"Vintage Sterling Silver Silpada Beautiful Large Garnet Ring Size 7" </i></span>
                             <br>
-                            <div class="itemTitle">Time left: </div> 
-                            <span class="time-left"> 10/10, 9:06PM (7d 23h)</span>
+                            <div id="timeleft"> </div> 
                         </div>
                         
                         <div class="bidPlace">
@@ -129,6 +128,12 @@
     </div>
     
     <!-- End footer -->
+
+    <script src="/resources/js/moment.js"></script>
+    <script>
+        const end_time = "<%- product.end_time %>";
+    </script>
+    <script src="/resources/js/detailpage.js"></script>
 </body>
 
 </html>

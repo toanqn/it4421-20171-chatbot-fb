@@ -331,3 +331,7 @@ h1 {
 }
 /* End user Profile */
 
+#timeleft {
+	font-size: 2em;
+	color: #0099CC;
+}
