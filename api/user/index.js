@@ -1,7 +1,7 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
 const passport = require('passport');
-
+const isAuthenticated = require('./../../utility/isAuthenticated');
 const route = express.Router();
 const controller = require('./controller');
 
@@ -34,6 +34,29 @@ route.post('/login', passport.authenticate('local'), (req, res) => {
 route.get('/logout', (req, res) => {
   req.logout();
   res.redirect('/');
+});
+
+route.post('/updateProfile', isAuthenticated, (req, res) => {
+  const username = req.user.username;
+  controller.findUserByUsername(username)
+    .then((success) => {
+      success.name = req.body.name;
+      success.email = req.body.email;
+      success.phone = req.body.phone;
+      success.gender = req.body.gender === 'Male'? true: false;
+      success.address = req.body.address;
+      success.save((err) => {
+        if (err) throw err;
+        console.log('Update profile sucessful!')
+      });
+      // console.log(success);
+      // console.log(username);
+      // console.log(req.user.username);
+      res.redirect('/userInfo');
+    })
+    .catch((err) => {
+      res.send(err);
+    })
 });
 
 module.exports = route;

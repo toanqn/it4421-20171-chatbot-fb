@@ -97,9 +97,13 @@ app.get('/detail', (req, res) => {
     });
 });
 
-app.get('/userInfo', isAuthenticated, (req, res) => {
-  res.render('userInfor', { login: req.isAuthenticated(), username: req.user ? req.user.username : '' });
-});
+app.get('/userInfo', isAuthenticated,(req, res) => {
+  res.render('userInfor', {
+    login: req.isAuthenticated(),
+    username: req.user ? req.user.username : '',
+    user: req.user
+  })
+})
 
 if (!process.env.NODE_ENV) {
   mongoose.connect(config.DB_Address);
