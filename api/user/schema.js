@@ -43,6 +43,9 @@ const userSchema = new schema({
     required: true,
     validate: roleValidator,
   },
+  address: String,
+  name: String,
+  gender: Boolean
 });
 
 module.exports = mongoose.model('user', userSchema);
