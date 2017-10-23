@@ -13,5 +13,15 @@ $(document).ready(function(){
         $('#iSelectedCategory').val(valSelected);
     });
 
-    
+    $('#btnDontBuy').click(function(){
+        $('#btnDontBuy').addClass('hide') ;
+        $('#btnBuy').removeClass('hide') ;
+        $('.dontbuy').removeClass('hide') ;
+    })
+
+    $('#btnBuy').click(function(){
+        $('#btnDontBuy').removeClass('hide') ;
+        $('#btnBuy').addClass('hide') ;
+        $('.dontbuy').addClass('hide') ;
+    })
 });

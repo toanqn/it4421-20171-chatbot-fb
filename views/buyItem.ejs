@@ -117,7 +117,29 @@
                                 <button type="submit" class="btn btn-lg btn-info"><span class="glyphicon glyphicon-send"></span> Order This Item</button>
                             </div>
                         </form>
-
+                        <hr>
+                        <div>
+                            <button id="btnDontBuy" class="btn btn-danger"><span class="glyphicon glyphicon-exclamation-sign"></span> I don't want to buy this Item</button>
+                            <button id="btnBuy" class="btn btn-success hide">Back to buy Item</button>
+                            <div class="dontbuy hide">
+                                <br> We understand that you have a problem with this item.
+                                <br> You are the winner in this Item Auction, but you want to cancel your order.
+                                <br> In this case, we will deduct 5% of your order cancellation fee from your account.
+                                <br> Tell us more about the problem you have encountered and confirm:
+                                <br><br>
+                                <form action="" method="POST" role="form">
+                                
+                                    <div class="form-group">
+                                        <label for="">Description about your problem:</label>
+                                        <textarea class="form-control" name="description" rows="4" placeholder="Tell us about your problem..." required="required"></textarea>
+                                        
+                                    </div>
+                                
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </form>
+                                
+                            </div>
+                        </div>
                     </div>
                 </div>
 
