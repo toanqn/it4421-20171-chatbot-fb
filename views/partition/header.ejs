@@ -43,7 +43,8 @@
                 <li style="display:<%if(!login) {%> none <%}%>"><a href="#">Hi: <%-username%></a></li>
                 <li class="dropdown" style="display:<%if(!login) {%> none <%}%>"><a class="dropdown-toggle" data-toggle="dropdown" href="#"> My Account<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a class="glyphicon glyphicon-cog" href="/userInfo"> Setting</a></li>
+                        <li><a class="glyphicon glyphicon-cog" href="/userInfo"> PersonalSetting</a></li>
+                        <li><a class="glyphicon glyphicon-open" href="/sellProduct"> SellProduct</a></li>
                         <li id="logout1"><a class="glyphicon glyphicon-log-out" href="/api/user/logout"> LogOut</a></li>
                     </ul>
                 </li>

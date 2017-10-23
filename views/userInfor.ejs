@@ -25,7 +25,7 @@
                     <h3> My Account</h3>
                     <hr>
                     <ul class="nav nav-pills nav-stacked selectCategoryMenu">
-                        <li class="selectCategory active"> <a href="/userInfo" class="cName">Personal Information</a></li>
+                        <li class="selectCategory active"> <a href="/userInfo" class="cName">Personal Setting</a></li>
                         <li class="selectCategory"> <a href="/sellProduct" class="cName">Sell a Product</a></li>
                         <li class="selectCategory"> <a href="#" class="cName">Sell/Buy History </a></li>
                         <li class="selectCategory">
@@ -42,73 +42,95 @@
                 <!-- END NAV LEFT -->
                 
                 <div class="col-xs-7 col-sm-7 col-md-8 col-lg-8">
-                    <div id="information">
-                        <br><span class="nameTitle col-md-3"> Username </span> : <%= user.username %>
-                        <br><span class="nameTitle col-md-3"> Full Name </span> : <%= user.name %>
-                        <br><span class="nameTitle col-md-3"> Email  </span> : <%= user.email %>
-                        <br><span class="nameTitle col-md-3"> Gender </span> : <%= user.gender? 'Male': 'Female' %>
-                        <br><span class="nameTitle col-md-3"> Phone  </span> : <%= user.phone %>
-                        <br><span class="nameTitle col-md-3"> Address </span> : <%= user.address %>
-                        <br><span class="nameTitle col-md-3"> Role </span> : <%= user.role %>
-                    </div>
-                    <div class="">
-                        <a href="#modal-edit" data-toggle="modal" class="btn btn-lg btn-success">Update Profile</a>
-                    </div>
-                </div>
-            </div>
-                
-            <!-- modal-edit-->
-            <div class="modal fade" id="modal-edit">
-                <form action="/api/user/updateProfile" method="POST" role="form">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                                <h4 class="modal-title">Update Profile</h4>
-
-                            </div>
-                            <div class="modal-body">
-
+                    <h2>Public Profile</h2>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-7">
+                            
+                            <form  action="/api/user/updateProfile" method="POST" role="form">
                                 <div class="form-group">
-                                    <label for="">Full Name</label>
-                                    <input type="text" name='name' class="form-control" id="" required="required" value=<%- user.name %> >
+                                    <label for="">Username</label>
+                                    <span class="form-control disabled"><%= user.username %></span>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="">Name</label>
+                                    <input type="text" name='name' class="form-control" required="required" value="<%= user.name %>">
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="">Email</label>
-                                    <input type="email" name='email' class="form-control" id="" required="required" value=<%= user.email %> >
+                                    <label for="">Email <span class="glyphicon glyphicon-lock"></span></label>
+                                    <input type="email" name='email' class="form-control" required="required" value="<%= user.email %>">
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="">Gender (Male/Female)</label>
-                                    <input type="text" name='gender' class="form-control" id="" required="required" value=<%= user.gender? 'Male': 'Female' %> >
+                                    <label>Gender</label>
+                                    <select class="form-control" name="gender">
+                                        <option  value="<%= user.gender? 'Male': 'Female' %>"><%= user.gender? 'Male': 'Female' %></option>
+                                        <option  value="<%= user.gender? 'Female': 'Male' %>"><%= user.gender? 'Female': 'Male' %></option>
+                                    </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="">Phone </label>
-                                    <input type="number" name='phone' class="form-control" id="" required="required" value=<%= user.phone %> >
+                                    <label for="">Phone <span class="glyphicon glyphicon-lock"></span></label>
+                                    <input type="number" name='phone' class="form-control" required="required" value="<%= user.phone %>">
                                 </div>
                                 <div class="form-group">
                                     <label for="">Address </label>
-                                    <input type="text" name='address' class="form-control" id="" value=<%= user.address %> >
+                                    <input type="text" name='address' class="form-control" value="<%= user.address %>">
                                 </div>
-                                <!-- <div class="form-group">
-                                    <label for="">Password </label>
-                                    <input type="password" name='password' class="form-control" required="required" name="newpassword">
-                                </div> -->
-                            </div>
 
-                            <div class="modal-footer">
+                                <div class="form-group">
+                                    <label>About me</label>
+                                    <br>
+                                    <textarea class="form-control" name="aboutme" rows="5" placeholder="Tell us a little bit about yourself..." ></textarea>
+                                    <span>There information will show in <a href="/userProfile">your profile</a></span>
+                                </div>
 
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                                <input type="hidden" name="command" value="update">
-                                <input type="hidden" name="userId" value="">
-                                <input type="submit" class="btn btn-primary" value="Submit" name="edit">
+                                <button type="submit" class="btn btn-lg btn-primary">Update Profile</button>
+                               
+                            </form>
+                            <hr><hr>
+                            <div>
+                                <h3> Change Your Password:</h3>
+                                
+                                <form action="" method="POST" role="form">
+                                
+                                    <div class="form-group">
+                                        <label for="">Old Password</label>
+                                        <input type="password" class="form-control" id="" placeholder="Old password">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">New Password</label>
+                                        <input type="password" class="form-control" id="" placeholder="New password">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Confirm Password</label>
+                                        <input type="password" class="form-control" id="" placeholder="Confirm password">
+                                    </div>
+                                
+                                    
+                                
+                                    <button type="submit" class="btn btn-danger">Change Password</button>
+                                </form>
+                                
                             </div>
                         </div>
+                        <div class="col-md-4">
+                            <h4><B>Profile Picture</B> </h4>
+                            <div class="table-bordered">
+                                <img src="resources/images/minhnb.jpg" class="img-responsive img-display" alt="avata">
+                            </div>
+                            <br>
+                            <form action="" method="POST" role="form">
+                                <input type="file" class="" id="my-button" value="Update new picture">
+                                <button type="submit" class="btn btn-info">Upload new profile picture</button>
+                            </form>
+                            
+                        </div>
                     </div>
-                </form>
+                </div>
             </div>
-            <!-- End modal -->
+           
                 
         </div>
         
