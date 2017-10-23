@@ -30,25 +30,7 @@
 
         <div class="row">
             <!-- NAV LEFT -->
-            <div class="col-xs-4 col-sm-2 col-md-3 col-lg-3 well navLeft">
-                <h3> My Account</h3>
-                <hr>
-                <ul class="nav nav-pills nav-stacked selectCategoryMenu">
-                    <li class="selectCategory"> <a href="/userInfo" class="cName">Personal Setting</a></li>
-                    <li class="selectCategory active"> <a href="/sellProduct" class="cName">Sell a Product</a></li>
-                    <li class="selectCategory"> <a href="#" class="cName">Sell/Buy History </a></li>
-                    <li class="selectCategory">
-                        <a href="#" class="cName">Reports and Tools</a>
-                        <ul class="dropdownStatic" role="menu">
-                            <li class="subCategory"><a href="#">Sales reports</a></li>
-                            <li class="subCategory"><a href="#">Report a buyer</a></li>
-                            <li class="subCategory"><a href="#">Contact Admin</a></li>
-                        </ul>
-                    </li>
-                    
-                </ul>
-            </div>
-            <!-- END NAV LEFT -->
+            <%- include('partition/navLeft.ejs') %>
 
             <div class="col-xs-7 col-sm-7 col-md-8 col-lg-8">
                 
