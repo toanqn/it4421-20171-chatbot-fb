@@ -1,6 +1,8 @@
 const express = require('express');
 
 const app = express();
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
 const mongoose = require('mongoose');
 const ejs = require('ejs');  // eslint-disable-line
 const bodyParser = require('body-parser');
@@ -61,6 +63,10 @@ passport.use(new LocalStrategy((username, password, done) => {
     });
 }));
 
+io.on('connection', () => {
+  console.log('connected');
+});
+
 app.use('/api/user', userRoute);
 app.use('/api/product', productRoute);
 
@@ -89,7 +95,6 @@ app.get('/detail', (req, res) => {
   const { id } = req.query;
   productController.getProductById(id)
     .then((success) => {
-      console.log('aaa', success);
       res.render('productDetail', { login: req.isAuthenticated(), username: req.user ? req.user.username : '', product: success });
     })
     .catch((err) => {
@@ -97,19 +102,19 @@ app.get('/detail', (req, res) => {
     });
 });
 
-app.get('/userInfo', isAuthenticated,(req, res) => {
+app.get('/userInfo', isAuthenticated, (req, res) => {
   res.render('userInfor', {
     login: req.isAuthenticated(),
     username: req.user ? req.user.username : '',
-    user: req.user
-  })
-})
+    user: req.user,
+  });
+});
 
 if (!process.env.NODE_ENV) {
   mongoose.connect(config.DB_Address);
 }
 
-app.listen(config.PORT, (err) => {
+http.listen(config.PORT, (err) => {
   if (err) {
     console.log('have error occur');
   } else {
