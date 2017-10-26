@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width initial-scale=1">
+        <title>Purchase History</title>
+        
+        
+        <link href="/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/resources/css/style.css" rel="stylesheet" type="text/css">
+        <script src="/resources/js/jquery-3.1.1.min.js" type="text/javascript"> </script>
+        <script src="/resources/bootstrap/js/bootstrap.min.js" type="text/javascript"> </script>
+        <script src="/resources/js/script.js" type="text/javascript"></script>
+    
+    </head>
+    <body>
+        <!-- Header -->
+        <%- include('partition/header.ejs') %>
+
+            <!-- Content -->
+            <div class="content container">
+                <div class="row">
+                    <!-- NAV LEFT -->
+                    <%- include('partition/navLeft.ejs') %>
+
+                        <div class="col-md-9">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4>Unpaid items</h4>
+                                </div>
+                                <div class="panel-body">
+                                    <p>You have 2 item waiting for pay.</p>
+                                    <p> Please click following link bellow to pay this items before end of time!</p>
+                                    <div class="row">
+                                        <!-- For each here -->
+                                        <div class="col-sm-6 col-md-4">
+                                            <div class="table-bordered productPreview">
+                                                <img src="http://i.ebayimg.com/images/g/EowAAOSwSclXMEe4/s-l1600.jpg" alt="http://i.ebayimg.com/images/g/EowAAOSwSclXMEe4/s-l1600.jpg"
+                                                    class="img-display table-bordered img-responsive">
+                                                <div class="caption">
+                                                    <a href="/buyItem">
+                                                        <h4 class="textPreview"> White Colour FujiFilm Fuji Instax Mini...</h4>
+                                                    </a>
+                                                    <div class="bidTimePreview">
+                                                        <h4> Price: 570$ </h4>
+                                                        <div id="EndTime"> Time remaining: 1 days</div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6 col-md-4">
+                                            <div class="table-bordered productPreview">
+                                                <img src="http://i.ebayimg.com/images/g/EowAAOSwSclXMEe4/s-l1600.jpg" alt="http://i.ebayimg.com/images/g/EowAAOSwSclXMEe4/s-l1600.jpg"
+                                                    class="img-display table-bordered img-responsive">
+                                                <div class="caption">
+                                                    <a href="/buyItem">
+                                                        <h4 class="textPreview"> White Colour FujiFilm Fuji Instax Mini...</h4>
+                                                    </a>
+                                                    <div class="bidTimePreview">
+                                                        <h4> Price: 570$ </h4>
+                                                        <div id="EndTime"> Time remaining: 4 minutes</div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- End for each -->
+                                    </div>
+                                    <!-- ./row -->
+                                </div>
+                            </div>
+                            <!-- ./panel -->
+
+
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4>Orders</h4>
+                                </div>
+                                <div class="panel-body">
+                                    <p>You have 1 item ordered. Your item is being shipped to your address</p>
+                                    <p> If you have received your items, please let us know by click button: "I got my item" bellow!</p>
+                                    <div class="row">
+                                        <!-- For each here -->
+                                        <div class="col-sm-6 col-md-4">
+                                            <div class="table-bordered productPreview">
+                                                <img src="http://i.ebayimg.com/images/g/EowAAOSwSclXMEe4/s-l1600.jpg" alt="http://i.ebayimg.com/images/g/EowAAOSwSclXMEe4/s-l1600.jpg"
+                                                    class="img-display table-bordered img-responsive">
+                                                <div class="caption">
+                                                    <a href="/detail?id=59de2ee24af3403b7cee9b5c">
+                                                        <h4 class="textPreview"> White Colour FujiFilm Fuji Instax Mini...</h4>
+                                                    </a>
+                                                    <div class="bidTimePreview">
+                                                        <h4> Price: 570$ </h4>
+                                                        <div id="EndTime"> Time estimate: 1 days remaining</div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-md-8">
+                                            <div>
+                                                <button class="btn btn-success btnShow"> I got my item</button>
+                                                <button class="btn btn-danger hide btnHide">Hide Feedback</button>
+                                                <div class="showdiv hide">
+                                                    <br> Thank you for choosing BK Auction for purchase.
+                                                    <br> You've just received your item.
+                                                    <br><br>
+                                                    <form action="" method="POST" role="form">
+                                                    
+                                                        <div class="form-group">
+                                                            <label>Please give some feedback:</label>
+                                                            <br>
+                                                            <label class="radio-inline"><input type="radio" name="rate" value="1">Very Bad</label>
+                                                            <label class="radio-inline"><input type="radio" name="rate" value="2">Bad</label>
+                                                            <label class="radio-inline"><input type="radio" name="rate" value="3">Good</label>
+                                                            <label class="radio-inline"><input type="radio" name="rate" value="4">Very Good</label>
+                                                            <label class="radio-inline"><input type="radio" name="rate" value="5" checked="checked">Excellent</label>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="">Tell us a little more:</label>
+                                                            <textarea class="form-control" name="feedback" rows="4" placeholder="Give some feedback"></textarea>
+                                                        </div>
+                                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                                    </form>
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- End for each -->
+                                    </div>
+                                    <!-- ./row -->
+                                </div>
+                            </div>
+                            <!-- ./panel -->
+
+
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4>Returns and canceled orders</h4>
+                                </div>
+                                <div class="panel-body">
+                                    <p>You do not have any returned and canceled orders to display in this view.</p>
+                                </div>
+                            </div>
+                            <!-- ./panel -->
+
+                        </div>
+
+
+                </div>
+            </div>
+    </body>
+    
+</html>

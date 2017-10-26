@@ -354,3 +354,16 @@ h1 {
 }
 /* End user Profile */
 
+/* Sell new product, selling product */
+
+.title {
+	font-family: Lobster;
+	color: red;
+	text-align: center;
+}
+
+.btnEdit {
+	max-width: 400px;
+	width: 100%;
+}
+/* End sell new product, selling product */
