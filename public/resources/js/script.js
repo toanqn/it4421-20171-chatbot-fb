@@ -13,15 +13,15 @@ $(document).ready(function(){
         $('#iSelectedCategory').val(valSelected);
     });
 
-    $('#btnDontBuy').click(function(){
-        $('#btnDontBuy').addClass('hide') ;
-        $('#btnBuy').removeClass('hide') ;
-        $('.dontbuy').removeClass('hide') ;
+    $('.btnShow').click(function(){
+        $('.btnShow').addClass('hide') ;
+        $('.btnHide').removeClass('hide') ;
+        $('.showdiv').removeClass('hide') ;
     })
 
-    $('#btnBuy').click(function(){
-        $('#btnDontBuy').removeClass('hide') ;
-        $('#btnBuy').addClass('hide') ;
-        $('.dontbuy').addClass('hide') ;
+    $('.btnHide').click(function(){
+        $('.btnShow').removeClass('hide') ;
+        $('.btnHide').addClass('hide') ;
+        $('.showdiv').addClass('hide') ;
     })
 });

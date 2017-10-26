@@ -140,8 +140,12 @@ app.get('/buyItem', (req, res) => {
   res.render('buyItem', { login: req.isAuthenticated(), username: req.user ? req.user.username : '' });
 });
 
-app.get('/userHistory', (req, res) => {
-  res.render('userHistory', { login: req.isAuthenticated(), username: req.user ? req.user.username : '' });
+app.get('/purchaseHistory', (req, res) => {
+  res.render('purchaseHistory', { login: req.isAuthenticated(), username: req.user ? req.user.username : '' });
+});
+
+app.get('/sellingItem', (req, res) => {
+  res.render('sellingItem', { login: req.isAuthenticated(), username: req.user ? req.user.username : '' });
 });
 
 // END LINHPHAN EDIT
