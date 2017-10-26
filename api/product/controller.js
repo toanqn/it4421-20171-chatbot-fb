@@ -13,8 +13,13 @@ const getProductById = function (id) {
   return product.findOne({ _id: id });
 };
 
+const getDateExpired = function (id) {
+  return product.findOne({ _id: id }, { end_time: 1 });
+};
+
 module.exports = {
   saveMultipleProduct,
   get6Products,
   getProductById,
+  getDateExpired,
 };

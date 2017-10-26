@@ -97,7 +97,7 @@
                             
                                 <form action="" method="" class="input-group" role="form">
                                     <span class="input-group-addon">$</span>
-                                    <input type="number" class="form-control" min="570">
+                                    <input type="number" class="form-control" min="570" id="price">
                                     <span class="input-group-btn">
                                         <button class="btn btn-primary" type="button" onclick="bidPlace()">Bid Place</button>
                                     </span>
@@ -179,14 +179,21 @@
     <script src="/resources/js/moment.js"></script>
     <script>
         const end_time = "<%- product.end_time %>";
+        var socket = io();
         var bidPlace = function(){
-            alert('aaa');
+            var newPrice = document.getElementById("price").value;
+            var obj = {
+                newPrice,
+                id : "<%- product._id %>",
+                username: "<%- username %>",
+            }
+            socket.emit('send price', obj);
         }
+        socket.on('response', function(val){
+            alert(val);
+        });
     </script>
     <script src="/resources/js/detailpage.js"></script>
-    <script>
-        var socket = io();
-    </script>
 </body>
 
 </html>

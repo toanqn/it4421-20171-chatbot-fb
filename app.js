@@ -17,6 +17,7 @@ const productController = require('./api/product/controller');
 const bcryptUtility = require('./utility/bcrypt');
 const isAuthenticated = require('./utility/isAuthenticated');
 const dateValidate = require('./utility/dateValidate');
+const connectSocket = require('./utility/socket');
 
 app.use(express.static(`${__dirname}/public`));
 app.set('view engine', 'ejs');
@@ -63,9 +64,7 @@ passport.use(new LocalStrategy((username, password, done) => {
     });
 }));
 
-io.on('connection', () => {
-  console.log('connected');
-});
+io.on('connection', connectSocket);
 
 app.use('/api/user', userRoute);
 app.use('/api/product', productRoute);
