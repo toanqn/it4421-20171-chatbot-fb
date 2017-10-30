@@ -31,7 +31,7 @@ const productSchema = new schema({
   description: {
     type: String,
   },
-  category_id: {
+  category: {
     type: String,
     required: true,
   },

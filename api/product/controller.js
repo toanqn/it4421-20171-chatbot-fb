@@ -17,9 +17,14 @@ const getDateExpired = function (id) {
   return product.findOne({ _id: id }, { end_time: 1 });
 };
 
+const createItem = function(item){
+  return product.insertMany(item);
+}
+
 module.exports = {
   saveMultipleProduct,
   get6Products,
   getProductById,
   getDateExpired,
+  createItem,
 };
