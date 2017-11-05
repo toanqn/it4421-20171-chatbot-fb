@@ -11,18 +11,6 @@ const emailValidator = [
   }),
 ];
 
-const roleValidator = [
-  validate({
-    validator(val) {
-      if (val !== 'business' && val !== 'personal') {
-        return false;
-      }
-      return true;
-    },
-    message: 'Role must be one of business or personal',
-  }),
-];
-
 const userSchema = new schema({
   username: {
     type: String,
@@ -39,11 +27,6 @@ const userSchema = new schema({
     validate: emailValidator,
   },
   phone: String,
-  role: {
-    type: String,
-    required: true,
-    validate: roleValidator,
-  },
   address: String,
   name: String,
   gender: Boolean
