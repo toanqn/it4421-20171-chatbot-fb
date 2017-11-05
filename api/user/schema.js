@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const validate = require('mongoose-validator');
+const bcrypt = require('bcrypt');
 
 const schema = mongoose.Schema;
 
@@ -47,5 +48,9 @@ const userSchema = new schema({
   name: String,
   gender: Boolean
 });
+
+userSchema.methods.validPassword = (password) => {
+  return bcrypt.compare(password, this.password);
+}
 
 module.exports = mongoose.model('user', userSchema);

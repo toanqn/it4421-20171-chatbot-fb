@@ -59,4 +59,33 @@ route.post('/updateProfile', isAuthenticated, (req, res) => {
     })
 });
 
+route.post('/changePassword', isAuthenticated, (req, res) =>{
+  const username = req.user.username;
+  const oldPassword = req.body.oldPassword;
+  const newPassword = req.body.newPassword;
+  const confirmPassword = req.body.confirmPassword;
+  controller.findUserByUsername(username)
+  .then((user) => {
+    if(user.validPassword(oldPassword)){
+      if(newPassword == confirmPassword){
+        bcrypt.hash(newPassword, 10)
+        .then((encodePassword) => {
+          user.password = encodePassword;
+          user.save((err) => {
+            if(err) throw err;
+            console.log('Change password sucessfull!');
+          });
+        res.redirect('/userInfo');
+        })
+        .catch((err) => {
+          res.send(err);
+        })
+      }
+    }else{
+      console.log('Invalid password!');
+      res.redirect('/userInfo');
+    }
+  })
+});
+
 module.exports = route;
