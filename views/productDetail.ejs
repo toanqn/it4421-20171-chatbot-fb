@@ -192,6 +192,11 @@
         socket.on('response', function(val){
             alert(val);
         });
+        socket.on('newPrice', function(val){
+            if(val.id === "<%- product.id -%>") {
+                document.getElementById('currentBid').innerText = "$"+val.newPrice;
+            }
+        })
     </script>
     <script src="/resources/js/detailpage.js"></script>
 </body>

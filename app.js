@@ -65,7 +65,9 @@ passport.use(new LocalStrategy((username, password, done) => {
     });
 }));
 
-io.on('connection', connectSocket);
+io.on('connection', function(socket){
+  connectSocket(socket, io);
+});
 
 app.use('/api/user', userRoute);
 app.use('/api/product', productRoute);
@@ -106,15 +108,6 @@ app.get('/detail', (req, res) => {
       console.log(err);
       res.send(err);
     });
-  // productController.getProductById(id)
-  //   .then((success) => {
-  //     res.render('productDetail', {
-  //       login: req.isAuthenticated(), username: req.user ? req.user.username : '', product: success, maxPrice: 100,
-  //     });
-  //   })
-  //   .catch((err) => {
-  //     res.send(err);
-  //   });
 });
 
 app.get('/userInfo', isAuthenticated, (req, res) => {

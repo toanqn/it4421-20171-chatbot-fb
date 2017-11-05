@@ -3,7 +3,7 @@ const productController = require('../api/product/controller');
 const dateValidate = require('../utility/dateValidate');
 
 /* eslint-disable */
-const connectSocket = function (socket) {
+const connectSocket = function (socket, io) {
   socket.on('send price', (val) => {
     if(val.username === ''){
         socket.emit('response', 'You need signin first !');
@@ -24,15 +24,22 @@ const connectSocket = function (socket) {
                     maxPrice: val.newPrice,
                   };
                   productHistoriesController.saveProductHistory(obj)
-                  .then(success => socket.emit('response', 'Success !'))
+                  .then((success) => {
+                    socket.emit('response', 'Success !');
+                    io.sockets.emit('newPrice', val.newPrice);
+                  })
                   .catch(err => socket.emit('response', 'Occur error !'));  
                 } else {
                   result.histories.push({username: val.username, price: val.newPrice});
                   if( result.maxPrice < val.newPrice) result.maxPrice = val.newPrice;
-                  console.log('aaa',result);
                   productHistoriesController.updateProductHistory(result)
-                  .then(success => socket.emit('response', 'Success !'))
-                  .catch(err => socket.emit('response', 'Occur error !'));
+                  .then((success) => {
+                    console.log('aaa');
+                    socket.emit('response', 'Success !');
+                    console.log('bbb', io);
+                    io.sockets.emit('newPrice', {newPrice: val.newPrice, id: val.id});
+                  })
+                  .catch(err => socket.emit('response', 'occur error'));
                 }
               });
           } else {
