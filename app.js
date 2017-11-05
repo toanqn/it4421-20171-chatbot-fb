@@ -82,7 +82,11 @@ app.get('/', (req, res) => {
           filteredProduct.push(e);
         }
       });
-      res.render('index', { login: req.isAuthenticated(), username: req.user ? req.user.username : '', products: filteredProduct });
+      res.render('index', { 
+        login: req.isAuthenticated(), 
+        username: req.user ? req.user.username : '', 
+        products: filteredProduct 
+      });
     })
     .catch((err) => {
       res.send(err);
@@ -90,9 +94,22 @@ app.get('/', (req, res) => {
 });
 
 app.get('/login', (req, res) => {
-  res.render('login', { login: req.isAuthenticated(), username: req.user ? req.user.username : '', message: false });
+  res.render('login', { 
+    login: req.isAuthenticated(), 
+    username: req.user ? req.user.username : '', 
+    message: false, 
+    isSignup: false 
+  });
 });
 
+app.get('/signup', (req, res) => {
+  res.render('login', {
+    login: req.isAuthenticated(),
+    username: req.user.username ? req.user.username : '',
+    message: false,
+    isSignup: true,
+  })
+})
 app.get('/detail', (req, res) => {
   const { id } = req.query;
   Promise.all([productController.getProductById(id), productHistory.getMaxPrice(id)])
