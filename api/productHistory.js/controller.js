@@ -12,8 +12,13 @@ const updateProductHistory = function (obj) {
   return schema.update({ _id: obj._id }, { $set: obj });
 };
 
+const getMaxPrice = function (id) {
+  return schema.findOne({productId: id});
+};
+
 module.exports = {
   getProductHistoryById,
   saveProductHistory,
   updateProductHistory,
+  getMaxPrice,
 };

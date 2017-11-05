@@ -14,6 +14,7 @@ const userRoute = require('./api/user');
 const userController = require('./api/user/controller');
 const productRoute = require('./api/product');
 const productController = require('./api/product/controller');
+const productHistory = require('./api/productHistory.js/controller');
 const bcryptUtility = require('./utility/bcrypt');
 const isAuthenticated = require('./utility/isAuthenticated');
 const dateValidate = require('./utility/dateValidate');
@@ -92,13 +93,28 @@ app.get('/login', (req, res) => {
 
 app.get('/detail', (req, res) => {
   const { id } = req.query;
-  productController.getProductById(id)
-    .then((success) => {
-      res.render('productDetail', { login: req.isAuthenticated(), username: req.user ? req.user.username : '', product: success });
+  Promise.all([productController.getProductById(id), productHistory.getMaxPrice(id)])
+    .then((result) => {
+      const success = result[0];
+      const maxPrice = result[1] !== null ? result[1].maxPrice : 0;
+      const countBid = result[1] !== null ? result[1].histories.length : 0;
+      res.render('productDetail', {
+        login: req.isAuthenticated(), username: req.user ? req.user.username : '', product: success, maxPrice, countBid,
+      });
     })
     .catch((err) => {
+      console.log(err);
       res.send(err);
     });
+  // productController.getProductById(id)
+  //   .then((success) => {
+  //     res.render('productDetail', {
+  //       login: req.isAuthenticated(), username: req.user ? req.user.username : '', product: success, maxPrice: 100,
+  //     });
+  //   })
+  //   .catch((err) => {
+  //     res.send(err);
+  //   });
 });
 
 app.get('/userInfo', isAuthenticated, (req, res) => {

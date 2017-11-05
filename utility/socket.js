@@ -21,12 +21,14 @@ const connectSocket = function (socket) {
                       username: val.username,
                       price: val.newPrice,
                     }],
+                    maxPrice: val.newPrice,
                   };
                   productHistoriesController.saveProductHistory(obj)
                   .then(success => socket.emit('response', 'Success !'))
                   .catch(err => socket.emit('response', 'Occur error !'));  
                 } else {
                   result.histories.push({username: val.username, price: val.newPrice});
+                  if( result.maxPrice < val.newPrice) result.maxPrice = val.newPrice;
                   console.log('aaa',result);
                   productHistoriesController.updateProductHistory(result)
                   .then(success => socket.emit('response', 'Success !'))

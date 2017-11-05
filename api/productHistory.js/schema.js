@@ -8,6 +8,7 @@ const productHistories = new schema({
     username: String,
     price: Number,
   }],
+  maxPrice: Number,
 });
 
 module.exports = mongoose.model('productHistories', productHistories);
