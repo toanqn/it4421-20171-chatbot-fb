@@ -14,6 +14,17 @@ const priceValidator = [
     message: 'Price must be > 0',
   }),
 ];
+// const categoryValidator = [
+//   validate({
+//     validator(val){
+//       if ((val == 'electronic') || (val == 'fashion') || (val == 'watches') || (val == 'others')){
+//         return true;
+//       }
+//       return false;
+//     },
+//     message: 'Category invalid!',
+//   }),
+// ];
 
 const productSchema = new schema({
   name: {
@@ -31,9 +42,10 @@ const productSchema = new schema({
   description: {
     type: String,
   },
-  category_id: {
+  category: {
     type: String,
     required: true,
+    enum: ['electronic', 'fashion', 'watches', 'others'],
   },
   is_sold: Boolean,
   image: {

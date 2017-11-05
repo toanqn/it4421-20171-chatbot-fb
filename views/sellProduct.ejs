@@ -41,7 +41,7 @@
                 <div class="box box-primary" style="margin: 0 auto; width:80%">
 
                     <!-- form -->
-                    <form role="form" method="post" action="" enctype="multipart/form-data">
+                    <form role="form" method="POST" action="/api/product/sellProduct">
                         <div class="box-body">
 
                             <div class="form-group">
@@ -51,7 +51,7 @@
 
                             <div class="form-group">
                                 <label>Startting Price ($):</label>
-                                <input type="number" class="form-control" name="SPrice" required="required">
+                                <input type="number" min='0' class="form-control" name="SPrice" required="required">
                             </div>
                             <div class="row">
 
@@ -89,9 +89,10 @@
 
                             <div class="form-group">
                                 <label>Images</label>
-                                <input type="file" id="exampleInputFile1" name="Img1" required="required">
+                                <input type="link" id='exampleInputFile1' name='Img1' required='required'>
+                                <!-- <input type="file" id="exampleInputFile1" name="Img1" required="required">
                                 <input type="file" id="exampleInputFile2" name="Img2" >
-                                <input type="file" id="exampleInputFile3" name="Img3" >
+                                <input type="file" id="exampleInputFile3" name="Img3" > -->
                             </div>
 
                         </div>
