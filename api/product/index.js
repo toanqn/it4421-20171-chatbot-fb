@@ -22,8 +22,11 @@ route.post('/sellProduct', (req, res) => {
     start_time: req.body.Stime,
     end_time: req.body.Etime
   };
-  console.log(item);
-  controller.createItem(item);
-  res.redirect('/sellProduct');
+  controller.createItem(item)
+  .then(success => {
+    console.log('Upload a new product sucessfull!');
+    res.redirect('/sellProduct');
+  })
+  .catch(err => res.send(err));
 })
 module.exports = route;
