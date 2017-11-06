@@ -132,6 +132,7 @@ app.get('/userInfo', isAuthenticated, (req, res) => {
     login: req.isAuthenticated(),
     username: req.user ? req.user.username : '',
     user: req.user,
+    menu: 'userInfo' ,
   });
 });
 
@@ -158,7 +159,11 @@ app.get('/bidHistory', (req, res) => {
 });
 
 app.get('/sellProduct', (req, res) => {
-  res.render('sellProduct', { login: req.isAuthenticated(), username: req.user ? req.user.username : '' });
+  res.render('sellProduct', { 
+    login: req.isAuthenticated(), 
+    username: req.user ? req.user.username : '' ,
+    menu: 'sellProduct' ,
+  });
 });
 
 app.get('/buyItem', (req, res) => {
@@ -166,11 +171,19 @@ app.get('/buyItem', (req, res) => {
 });
 
 app.get('/purchaseHistory', (req, res) => {
-  res.render('purchaseHistory', { login: req.isAuthenticated(), username: req.user ? req.user.username : '' });
+  res.render('purchaseHistory', { 
+    login: req.isAuthenticated(), 
+    username: req.user ? req.user.username : '' ,
+    menu: 'purchaseHistory' ,
+  });
 });
 
 app.get('/sellingItem', (req, res) => {
-  res.render('sellingItem', { login: req.isAuthenticated(), username: req.user ? req.user.username : '' });
+  res.render('sellingItem', { 
+    login: req.isAuthenticated(), 
+    username: req.user ? req.user.username : '' ,
+    menu: 'sellingItem' ,
+  });
 });
 
 // END LINHPHAN EDIT
