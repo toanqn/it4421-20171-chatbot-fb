@@ -11,7 +11,6 @@ route.post('/createUser', (req, res) => {
     password: req.body.password,
     email: req.body.email,
     phone: req.body.phone,
-    role: req.body.role,
   };
   console.log(userInfo);
   bcrypt.hash(userInfo.password, 10)

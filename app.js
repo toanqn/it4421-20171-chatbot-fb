@@ -105,7 +105,7 @@ app.get('/login', (req, res) => {
 app.get('/signup', (req, res) => {
   res.render('login', {
     login: req.isAuthenticated(),
-    username: req.user.username ? req.user.username : '',
+    username: req.user ? req.user.username : '',
     message: false,
     isSignup: true,
   })
