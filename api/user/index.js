@@ -11,7 +11,6 @@ route.post('/createUser', (req, res) => {
     password: req.body.password,
     email: req.body.email,
     phone: req.body.phone,
-    role: req.body.role,
   };
   console.log(userInfo);
   bcrypt.hash(userInfo.password, 10)
@@ -19,10 +18,16 @@ route.post('/createUser', (req, res) => {
       userInfo.password = encodePassword;
       controller.createUser(userInfo)
         .then((success) => {
-          res.render('login', { login: false, username: '', message: 'Đăng kí thành công' });
+          console.log('Đăng kí thành công!');
+          res.redirect('/');
         })
         .catch((err) => {
-          res.render('login', { login: false, username: '', message: 'Đăng kí thất bại' });
+          res.render('login', { 
+            login: false, 
+            username: '', 
+            message: 'Đăng kí thất bại!',
+            isSignup: true,
+          });
         });
     });
 });
