@@ -37,7 +37,7 @@ const connectSocket = function (socket, io) {
                     console.log('aaa');
                     socket.emit('response', 'Success !');
                     console.log('bbb', io);
-                    io.sockets.emit('newPrice', {newPrice: val.newPrice, id: val.id});
+                    io.sockets.emit('newPrice', {newPrice: result.maxPrice, id: val.id});
                   })
                   .catch(err => socket.emit('response', 'occur error'));
                 }

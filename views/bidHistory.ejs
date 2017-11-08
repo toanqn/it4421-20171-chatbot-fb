@@ -28,12 +28,10 @@
                     <h2> Bid History</h2>
                     <hr class="hrBidHistory">
 
-                    <a href="/detail?id=59de2ee24af3403b7cee9b5d"><span class="productTitle"> The Polaroid Book, Barbara Hitchcock Hardcover 2008</span> </a>
+                    <a href="/detail?id=<%- product.id %>"><span class="productTitle"> <%- product.name %></span> </a>
                     <div id="bidHeader">
-                        <div class="bidInfoTitle">Bidders: <span id="bidders" class="bidInfor">5</span></div>
-                        <div class="bidInfoTitle">Bids: <span id="bids" class="bidInfor">6</span></div>
-                        <div class="bidInfoTitle">Time Left: <span id="timeLeftHistory" class="bidInfor"> 1 day 18 hours 15 mins </span></div>
-                        <div class="bidInfoTitle">Durations: <span id="durations" class="bidInfor">3 days</span></div>
+                        <div class="bidInfoTitle">Bids: <span id="bids" class="bidInfor"><%- history.histories.length %></span></div>
+                        <div class="bidInfoTitle">Time Left: <span id="timeLeftHistory" class="bidInfor"></span></div>
                     </div>
                     <hr class="hrBidHistory">
                 </div>
@@ -45,77 +43,40 @@
                             <tr>
                                 <th>Bidder</th>
                                 <th>Bid Amount</th>
-                                <th>Bid Time</th>
                             </tr>
                         </thead>
                         <tbody>
-
-                            <tr class="danger bidSucess">
-                                <td class="bidSucess"> <a href="#">n***a (0) </a> </td>
-                                <td class="bidSucess"> US <span id="">$560.00</span> </td>
-                                <td class="bidSucess"> <span id="bidTime">Oct-11-17 15:21:22 PDT</span></td>
-                            </tr>
-                            <tr>
-                                <td> <a href="#">c***h (166) </a> </td>
-                                <td> US <span id="">$560.00</span> </td>
-                                <td> <span id="bidTime">Oct-11-17 18:43:28 PDT</span></td>
-                            </tr>
-                            <tr>
-                                <td> <a href="#">b***t (1) </a> </td>
-                                <td> US <span id="">$540.00</span> </td>
-                                <td> <span id="bidTime">Oct-11-17 15:52:45 PDT</span></td>
-                            </tr>
-                            <tr>
-                                <td> <a href="#">v***y (15) </a> </td>
-                                <td> US <span id="">$520.00</span> </td>
-                                <td> <span id="bidTime">Oct-11-17 14:10:32 PDT</span></td>
-                            </tr>
-                            <tr>
-                                <td> <a href="#">f***e (64) </a> </td>
-                                <td> US <span id="">$510.00</span> </td>
-                                <td> <span id="bidTime">Oct-11-17 11:06:14 PDT</span></td>
-                            </tr>
-                            <tr>
-                                <td> <a href="#">v***y (15) </a> </td>
-                                <td> US <span id="">$500.00</span> </td>
-                                <td> <span id="bidTime">Oct-11-17 03:43:03 PDT</span></td>
-                            </tr>
-                            <tr class="info">
-                                <td> Starting Price </td>
-                                <td> US <span id="">$500.00</span> </td>
-                                <td> <span id="bidTime">Oct-10-17 13:43:34 PDT</span></td>
-                            </tr>
+                            <% history.histories.forEach((e) => { %>
+                                <tr class="danger bidSucess">
+                                    <td> <a href="#"><%- e.username %></a> </td>
+                                    <td> US <span id=""><%- e.price %></span> </td>
+                                </tr>
+                            <%}) %>
                         </tbody>
                     </table>
-
-                    <span> If two people bid the same amount, the first bid has priority. Also, you can only retract your bid under certain circumstances </span>
                 </div>
                 <div class="bidPlaceHistory col-md-3 well">
                     <div class="itemInfor">
                         <h3>Item Information</h3>
                         <hr class="hrBidHistory">
                         <div>
-                            <a href="/detail?id=59de2ee24af3403b7cee9b5d">The Polaroid Book, Barbara Hitchcock Hardcover 2008</a>
-                            <div class="itemTitle">Current Bid: <span id="currentBid"> US $560</span></div>
-                            <a href="/bidHistory">[6 bids]</a>
+                            <a href="/detail?id=<%- product.id %>"><%- product.name %></a>
+                            <div class="itemTitle">Current Bid: <span id="currentBid"> US $<%- history.maxPrice %></span></div>
+                            <br>
                         </div>
                     </div>
-
-                    <br>
-                    <form action="" method="" class="input-group" role="form">
-                        <span class="input-group-addon">$</span>
-                        <input type="number" class="form-control" min="570">
-                        <span class="input-group-btn">
-                            <button class="btn btn-primary" type="submit">Place Bid</button>
-                        </span>
-                    </form>
-                    <div>Enter US $570 or More</div>
                 </div>
 
             </div>
             
         </div> 
         <!-- End container -->
+
+        <script>
+            const end_time = "<%- product.end_time %>";
+        </script>
+        <script src="/resources/js/moment.js"></script>
+        <script src="/resources/js/bidHistory.js"></script>
 
     </body>
 </html>

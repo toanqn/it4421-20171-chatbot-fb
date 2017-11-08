@@ -93,16 +93,15 @@
                         
                         <div class="bidPlace">
                             <div class="itemTitle">Current Bid: <span id="currentBid"> US $<%- maxPrice %></span></div>
-                            <a href="/bidHistory">[<%- countBid %> Bids]</a>
-                            
-                                <form action="" method="" class="input-group" role="form">
-                                    <span class="input-group-addon">$</span>
-                                    <input type="number" class="form-control" min="570" id="price">
-                                    <span class="input-group-btn">
-                                        <button class="btn btn-primary" type="button" onclick="bidPlace()">Bid Place</button>
-                                    </span>
-                                </form>
-                            <div>Enter US $570 or More</div>
+                            <a href="/bidHistory?id=<%- product.id %>">[<%- countBid %> Bids]</a>
+                            <form class="input-group">
+                                <span class="input-group-addon">$</span>
+                                <input type="number" class="form-control" min="<%- maxPrice %>" id="price">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-primary" type="button" onclick="bidPlace()">Bid Place</button>
+                                </span>
+                            </form>
+                            <div id="minPrice">Enter US $<%- maxPrice %> or More</div>
                             
                         </div>
                     </div>
@@ -179,15 +178,21 @@
     <script src="/resources/js/moment.js"></script>
     <script>
         const end_time = "<%- product.end_time %>";
+        let max = Number("<%- maxPrice %>");
         var socket = io();
         var bidPlace = function(){
             var newPrice = document.getElementById("price").value;
-            var obj = {
-                newPrice,
-                id : "<%- product._id %>",
-                username: "<%- username %>",
+            if (Number(newPrice) < max ) {
+                alert("Bạn phải nhập lớn hơn "+max);
+            } else {
+                var obj = {
+                    newPrice,
+                    id : "<%- product._id %>",
+                    username: "<%- username %>",
+                }
+                socket.emit('send price', obj);
+
             }
-            socket.emit('send price', obj);
         }
         socket.on('response', function(val){
             alert(val);
@@ -195,6 +200,8 @@
         socket.on('newPrice', function(val){
             if(val.id === "<%- product.id -%>") {
                 document.getElementById('currentBid').innerText = "$"+val.newPrice;
+                document.getElementById('minPrice').innerText = "Enter US $"+val.newPrice+" or More";
+                max = Number(val.newPrice);
             }
         })
     </script>

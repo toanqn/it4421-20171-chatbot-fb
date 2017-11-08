@@ -161,7 +161,15 @@ app.get('/userProfile', (req, res) => {
 });
 
 app.get('/bidHistory', (req, res) => {
-  res.render('bidHistory', { login: req.isAuthenticated(), username: req.user ? req.user.username : '' });
+  const { id } = req.query;
+  Promise.all([productController.getProductById(id), productHistory.getProductHistoryById(id)])
+    .then(([product, history]) => {
+      console.log('product', product);
+      console.log('history', history);
+      res.render('bidHistory', {
+        login: req.isAuthenticated(), username: req.user ? req.user.username : '', product, history,
+      });
+    });
 });
 
 app.get('/sellProduct', (req, res) => {
@@ -173,7 +181,6 @@ app.get('/sellProduct', (req, res) => {
 });
 
 app.get('/buyItem', (req, res) => {
-  res.render('buyItem', { login: req.isAuthenticated(), username: req.user ? req.user.username : '' });
 });
 
 app.get('/purchaseHistory', (req, res) => {
