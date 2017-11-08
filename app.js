@@ -107,8 +107,8 @@ app.get('/signup', (req, res) => {
     login: req.isAuthenticated(),
     username: req.user ? req.user.username : '',
     message: false,
-    isSignup: true,
-  })
+    isSignup: true
+  });
 })
 app.get('/detail', (req, res) => {
   const { id } = req.query;
