@@ -65,7 +65,7 @@ passport.use(new LocalStrategy((username, password, done) => {
     });
 }));
 
-io.on('connection', function(socket){
+io.on('connection', (socket) => {
   connectSocket(socket, io);
 });
 
@@ -82,11 +82,17 @@ app.get('/', (req, res) => {
           filteredProduct.push(e);
         }
       });
-      res.render('index', { 
-        login: req.isAuthenticated(), 
-        username: req.user ? req.user.username : '', 
-        products: filteredProduct 
-      });
+      Promise.all(filteredProduct.map(e => productHistory.getMaxPrice(e.id)))
+        .then((result) => {
+          for (let i = 0; i < filteredProduct.length; i++) {
+            filteredProduct[i].maxPrice = result[i].maxPrice;
+          }
+          res.render('index', {
+            login: req.isAuthenticated(),
+            username: req.user ? req.user.username : '',
+            products: filteredProduct,
+          });
+        });
     })
     .catch((err) => {
       res.send(err);
@@ -94,11 +100,11 @@ app.get('/', (req, res) => {
 });
 
 app.get('/login', (req, res) => {
-  res.render('login', { 
-    login: req.isAuthenticated(), 
-    username: req.user ? req.user.username : '', 
-    message: false, 
-    isSignup: false 
+  res.render('login', {
+    login: req.isAuthenticated(),
+    username: req.user ? req.user.username : '',
+    message: false,
+    isSignup: false,
   });
 });
 
@@ -107,9 +113,9 @@ app.get('/signup', (req, res) => {
     login: req.isAuthenticated(),
     username: req.user ? req.user.username : '',
     message: false,
-    isSignup: true
+    isSignup: true,
   });
-})
+});
 app.get('/detail', (req, res) => {
   const { id } = req.query;
   Promise.all([productController.getProductById(id), productHistory.getMaxPrice(id)])
@@ -132,7 +138,7 @@ app.get('/userInfo', isAuthenticated, (req, res) => {
     login: req.isAuthenticated(),
     username: req.user ? req.user.username : '',
     user: req.user,
-    menu: 'userInfo' ,
+    menu: 'userInfo',
   });
 });
 
@@ -159,10 +165,10 @@ app.get('/bidHistory', (req, res) => {
 });
 
 app.get('/sellProduct', (req, res) => {
-  res.render('sellProduct', { 
-    login: req.isAuthenticated(), 
-    username: req.user ? req.user.username : '' ,
-    menu: 'sellProduct' ,
+  res.render('sellProduct', {
+    login: req.isAuthenticated(),
+    username: req.user ? req.user.username : '',
+    menu: 'sellProduct',
   });
 });
 
@@ -171,18 +177,18 @@ app.get('/buyItem', (req, res) => {
 });
 
 app.get('/purchaseHistory', (req, res) => {
-  res.render('purchaseHistory', { 
-    login: req.isAuthenticated(), 
-    username: req.user ? req.user.username : '' ,
-    menu: 'purchaseHistory' ,
+  res.render('purchaseHistory', {
+    login: req.isAuthenticated(),
+    username: req.user ? req.user.username : '',
+    menu: 'purchaseHistory',
   });
 });
 
 app.get('/sellingItem', (req, res) => {
-  res.render('sellingItem', { 
-    login: req.isAuthenticated(), 
-    username: req.user ? req.user.username : '' ,
-    menu: 'sellingItem' ,
+  res.render('sellingItem', {
+    login: req.isAuthenticated(),
+    username: req.user ? req.user.username : '',
+    menu: 'sellingItem',
   });
 });
 
