@@ -84,8 +84,12 @@ app.get('/', (req, res) => {
       });
       Promise.all(filteredProduct.map(e => productHistory.getMaxPrice(e.id)))
         .then((result) => {
-          for (let i = 0; i < filteredProduct.length; i++) {
-            filteredProduct[i].maxPrice = result[i].maxPrice;
+          for (let i = 0, j = 0; i < filteredProduct.length; i++) {
+            if(result[i]){
+              filteredProduct[i].maxPrice = result[i].maxPrice;
+            } else {
+              filteredProduct[i].maxPrice = filteredProduct[i].price;
+            }
           }
           res.render('index', {
             login: req.isAuthenticated(),
@@ -93,17 +97,6 @@ app.get('/', (req, res) => {
             products: filteredProduct,
           });
         })
-        .catch((err => {
-          for (let i = 0; i < filteredProduct.length; i++) {
-            filteredProduct[i].maxPrice = filteredProduct[i].price;
-          }
-
-          res.render('index', {
-            login: req.isAuthenticated(),
-            username: req.user ? req.user.username : '',
-            products: filteredProduct,
-          });
-        }));
     })
     .catch((err) => {
       res.send(err);
