@@ -92,7 +92,18 @@ app.get('/', (req, res) => {
             username: req.user ? req.user.username : '',
             products: filteredProduct,
           });
-        });
+        })
+        .catch((err => {
+          for (let i = 0; i < filteredProduct.length; i++) {
+            filteredProduct[i].maxPrice = filteredProduct[i].price;
+          }
+
+          res.render('index', {
+            login: req.isAuthenticated(),
+            username: req.user ? req.user.username : '',
+            products: filteredProduct,
+          });
+        }));
     })
     .catch((err) => {
       res.send(err);
