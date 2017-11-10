@@ -125,7 +125,7 @@ app.get('/detail', (req, res) => {
   Promise.all([productController.getProductById(id), productHistory.getMaxPrice(id)])
     .then((result) => {
       const success = result[0];
-      const maxPrice = result[1] !== null ? result[1].maxPrice : 0;
+      const maxPrice = result[1] !== null ? result[1].maxPrice : success.price;
       const countBid = result[1] !== null ? result[1].histories.length : 0;
       res.render('productDetail', {
         login: req.isAuthenticated(), username: req.user ? req.user.username : '', product: success, maxPrice, countBid,
