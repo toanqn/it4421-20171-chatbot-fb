@@ -11,7 +11,7 @@ const emailValidator = [
   }),
 ];
 
-const userSchema = new schema({
+var userSchema = new schema({
   username: {
     type: String,
     required: true,
@@ -32,8 +32,8 @@ const userSchema = new schema({
   gender: Boolean
 });
 
-userSchema.methods.validPassword = (password) => {
-  return bcrypt.compare(password, this.password);
+userSchema.methods.validPassword = function(password){
+  return bcrypt.compareSync(password, this.password);
 }
 
 module.exports = mongoose.model('user', userSchema);
