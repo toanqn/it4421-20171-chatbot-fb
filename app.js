@@ -180,7 +180,12 @@ app.get('/sellProduct', (req, res) => {
   });
 });
 
-app.get('/buyItem', (req, res) => {
+app.get('/buyItem', isAuthenticated, (req, res) => {
+  res.render('buyItem', {
+    login: req.isAuthenticated(),
+    username: req.user ? req.user.username : '',
+    menu: 'sellProduct',
+  });
 });
 
 app.get('/purchaseHistory', (req, res) => {

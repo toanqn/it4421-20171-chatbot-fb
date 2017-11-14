@@ -51,6 +51,23 @@ const connectSocket = function (socket, io) {
         });
     }
   });
+
+  socket.on("check status", (id) => {
+    productController.getProductById(id)
+      .then((product) => {
+        if(!dateValidate.compareDate(product.end_time)){
+          productHistoriesController.getProductHistoryById(id)
+           .then((history) => {
+           });
+        } else {
+          socket.emit("cannot check now");
+        }
+      })
+      .catch((err) => {
+        socket.emit("cannot check now");
+      });
+    // socket.emit("cannot check now");
+  })
 };
 
 module.exports = connectSocket;

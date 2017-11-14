@@ -76,19 +76,8 @@
                             <div>
                                 <span class="itemTitle"> Time Left: </span><div id="timeleft"> </div> 
                             </div>
-                            <!-- <span id="timeout">Time Out!</span>
-                            <div class="countTime">
-                                <div class="itemTitle" id="titleTimeLeft">Time left: </div>
-                                <div class="time-left">
-                                        <span id="minute">0</span>
-                                        <span id=twodot>:</span>
-                                        <span id="second">10</span>
-                                </div>
-                                
-                            </div> -->
                             <br>
-                            <button type="button" class="btn btn-info btn-lg checkStt" data-toggle="modal" data-target="#modalCheckStt">Check Your Status</button>
-                            
+                            <button type="button" class="btn btn-info btn-lg" id="checkStt" data-toggle="modal" onclick="checkStatus()">Check Your Status</button>
                         </div>
                         
                         <div class="bidPlace">
@@ -102,7 +91,6 @@
                                 </span>
                             </form>
                             <div id="minPrice">Enter US $<%- maxPrice %> or More</div>
-                            
                         </div>
                     </div>
                     
@@ -194,6 +182,16 @@
 
             }
         }
+        var checkStatus = function() {
+            socket.emit("check status", "<%- product.id %>");
+        }
+        socket.on("cannot check now", () => {
+            alert("Sản phẩm vẫn đang trong quá trình đấu giá !");
+        });
+        socket.on("result of auction", (result) => {
+            document.getElementById("checkStt").setAttribute("data-target","#modalCheckStt");
+            $("#checkStatus").click();
+        })
         socket.on('response', function(val){
             alert(val);
         });
