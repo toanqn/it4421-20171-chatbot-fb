@@ -85,6 +85,9 @@ route.post('/changePassword', isAuthenticated, (req, res) =>{
         .catch((err) => {
           res.send(err);
         })
+      } else {
+        console.log('Confirm password not match!');
+        res.redirect('/userInfo');
       }
     }else{
       console.log('Invalid password!');
