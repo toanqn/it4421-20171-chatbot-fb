@@ -159,7 +159,6 @@ http.listen(config.PORT, (err) => {
 });
 
 
-// LINHPHAN EDIT TO SHOW IN PROJECT
 app.get('/userProfile', (req, res) => {
   res.render('userProfile', { login: req.isAuthenticated(), username: req.user ? req.user.username : '' });
 });
@@ -176,11 +175,11 @@ app.get('/bidHistory', (req, res) => {
     });
 });
 
-app.get('/sellProduct', (req, res) => {
-  res.render('sellProduct', {
+app.get('/sellNewProduct', (req, res) => {
+  res.render('sellNewProduct', {
     login: req.isAuthenticated(),
     username: req.user ? req.user.username : '',
-    menu: 'sellProduct',
+    menu: 'sellNewProduct',
   });
 });
 
@@ -208,4 +207,12 @@ app.get('/sellingItem', (req, res) => {
   });
 });
 
-// END LINHPHAN EDIT
+app.get('/editItem', (req, res) => {
+  res.render('editItem', {
+    login: req.isAuthenticated(),
+    username: req.user ? req.user.username : '',
+    menu: 'sellingItem' ,
+  });
+});
+
+

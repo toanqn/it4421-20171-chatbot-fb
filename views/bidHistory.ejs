@@ -43,27 +43,22 @@
                             <tr>
                                 <th>Bidder</th>
                                 <th>Bid Amount</th>
+                                <th>Time</th>
                             </tr>
                         </thead>
                         <tbody>
                             <% history.histories.forEach((e) => { %>
-                                <tr class="danger bidSucess">
+                                <tr>
                                     <td> <a href="#"><%- e.username %></a> </td>
-                                    <td> US <span id=""><%- e.price %></span> </td>
+                                    <td> US $<%- e.price %></td>
+                                    <td>Oct-11-17 15:21:22 (Fix Cứng)</td>
                                 </tr>
                             <%}) %>
                         </tbody>
                     </table>
-                </div>
-                <div class="bidPlaceHistory col-md-3 well">
-                    <div class="itemInfor">
-                        <h3>Item Information</h3>
-                        <hr class="hrBidHistory">
-                        <div>
-                            <a href="/detail?id=<%- product.id %>"><%- product.name %></a>
-                            <div class="itemTitle">Current Bid: <span id="currentBid"> US $<%- history.maxPrice %></span></div>
-                            <br>
-                        </div>
+                    <div class="itemTitle">The current bid was
+                        <span id="currentBid"> US $<%- history.maxPrice %></span>
+                        <p>You must pay more than US $<%- history.maxPrice %> to become a winner.</p>
                     </div>
                 </div>
 

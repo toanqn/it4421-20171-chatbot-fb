@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width initial-scale=1">
+    <title>Edit Selling Product</title>
+
+
+    <link href="../resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../resources/css/style.css" rel="stylesheet" type="text/css">
+    <script src="../resources/js/jquery-3.1.1.min.js" type="text/javascript"></script>
+    <script src="../resources/js/script.js" type="text/javascript"></script>
+    </script>
+
+    <!-- Font Lobster -->
+    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+
+</head>
+
+<body>
+    <!-- Header -->
+    <%- include('partition/header.ejs') %>
+
+        <!-- Content -->
+        <div class="content container">
+
+            <div class="row">
+                <!-- NAV LEFT -->
+                <%- include('partition/navLeft.ejs') %>
+
+                    <div class="col-xs-7 col-sm-7 col-md-8 col-lg-8">
+
+                        <h1 class="title"> Edit Product</h1>
+                        <br>
+                        <br>
+                        <div class="box box-primary" style="margin: 0 auto; width:80%">
+
+                            <!-- form -->
+                            <form role="form" method="POST" action="/api/product/sellProduct">
+                                <div class="box-body">
+                                    <div class="form-group">
+                                        <label>Title</label>
+                                        <input type="text" class="form-control" id="" name="productName" placeholder="Title" value="Polaroid Snap Touch Instant Print Digital Camera With LCD Display"
+                                            required="required">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label>Startting Price ($):</label>
+                                        <input type="number" class="form-control" name="SPrice" value="300" required="required">
+                                    </div>
+                                    <div class="row">
+                                    
+                                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                            <div class="form-group">
+                                                <label>Start time:</label>
+                                                <input type="datetime-local" class="form-control" name="Stime" min="2017-10-21T08:00" max="2017-12-21T08:00" value="2017-11-20T08:00"
+                                                    required="required">
+                                            </div>
+                                        </div>
+                                    
+                                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                            <div class="form-group">
+                                                <label>End time:</label>
+                                                <input type="datetime-local" class="form-control" name="Etime" min="2017-10-21T08:00" max="2017-12-21T08:00" value="2017-11-22T08:00"
+                                                    required="required">
+                                            </div>
+                                        </div>
+                                    
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label>Category</label>
+                                        <select class="form-control" name="categoryId">
+                                            <option value="electronic">Electronic</option>
+                                            <option value="fashion" selected>Fashion</option>
+                                            <option value="watches">Watches</option>
+                                            <option value="others">Others</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label>Description</label>
+                                        <br>
+                                        <textarea class="form-control" name="description" rows="6" placeholder="Desctiption about this item..."
+                                            required="required">Polaroid Snap Touch Instant Print Digital Camera With LCD Display</textarea>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label>Images</label>
+                                        <input type="file" id="exampleInputFile1" name="Img1" required>
+                                        <input type="file" id="exampleInputFile2" name="Img2">
+                                        <input type="file" id="exampleInputFile3" name="Img3">
+                                    </div>
+                                    
+                                    </div>
+                                    <input type="hidden" name="idProduct" value="59de2ee24af3403b7cee9b5c">
+
+                                </div>
+                                <!-- /.box-body -->
+                                <br>
+                                <div class="box-footer">
+                                    <button type="submit" class="btn btn-lg btn-primary">Complete Edit</button>
+                                </div>
+                            </form>
+
+
+                        </div>
+                    </div>
+
+            </div>
+            <!-- End conntent -->
+            <br>
+        </div>
+</body>
+
+
+</html>

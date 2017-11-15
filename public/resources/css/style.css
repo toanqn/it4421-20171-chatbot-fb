@@ -365,5 +365,6 @@ h1 {
 .btnEdit {
 	max-width: 400px;
 	width: 100%;
+	margin-top: 5px;
 }
 /* End sell new product, selling product */
