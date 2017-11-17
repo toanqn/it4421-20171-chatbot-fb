@@ -16,9 +16,14 @@ const getMaxPrice = function (id) {
   return schema.findOne({productId: id});
 };
 
+const deleteItemById = function(id){
+  return schema.findOneAndRemove({'productId': id});
+}
+
 module.exports = {
   getProductHistoryById,
   saveProductHistory,
   updateProductHistory,
   getMaxPrice,
+  deleteItemById,
 };

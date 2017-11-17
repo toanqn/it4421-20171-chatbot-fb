@@ -128,7 +128,11 @@ app.get('/detail', (req, res) => {
       const maxPrice = result[1] !== null ? result[1].maxPrice : success.price;
       const countBid = result[1] !== null ? result[1].histories.length : 0;
       res.render('productDetail', {
-        login: req.isAuthenticated(), username: req.user ? req.user.username : '', product: success, maxPrice, countBid,
+        login: req.isAuthenticated(), 
+        username: req.user ? req.user.username : '', 
+        product: success, 
+        maxPrice, 
+        countBid,
       });
     })
     .catch((err) => {
@@ -160,7 +164,10 @@ http.listen(config.PORT, (err) => {
 
 
 app.get('/userProfile', (req, res) => {
-  res.render('userProfile', { login: req.isAuthenticated(), username: req.user ? req.user.username : '' });
+  res.render('userProfile', { 
+    login: req.isAuthenticated(), 
+    username: req.user ? req.user.username : '' 
+  });
 });
 
 app.get('/bidHistory', (req, res) => {
@@ -200,19 +207,36 @@ app.get('/purchaseHistory', (req, res) => {
 });
 
 app.get('/sellingItem', (req, res) => {
-  res.render('sellingItem', {
-    login: req.isAuthenticated(),
-    username: req.user ? req.user.username : '',
-    menu: 'sellingItem',
-  });
+  productController.getProductsOfUser(req.user._id)
+  .then((success) => {
+    res.render('sellingItem', {
+      products: success,
+      nop: success.length,
+      login: req.isAuthenticated(),
+      username: req.user ? req.user.username : '',
+      menu: 'sellingItem',
+    });
+  })
+  .catch((err) => {
+    res.send(err)
+  })
 });
 
 app.get('/editItem', (req, res) => {
-  res.render('editItem', {
-    login: req.isAuthenticated(),
-    username: req.user ? req.user.username : '',
-    menu: 'sellingItem' ,
-  });
+  const { id } = req.query;
+  productController.getProductById(id)
+  .then((success) => {
+    res.render('editItem', {
+      product: success,
+      login: req.isAuthenticated(),
+      username: req.user ? req.user.username : '',
+      menu: 'sellingItem' ,
+    });
+  })
+  .catch((err) => {
+    res.send(err);
+  })
+  
 });
 
 

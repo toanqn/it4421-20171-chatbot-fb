@@ -2,6 +2,7 @@ const express = require('express');
 
 const route = express.Router();
 const controller = require('./controller');
+const controllerPH = require('../productHistory.js/controller')
 
 route.post('/saveProducts', (req, res) => {
   const arrProducts = req.body.data;
@@ -24,9 +25,29 @@ route.post('/sellProduct', (req, res) => {
   };
   controller.createItem(item)
   .then(success => {
-    console.log('Upload a new product sucessfull!');
-    res.redirect('/sellProduct');
+    console.log('Upload a new product successfull!');
+    res.redirect('/sellNewProduct');
   })
   .catch(err => res.send(err));
+});
+
+route.post('/deleteProduct', (req, res) => {
+  const idProduct = req.body.idProduct;
+  controller.deleteItem(idProduct)
+  .then((success) => {
+    console.log('Remove item '+ idProduct + ' from products successfull!');
+    // res.redirect('/sellingItem');
+  })
+  .catch((err)=> {
+    res.send(err);
+  });
+  controllerPH.deleteItemById(idProduct)
+  .then((success) => {
+    console.log('Remove ' + idProduct + ' from product histories successfull!');
+    res.redirect('/sellingItem');
+  })
+  .catch((err) => {
+    res.send(err);
+  })
 })
 module.exports = route;
