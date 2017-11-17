@@ -39,7 +39,7 @@
                         <div class="box box-primary" style="margin: 0 auto; width:80%">
 
                             <!-- form -->
-                            <form role="form" method="POST" action="/api/product/sellProduct">
+                            <form role="form" method="POST" action="/api/product/updateProduct">
                                 <div class="box-body">
                                     <div class="form-group">
                                         <label>Title</label>
@@ -90,7 +90,7 @@
                                     
                                     <div class="form-group">
                                         <label>Images</label>
-                                        <input type="link" id='exampleInputFile1' name='Img1' required='required'>
+                                        <input type="link" id='exampleInputFile1' name='Img1' required='required' value="<%- product.image %>" style="width: 100%;">
                                         <!-- <input type="file" id="exampleInputFile1" name="Img1" required="required">
                                         <input type="file" id="exampleInputFile2" name="Img2" >
                                         <input type="file" id="exampleInputFile3" name="Img3" > -->

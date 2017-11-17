@@ -31,6 +31,25 @@ route.post('/sellProduct', (req, res) => {
   .catch(err => res.send(err));
 });
 
+route.post('/updateProduct', (req, res) => {
+  const idProduct = req.body.idProduct;
+  controller.getProductById(idProduct)
+  .then((success) => {
+    success.name = req.body.productName;
+    success.price = req.body.SPrice;
+    success.description = req.body.description;
+    success.category = req.body.categoryId;
+    success.image = req.body.Img1;
+    success.start_time = req.body.Stime;
+    success.end_time = req.body.Etime;
+    success.save((err) => {
+      if (err) throw err;
+      console.log('Update product '+ idProduct +' successfull!');
+    });
+    res.redirect('/sellingItem');
+  })
+})
+
 route.post('/deleteProduct', (req, res) => {
   const idProduct = req.body.idProduct;
   controller.deleteItem(idProduct)

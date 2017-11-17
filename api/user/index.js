@@ -52,7 +52,7 @@ route.post('/updateProfile', isAuthenticated, (req, res) => {
       success.address = req.body.address;
       success.save((err) => {
         if (err) throw err;
-        console.log('Update profile sucessful!')
+        console.log('Update profile successful!')
       });
       // console.log(success);
       // console.log(username);
