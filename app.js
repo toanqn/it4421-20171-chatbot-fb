@@ -198,23 +198,23 @@ app.get('/buyItem', isAuthenticated, (req, res) => {
   });
 });
 
-app.get('/purchaseHistory', (req, res) => {
-  res.render('purchaseHistory', {
+app.get('/managePurchases', (req, res) => {
+  res.render('managePurchases', {
     login: req.isAuthenticated(),
     username: req.user ? req.user.username : '',
-    menu: 'purchaseHistory',
+    menu: 'managePurchases',
   });
 });
 
-app.get('/sellingItem', (req, res) => {
+app.get('/manageSales', (req, res) => {
   productController.getProductsOfUser(req.user._id)
   .then((success) => {
-    res.render('sellingItem', {
+    res.render('manageSales', {
       products: success,
       nop: success.length,
       login: req.isAuthenticated(),
       username: req.user ? req.user.username : '',
-      menu: 'sellingItem',
+      menu: 'manageSales',
     });
   })
   .catch((err) => {
@@ -230,7 +230,7 @@ app.get('/editItem', (req, res) => {
       product: success,
       login: req.isAuthenticated(),
       username: req.user ? req.user.username : '',
-      menu: 'sellingItem' ,
+      menu: 'manageSales' ,
     });
   })
   .catch((err) => {

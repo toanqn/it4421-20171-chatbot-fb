@@ -40,8 +40,7 @@
                                 </div>
                             </div>
                             <div class="panel-body">
-                                <p>You have
-                                    <%- nop %> products being sold:</p>
+                                <p>You have <%- nop %> products are in selling:</p>
                                 <div class="row">
                                     <!-- For each here -->
                                     <% products.forEach((product) => { %>
@@ -103,6 +102,77 @@
 
                                     </div>
                                 <% }) %>
+                            </div>
+                        </div>
+                        <!-- ./panel -->
+
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-md-9">
+                                        <h3>Selled items</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <p>You have 1 products being sold and was end of time.</p>
+                                <div class="row">
+                                    <!-- For each here -->
+                                    
+                                        <div class="col-sm-6 col-md-4 col-lg-4">
+                                            <div class="table-bordered productPreview">
+                                                <img src="http://i.ebayimg.com/images/g/EowAAOSwSclXMEe4/s-l1600.jpg" alt="http://i.ebayimg.com/images/g/EowAAOSwSclXMEe4/s-l1600.jpg" class="img-display table-bordered img-responsive">
+                                                <div class="caption">
+                                                    <a href="/detail?id">
+                                                        <h4 class="textPreview">
+                                                            Tên sản phẩm
+                                                        </h4>
+                                                    </a>
+                                                    <div class="bidTimePreview">
+                                                        <h4> Price: 2$ </h4>
+                                                        <div id="StartTime"> Start Time: 333
+                                                        </div>
+                                                        <div id="EndTime"> End Time:
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <a href="#delete-1" data-toggle="modal" class="btn btn-danger btnEdit">Delete</a>
+                                                        </div>
+                                                        
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+ 
+                                </div>
+                                <!-- ./row -->
+
+
+                               
+                                    <div class="modal fade" id="delete-1">
+                                        <form role="form" method="POST" action="/api/product/deleteProduct">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h4>Delete ProductName</h4>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <p>This action cannot redo. Are you sure delete item:
+                                                            <b>name</b>?</p>
+                                                    </div>
+                                                    <input type="hidden" name="idProduct" value="id1">
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+
+                                    </div>
+                               
                             </div>
                         </div>
                         <!-- ./panel -->

@@ -34,8 +34,7 @@
                     <div class="col-xs-7 col-sm-7 col-md-8 col-lg-8">
 
                         <h1 class="title"> Edit Product</h1>
-                        <br>
-                        <br>
+                        <br> <br>
                         <div class="box box-primary" style="margin: 0 auto; width:80%">
 
                             <!-- form -->
@@ -43,8 +42,7 @@
                                 <div class="box-body">
                                     <div class="form-group">
                                         <label>Title</label>
-                                        <input type="text" class="form-control" id="" name="productName" placeholder="Title" value="<%- product.name %>"
-                                            required="required">
+                                        <input type="text" class="form-control" id="" name="productName" placeholder="Title" value="<%- product.name %>" required="required">
                                     </div>
                                     
                                     <div class="form-group">
@@ -56,16 +54,14 @@
                                         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                                             <div class="form-group">
                                                 <label>Start time:</label>
-                                                <input type="datetime-local" class="form-control" name="Stime" value="<%- product.start_time %>"
-                                                    required="required">
+                                                <input type="datetime-local" class="form-control" name="Stime" value="<%- product.start_time %>" required="required">
                                             </div>
                                         </div>
                                     
                                         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                                             <div class="form-group">
                                                 <label>End time:</label>
-                                                <input type="datetime-local" class="form-control" name="Etime" value="<%- product.end_time %>"
-                                                    required="required">
+                                                <input type="datetime-local" class="form-control" name="Etime" value="<%- product.end_time %>" required="required">
                                             </div>
                                         </div>
                                     
@@ -84,21 +80,20 @@
                                     <div class="form-group">
                                         <label>Description</label>
                                         <br>
-                                        <textarea class="form-control" name="description" rows="6" placeholder="Desctiption about this item..."
-                                            required="required"><%= product.description %></textarea>
+                                        <textarea class="form-control" name="description" rows="6" placeholder="Desctiption about this item..." required="required">
+                                            <%= product.description %></textarea>
                                     </div>
                                     
                                     <div class="form-group">
                                         <label>Images</label>
-                                        <input type="link" id='exampleInputFile1' name='Img1' required='required' value="<%- product.image %>" style="width: 100%;">
+                                        <input type="text" id='exampleInputFile1' name='Img1' required='required' value="<%- product.image %>" style="width: 100%;">
                                         <!-- <input type="file" id="exampleInputFile1" name="Img1" required="required">
                                         <input type="file" id="exampleInputFile2" name="Img2" >
                                         <input type="file" id="exampleInputFile3" name="Img3" > -->
                                     </div>
                                     
-                                    </div>
                                     <input type="hidden" name="idProduct" value="<%- product._id %>">
-
+                                    
                                 </div>
                                 <!-- /.box-body -->
                                 <br>

@@ -46,7 +46,7 @@ route.post('/updateProduct', (req, res) => {
       if (err) throw err;
       console.log('Update product '+ idProduct +' successfull!');
     });
-    res.redirect('/sellingItem');
+    res.redirect('/manageSales');
   })
 })
 
@@ -55,7 +55,7 @@ route.post('/deleteProduct', (req, res) => {
   controller.deleteItem(idProduct)
   .then((success) => {
     console.log('Remove item '+ idProduct + ' from products successfull!');
-    // res.redirect('/sellingItem');
+    // res.redirect('/manageSales');
   })
   .catch((err)=> {
     res.send(err);
@@ -63,7 +63,7 @@ route.post('/deleteProduct', (req, res) => {
   controllerPH.deleteItemById(idProduct)
   .then((success) => {
     console.log('Remove ' + idProduct + ' from product histories successfull!');
-    res.redirect('/sellingItem');
+    res.redirect('/manageSales');
   })
   .catch((err) => {
     res.send(err);
