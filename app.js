@@ -146,6 +146,27 @@ app.get('/search', (req, res) => {
     });
 });
 
+app.get('/searchText', (req, res) => {
+  const { text } = req.query;
+  productController.getProductByName(text)
+    .then((success) => {
+      const filteredProduct = [];
+      success.forEach((e) => {
+        if (dateValidate.compareDate(e.end_time)) {
+          filteredProduct.push(e);
+        }
+      });
+      res.render('index', {
+        login: req.isAuthenticated(),
+        username: req.user ? req.user.username : '',
+        products: filteredProduct,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+
 app.get('/login', (req, res) => {
   res.render('login', {
     login: req.isAuthenticated(),
