@@ -15,21 +15,14 @@
             <a class="navbar-brand" href="/">BK Auction</a>
         </div>
         <ul class="nav navbar-nav navbar-collapse collapse navCollapse">
-            <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Category<span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                    <li><a href="#"> Faction</a></li>
-                    <li><a href="#"> Home & Garden</a></li>
-                    <li><a href="#"> Electronic</a></li>
-                </ul>
-            </li>
             <li><a href="#">About</a></li>
             <li><a href="#">Help & Contact</a></li>
         </ul>
         <form class="navbar-form navbar-left navbar-collapse collapse navCollapse">
             <div class="input-group">
                 <input type="text" class="form-control" id="searchText" placeholder="Search">
-                <div class="input-group-btn">
-                    <button class="btn btn-default" type="submit">
+                <div class="input-group-btn" onclick="return searchText()">
+                    <button class="btn btn-default">
                       <i class="glyphicon glyphicon-search"></i>
                     </button>
                 </div>
