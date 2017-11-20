@@ -273,9 +273,18 @@ app.get('/managePurchases', (req, res) => {
 app.get('/manageSales', (req, res) => {
   productController.getProductsOfUser(req.user._id)
     .then((success) => {
+      var sellingProducts = [];
+      var soldProducts = [];
+      success.forEach((e) => {
+        if (dateValidate.compareDate(e.end_time)){
+          sellingProducts.push(e);
+        } else {
+          soldProducts.push(e);
+        }
+      });
       res.render('manageSales', {
-        products: success,
-        nop: success.length,
+        sellingProducts,
+        soldProducts,
         login: req.isAuthenticated(),
         username: req.user ? req.user.username : '',
         menu: 'manageSales',
