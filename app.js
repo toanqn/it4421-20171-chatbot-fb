@@ -227,11 +227,29 @@ http.listen(config.PORT, (err) => {
 });
 
 
-app.get('/userProfile', (req, res) => {
-  res.render('userProfile', {
-    login: req.isAuthenticated(),
-    username: req.user ? req.user.username : '',
-  });
+app.get('/:username', (req, res) => {
+  var username = req.params.username;
+  userController.findUserByUsername(username)
+  .then((user) => {
+    productController.getProductsOfUser(user._id)
+    .then((success) => {
+      var products = []
+      success.forEach((e) => {
+        if(dateValidate.compareDate(e.end_time)){
+          products.push(e);
+        }
+      })
+      res.render('userProfile', {
+        login: req.isAuthenticated(),
+        username: req.user ? req.user.username : '',
+        user: user,
+        products: products
+      });
+    })
+  })
+  .catch((err) => {
+    res.send(err);
+  })
 });
 
 app.get('/bidHistory', (req, res) => {

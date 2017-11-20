@@ -22,12 +22,12 @@
            
            <div class="col-xs-5 col-sm-6 col-md-3 col-lg-3">
                 <div class="table-bordered imgAvata">
-                    <img src="resources/images/minhnb.jpg" class="img-responsive img-display" alt="avata">
+                    <img src="<%- user.image %>" onerror="this.src='resources/images/minhnb.jpg'" class="img-responsive img-display" alt="avata">
                 </div>
                 <div class="userBrief">
-                    <h3>Nguyen Binh Minh</h3>
-                    <h4>minhnb</h4>
-                    <p><span class="glyphicon glyphicon-map-marker"></span> Ha Noi, VietNam</p>
+                    <h3><%= user.name %></h3>
+                    <h4><%= user.username %></h4>
+                    <p><span class="glyphicon glyphicon-map-marker"></span><%= user.address %></p>
                     <hr>
                 </div>
                 <div class="verifiedInfo">
@@ -48,53 +48,38 @@
 
            
             <div class="col-xs-7 col-sm-6 col-md-9 col-lg-9">
-                <h1>Hey, I'm <span id="userName">Nguyen Binh Minh</span>!</h1>
-                <h4><span class="glyphicon glyphicon-map-marker"></span> Ha Noi, Joined in October 2017 </h4>
+                <h1>Hey, I'm <span id="userName"><%= user.name %></span>!</h1>
+                <!-- <h4><span class="glyphicon glyphicon-map-marker"></span> Ha Noi, Joined in October 2017</h4> -->
                 <p><span class="glyphicon glyphicon-flag"></span><a href="#"> Report this user!</a></p>
                 <hr>
 
                 <div>
                     <h2>About Me</h2>
-                    <span>I am Researcher and Lecturer at Department of Information Systems, School of Information and Communication Technology, Hanoi University of Science and Technology.    </span>
+                    <span><%= user.aboutme %></span>
                 </div>
                 <hr>
                 <div>
                     <h2>Selling Product</h2>
                     <div class="row">
-
-                        <div class="col-sm-6 col-md-4 col-lg-4">
-                            <div class="table-bordered productPreview">
-                                <img src="http://i.ebayimg.com/images/g/EowAAOSwSclXMEe4/s-l1600.jpg" alt="http://i.ebayimg.com/images/g/EowAAOSwSclXMEe4/s-l1600.jpg"
-                                    class="img-display table-bordered img-responsive">
-                                <div class="caption">
-                                    <a href="/detail?id=59de2ee24af3403b7cee9b5c">
-                                        <h4 class="textPreview"> Polaroid Snap Touch Instant Print Digital Camera With LCD Display</h4>
-                                    </a>
-                                    <div class="bidTimePreview">
-                                        <h4> Current Bid: 300$ </h4>
-                                        <div id="StartTime"> Start Time: 2017-10-29T09:00:00</div>
-                                        <div id="EndTime"> End Time: 2017-11-25T09:00:00</div>
+                        <% products.forEach((product) => { %>
+                            <div class="col-sm-6 col-md-4 col-lg-4">
+                                <div class="table-bordered productPreview">
+                                    <img src="<%- product.image %>" alt="http://i.ebayimg.com/images/g/EowAAOSwSclXMEe4/s-l1600.jpg"
+                                        class="img-display table-bordered img-responsive">
+                                    <div class="caption">
+                                        <a href="/detail?id=<%-product._id%>">
+                                            <h4 class="textPreview"><%= product.name %></h4>
+                                        </a>
+                                        <div class="bidTimePreview">
+                                            <h4> Price: <%= product.price %>$ </h4>
+                                            <div id="StartTime"> Start Time: <%= product.start_time %></div>
+                                            <div id="EndTime"> End Time: <%= product.end_time %></div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="col-sm-6 col-md-4 col-lg-4">
-                            <div class="table-bordered productPreview">
-                                <img src="http://i.ebayimg.com/images/g/htYAAOSwbiFZSLhe/s-l1600.jpg" alt="http://i.ebayimg.com/images/g/htYAAOSwbiFZSLhe/s-l1600.jpg"
-                                    class="img-display table-bordered img-responsive">
-                                <div class="caption">
-                                    <a href="/detail?id=59de2ee24af3403b7cee9b5d">
-                                        <h4 class="textPreview"> The Polaroid Book, Barbara Hitchcock Hardcover 2008</h4>
-                                    </a>
-                                    <div class="bidTimePreview">
-                                        <h4> Current Bid: 500$ </h4>
-                                        <div id="StartTime"> Start Time: 2017-10-29T09:00:00</div>
-                                        <div id="EndTime"> End Time: 2017-11-25T09:00:00</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <% }) %>
 
                     </div>
                     <!-- End row product -->
