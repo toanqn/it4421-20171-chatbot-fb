@@ -24,4 +24,8 @@ $(document).ready(function(){
         $('.btnHide').addClass('hide') ;
         $('.showdiv').addClass('hide') ;
     })
+
+    var h = $('.contentRight').height();
+    var heightLeft = h + "px";
+    $('.navLeft').css("height", heightLeft);
 });
