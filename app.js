@@ -84,8 +84,8 @@ app.get('/', (req, res) => {
       });
       Promise.all(filteredProduct.map(e => productHistory.getMaxPrice(e.id)))
         .then((result) => {
-          for (let i = 0, j = 0; i < filteredProduct.length; i++) {
-            if(result[i]){
+          for (let i = 0; i < filteredProduct.length; i++) {
+            if (result[i]) {
               filteredProduct[i].maxPrice = result[i].maxPrice;
             } else {
               filteredProduct[i].maxPrice = filteredProduct[i].price;
@@ -96,10 +96,53 @@ app.get('/', (req, res) => {
             username: req.user ? req.user.username : '',
             products: filteredProduct,
           });
-        })
+        });
     })
     .catch((err) => {
       res.send(err);
+    });
+});
+
+app.get('/search', (req, res) => {
+  const cateId = req.query.id;
+  const { min, max } = req.query;
+  productController.getProductWithCate(cateId)
+    .then((success) => {
+      const filteredProduct = [];
+      const filteredProductWithPrice = [];
+      success.forEach((e) => {
+        if (dateValidate.compareDate(e.end_time)) {
+          filteredProduct.push(e);
+        }
+      });
+      Promise.all(filteredProduct.map(e => productHistory.getMaxPrice(e.id)))
+        .then((result) => {
+          for (let i = 0; i < filteredProduct.length; i++) {
+            if (result[i]) {
+              filteredProduct[i].maxPrice = result[i].maxPrice;
+            } else {
+              filteredProduct[i].maxPrice = filteredProduct[i].price;
+            }
+          }
+          if (min === '' || max === '') {
+            res.render('index', {
+              login: req.isAuthenticated(),
+              username: req.user ? req.user.username : '',
+              products: filteredProduct,
+            });
+          } else {
+            filteredProduct.forEach((e) => {
+              if (e.maxPrice >= Number(min) && e.maxPrice <= Number(max)) {
+                filteredProductWithPrice.push(e);
+              }
+            });
+            res.render('index', {
+              login: req.isAuthenticated(),
+              username: req.user ? req.user.username : '',
+              products: filteredProductWithPrice,
+            });
+          }
+        });
     });
 });
 
@@ -128,10 +171,10 @@ app.get('/detail', (req, res) => {
       const maxPrice = result[1] !== null ? result[1].maxPrice : success.price;
       const countBid = result[1] !== null ? result[1].histories.length : 0;
       res.render('productDetail', {
-        login: req.isAuthenticated(), 
-        username: req.user ? req.user.username : '', 
-        product: success, 
-        maxPrice, 
+        login: req.isAuthenticated(),
+        username: req.user ? req.user.username : '',
+        product: success,
+        maxPrice,
         countBid,
       });
     })
@@ -164,9 +207,9 @@ http.listen(config.PORT, (err) => {
 
 
 app.get('/userProfile', (req, res) => {
-  res.render('userProfile', { 
-    login: req.isAuthenticated(), 
-    username: req.user ? req.user.username : '' 
+  res.render('userProfile', {
+    login: req.isAuthenticated(),
+    username: req.user ? req.user.username : '',
   });
 });
 
@@ -208,35 +251,33 @@ app.get('/managePurchases', (req, res) => {
 
 app.get('/manageSales', (req, res) => {
   productController.getProductsOfUser(req.user._id)
-  .then((success) => {
-    res.render('manageSales', {
-      products: success,
-      nop: success.length,
-      login: req.isAuthenticated(),
-      username: req.user ? req.user.username : '',
-      menu: 'manageSales',
+    .then((success) => {
+      res.render('manageSales', {
+        products: success,
+        nop: success.length,
+        login: req.isAuthenticated(),
+        username: req.user ? req.user.username : '',
+        menu: 'manageSales',
+      });
+    })
+    .catch((err) => {
+      res.send(err);
     });
-  })
-  .catch((err) => {
-    res.send(err)
-  })
 });
 
 app.get('/editItem', (req, res) => {
   const { id } = req.query;
   productController.getProductById(id)
-  .then((success) => {
-    res.render('editItem', {
-      product: success,
-      login: req.isAuthenticated(),
-      username: req.user ? req.user.username : '',
-      menu: 'manageSales' ,
+    .then((success) => {
+      res.render('editItem', {
+        product: success,
+        login: req.isAuthenticated(),
+        username: req.user ? req.user.username : '',
+        menu: 'manageSales',
+      });
+    })
+    .catch((err) => {
+      res.send(err);
     });
-  })
-  .catch((err) => {
-    res.send(err);
-  })
-  
 });
-
 

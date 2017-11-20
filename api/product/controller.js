@@ -28,6 +28,10 @@ const getProductsOfUser = function(user_id) {
   return product.find({'provider_id': user_id});
 }
 
+const getProductWithCate = function(cateId) {
+  return product.find({'category_id': cateId});
+}
+
 module.exports = {
   saveMultipleProduct,
   get6Products,
@@ -36,4 +40,5 @@ module.exports = {
   createItem,
   getProductsOfUser,
   deleteItem,
+  getProductWithCate,
 };
