@@ -24,8 +24,8 @@ const createItem = function (item) {
 const deleteItem = function (id) {
   return product.findOneAndRemove({ _id: id });
 };
-const getProductsOfUser = function (user_id) {
-  return product.find({ provider_id: user_id });
+const getProductsOfUser = function (username) {
+  return product.find({ provider: username });
 };
 
 const getProductWithCate = function (cateId) {

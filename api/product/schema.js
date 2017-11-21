@@ -31,7 +31,7 @@ const productSchema = new schema({
     type: String,
     required: true,
   },
-  provider_id: {
+  provider: {
     type: String,
     required: true,
   },
@@ -45,7 +45,7 @@ const productSchema = new schema({
   category: {
     type: String,
     required: true,
-    enum: ['electronic', 'fashion', 'watches', 'others'],
+    enum: ['0000001', '0000002', '0000003', '0000004'],
   },
   is_sold: Boolean,
   image: {

@@ -100,7 +100,7 @@
                         <div id="sellerInfo">
                             <!-- <a href="#">Top-rated Seller</a> -->
                             <p id="sellerAcc"> 
-                                <a href="/userProfile">Minhnb</a> 
+                                <a href="/userProfile?username=<%=product.provider%>"><%=product.provider%></a> 
                                 <span id="numStars"> (450 <span class="glyphicon glyphicon-star"></span>)</span>
                             </p>
                             
@@ -140,7 +140,7 @@
                     <div class="itemTitle">Item:  </div>
                     <span class="productName"><i> <%- product.name %> </i></span>
                     <br>
-                    <div class="itemTitle">Your Bid: <span id="currentBid"> US $560</span></div>
+                    <div class="itemTitle">Your Bid: <span id="currentBid"> US $<%= maxPrice %></span></div>
                     <br>
                     <div class="itemTitle">Status:  </div>
                     <span style="color:green;">Waiting for pay</span>

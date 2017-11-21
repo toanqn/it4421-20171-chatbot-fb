@@ -227,11 +227,11 @@ http.listen(config.PORT, (err) => {
 });
 
 
-app.get('/:username', (req, res) => {
-  var username = req.params.username;
+app.get('/userProfile', (req, res) => {
+  const { username } = req.query;
   userController.findUserByUsername(username)
   .then((user) => {
-    productController.getProductsOfUser(user._id)
+    productController.getProductsOfUser(user.username)
     .then((success) => {
       var products = []
       success.forEach((e) => {
@@ -289,7 +289,7 @@ app.get('/managePurchases', (req, res) => {
 });
 
 app.get('/manageSales', (req, res) => {
-  productController.getProductsOfUser(req.user._id)
+  productController.getProductsOfUser(req.user.username)
     .then((success) => {
       var sellingProducts = [];
       var soldProducts = [];

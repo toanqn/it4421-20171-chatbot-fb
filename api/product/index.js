@@ -14,7 +14,7 @@ route.post('/saveProducts', (req, res) => {
 route.post('/sellProduct', (req, res) => {
   const item = {
     name: req.body.productName,
-    provider_id: req.user._id,
+    provider: req.user.username,
     price: req.body.SPrice,
     description: req.body.description,
     category: req.body.categoryId,
