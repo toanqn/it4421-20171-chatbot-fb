@@ -5,8 +5,8 @@ const saveMultipleProduct = function (arrProducts) {
   return product.insertMany(arrProducts);
 };
 
-const get6Products = function (pageNumber) {
-  return product.find({}).skip((pageNumber - 1) * 6).limit(6).sort({ start_time: -1 });
+const get8Products = function (pageNumber) {
+  return product.find({}).skip((pageNumber - 1) * 8).limit(8).sort({ start_time: -1 });
 };
 
 const getProductById = function (id) {
@@ -38,7 +38,7 @@ const getProductByName = function (text) {
 
 module.exports = {
   saveMultipleProduct,
-  get6Products,
+  get8Products,
   getProductById,
   getDateExpired,
   createItem,
