@@ -27,9 +27,9 @@
         <hr>
         <div class="row">
 
-            <div class="col-md-4 col-lg-4 imgPreview well">
+            <div class="col-md-4 col-lg-4 well">
                 <!-- Banner -->
-                <div id="carousel-id" class="carousel slide" data-ride="carousel">
+                <!-- <div id="carousel-id" class="carousel slide" data-ride="carousel">
                     <ol class="carousel-indicators">
                         <li data-target="#carousel-id" data-slide-to="0" class="active"></li>
                         <li data-target="#carousel-id" data-slide-to="1"></li>
@@ -49,8 +49,9 @@
                     </div>
                     <a class="left carousel-control" href="#carousel-id" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
                     <a class="right carousel-control" href="#carousel-id" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
-                </div>
+                </div> -->
                 <!-- End banner -->
+                <img src="<%- product.image %>" alt="<%- product.image %>" class="imgZoom img-display table-bordered img-responsive">
             </div>
 
             
@@ -68,7 +69,7 @@
                 <hr >
                 <div class="row">
                     
-                    <div class="col-md-8 col-lg-8">
+                    <div class="col-md-8 col-lg-8 ">
                         <div> 
                             <div class="itemTitle">Item Describe: </div>
                             <span class="describe"><i><%= product.description %></i></span>
@@ -159,6 +160,11 @@
 
     <br>
     <!-- Footer -->
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="fb-comments col-md-8" data-href="http://localhost:8080/detail?id=<%- product.id %>"
+            data-width="850" data-numposts="5"></div>
+    </div>
     <div align="center">
         Code by <a href="#"> Group 5 </a>
     </div>
@@ -173,7 +179,7 @@
         var bidPlace = function(){
             var newPrice = document.getElementById("price").value;
             if (Number(newPrice) < max ) {
-                alert("Bạn phải nhập lớn hơn "+max);
+                alert("You must bid greater than "+max);
             } else {
                 var obj = {
                     newPrice,
@@ -188,7 +194,7 @@
             socket.emit("check status", "<%- product.id %>");
         }
         socket.on("cannot check now", () => {
-            alert("Sản phẩm vẫn đang trong quá trình đấu giá !");
+            alert("This product is still in auction process!");
         });
         socket.on("result of auction", (result) => {
             document.getElementById("checkStt").setAttribute("data-target","#modalCheckStt");
@@ -200,12 +206,31 @@
         socket.on('newPrice', function(val){
             if(val.id === "<%- product.id -%>") {
                 document.getElementById('currentBid').innerText = "$"+val.newPrice;
-                document.getElementById('minPrice').innerText = "Enter US $"+val.newPrice+" or More";
+                document.getElementById('minPrice').innerText = "Enter more US $"+val.newPrice+ "!";
                 max = Number(val.newPrice);
             }
         })
     </script>
     <script src="/resources/js/detailpage.js"></script>
+
+    <!--   plugin comment facebook-->
+    <script>
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '1185086244911379',
+                xfbml: true,
+                version: 'v2.8'
+            });
+        };
+
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) { return; }
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
 </body>
 
 </html>

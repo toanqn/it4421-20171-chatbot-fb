@@ -26,6 +26,8 @@ $(document).ready(function(){
     })
 
     var h = $('.contentRight').height();
+    if(h<690)
+        h=690 ;
     var heightLeft = h + "px";
     $('.navLeft').css("height", heightLeft);
 });
