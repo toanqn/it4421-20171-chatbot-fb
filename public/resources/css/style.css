@@ -71,14 +71,6 @@ h4 {
  
 }
 
-/* .navLeft div.navbar-header button {
-	
-	max-width: 100%;
-}
-.carousel-slide{
-    max-height: 360px;
-} */
-
 
 .selectCategoryMenu li a.cName {
 	font-weight: bold;
@@ -111,8 +103,8 @@ h4 {
 
 .productPreview:hover {
 
-	-webkit-transform:scale(1.12);
 	box-shadow:0px 0px 30px gray; 
+	-webkit-transform:scale(1.12);
 	-moz-transform:scale(1.1); /*Mozilla */
 	-moz-box-shadow:0px 0px 30px gray; /*Mozilla */
 	opacity: 0.9;
@@ -178,9 +170,12 @@ h4 {
 }
 
 .imgZoom:hover {
-	-webkit-transform:scale(2);
-	-moz-transform:scale(2); /* Mozilla*/
+	box-shadow:0px 0px 30px gray; 
+	-webkit-transform:scale(2.7);
+	-moz-transform:scale(2.7); /* Mozilla*/
 	position:absolute;
+	margin-top: 70px;
+	margin-left: 300px;
 	z-index: 30;
 }
 
