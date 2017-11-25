@@ -25,6 +25,7 @@ $(document).ready(function(){
         $('.showdiv').addClass('hide') ;
     })
 
+    // fit height of navleft
     var h = $('.contentRight').height();
     if(h<690)
         h=690 ;

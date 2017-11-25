@@ -48,21 +48,21 @@
 
                             <div class="form-group">
                                 <label>Startting Price ($):</label>
-                                <input type="number" min='0' class="form-control" name="SPrice" required="required">
+                                <input type="number" min='1' class="form-control" name="SPrice" required="required">
                             </div>
                             <div class="row">
 
                                 <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                                     <div class="form-group">
                                         <label>Start time:</label>
-                                        <input type="datetime-local" class="form-control" name="Stime"  required="required">
+                                        <input type="datetime-local" class="form-control" name="Stime" value="" min="" required="required">
                                     </div>
                                 </div>
 
                                 <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                                     <div class="form-group">
                                         <label>End time:</label>
-                                        <input type="datetime-local" class="form-control" name="Etime" required="required">
+                                        <input type="datetime-local" class="form-control" name="Etime" value="" min="" required="required">
                                     </div>
                                 </div>
 
@@ -87,9 +87,11 @@
                             <div class="form-group">
                                 <label>Images</label>
                                 <input type="link" id='exampleInputFile1' name='Img1' required='required' style="width: 100%;">
-                                <!-- <input type="file" id="exampleInputFile1" name="Img1" required="required">
+                            <!-- 
+                                <input type="file" id="exampleInputFile1" name="Img1" required="required">
                                 <input type="file" id="exampleInputFile2" name="Img2" >
-                                <input type="file" id="exampleInputFile3" name="Img3" > -->
+                                <input type="file" id="exampleInputFile3" name="Img3" > 
+                            -->
                             </div>
 
                         </div>
@@ -109,6 +111,20 @@
         <br>
     </div>
 </body>
+<script>
 
+    var timeNow = new Date().toISOString() ;
+    timeNow = timeNow.substring(0, timeNow.length - 8) ;
+    $("input[type='datetime-local']").attr('min',timeNow) ;
+    $("input[type='datetime-local']").attr('value',timeNow) ;
+    
+    $("input[name='Stime']").change(function () {
+        var Stime = $("input[name='Stime']").val();
+        $("input[name='Etime']").attr('value', Stime );
+        $("input[name='Etime']").attr('min', Stime );
+
+    });
+
+</script>
 
 </html>
