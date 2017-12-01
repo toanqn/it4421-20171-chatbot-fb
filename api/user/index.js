@@ -73,7 +73,7 @@ route.post('/changePassword', isAuthenticated, (req, res) =>{
   controller.findUserByUsername(username)
   .then((user) => {
     if(user.validPassword(oldPassword)){
-      if(newPassword == confirmPassword){
+      if((newPassword == confirmPassword) && newPassword != ''){
         bcrypt.hash(newPassword, 10)
         .then((encodePassword) => {
           user.password = encodePassword;
@@ -87,7 +87,7 @@ route.post('/changePassword', isAuthenticated, (req, res) =>{
           res.send(err);
         })
       } else {
-        console.log('Confirm password not match!');
+        console.log('Password is empty or confirm password not match!');
         res.redirect('/userInfo');
       }
     }else{
