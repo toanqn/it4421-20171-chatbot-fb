@@ -65,7 +65,7 @@
                                     <label>About me</label>
                                     <br>
                                     <textarea class="form-control" name="aboutme" rows="5" placeholder="Tell us a little bit about yourself..." ><%= user.aboutme %></textarea>
-                                    <span>There information will show in <a href="/userProfile">your profile</a></span>
+                                    <span>There information will show in <a href="/userProfile?username=<%=user.username%>">your profile</a></span>
                                 </div>
 
                                 <button type="submit" class="btn btn-lg btn-primary">Update Profile</button>
@@ -100,7 +100,7 @@
                         <div class="col-md-4">
                             <h4><B>Profile Picture</B> </h4>
                             <div class="table-bordered">
-                                <img src="<%- user.image %>" onerror="this.src='resources/images/minhnb.jpg'" class="img-responsive img-display" alt="avata">
+                                <img src="<%- user.image %>" onerror="this.src='resources/images/defaultAvata.jpg'" class="img-responsive img-display" alt="avata">
                             </div>
                             <br>
                             <form action="/api/user/updateAvatar" method="POST" role="form">
