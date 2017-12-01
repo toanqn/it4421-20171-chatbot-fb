@@ -51,7 +51,7 @@
                                 <tr>
                                     <td> <a href="#"><%- e.username %></a> </td>
                                     <td> US $<%- e.price %></td>
-                                    <td>Oct-11-17 15:21:22 (Fix Cứng)</td>
+                                    <td class="bidtime"><%- e.time %></td>
                                 </tr>
                             <%}) %>
                         </tbody>
@@ -63,12 +63,14 @@
                 </div>
 
             </div>
-            
         </div> 
         <!-- End container -->
 
         <script>
             const end_time = "<%- product.end_time %>";
+            var bidtime = $(".bidtime").html();
+            bidtime = bidtime.substr(0,31);
+            $(".bidtime").html(bidtime);
         </script>
         <script src="/resources/js/moment.js"></script>
         <script src="/resources/js/bidHistory.js"></script>

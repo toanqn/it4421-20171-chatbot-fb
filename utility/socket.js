@@ -20,6 +20,7 @@ const connectSocket = function (socket, io) {
                     histories: [{
                       username: val.username,
                       price: val.newPrice,
+                      time: new Date()
                     }],
                     maxPrice: val.newPrice,
                   };
@@ -30,16 +31,22 @@ const connectSocket = function (socket, io) {
                   })
                   .catch(err => socket.emit('response', 'Occur error !'));  
                 } else {
-                  result.histories.push({username: val.username, price: val.newPrice});
-                  if( result.maxPrice < val.newPrice) result.maxPrice = val.newPrice;
-                  productHistoriesController.updateProductHistory(result)
-                  .then((success) => {
-                    console.log('aaa');
-                    socket.emit('response', 'Success !');
-                    console.log('bbb', io);
-                    io.sockets.emit('newPrice', {newPrice: result.maxPrice, id: val.id});
-                  })
-                  .catch(err => socket.emit('response', 'occur error'));
+                  if(result.maxPrice < val.newPrice){ 
+                    result.histories.push({
+                      username: val.username, 
+                      price: val.newPrice,
+                      time: new Date()
+                    });
+                    result.maxPrice = val.newPrice;
+                    productHistoriesController.updateProductHistory(result)
+                    .then((success) => {
+                      // console.log('aaa');
+                      socket.emit('response', 'Success !');
+                      // console.log('bbb', io);
+                      io.sockets.emit('newPrice', {newPrice: result.maxPrice, id: val.id});
+                    })
+                    .catch(err => socket.emit('response', 'occur error'));
+                  }
                 }
               });
           } else {
