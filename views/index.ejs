@@ -107,18 +107,16 @@
                 <!-- Pagination -->
                 <nav aria-label="Page navigation">
                     <ul class="pagination">
-                        <li>
-                            <a href="#" aria-label="Previous">
+                        <li id= "liPrev">
+                            <a href="/?page_number=<%- parseInt(page_number) -1 %>" aria-label="Previous">
                               <span aria-hidden="true">&laquo;</span>
                             </a>
                         </li>
-                        <li><a href="/?page_number=1">1</a></li>
-                        <li><a href="/?page_number=2">2</a></li>
-                        <li><a href="/?page_number=3">3</a></li>
-                        <li><a href="/?page_number=4">4</a></li>
-                        <li><a href="/?page_number=5">5</a></li>
-                        <li>
-                            <a href="#" aria-label="Next">
+                        <li class="active"><a href="/?page_number=<%- page_number %>"><%- page_number %></a></li>
+                        <li><a href="/?page_number=<%- parseInt(page_number)+1 %>"><%- parseInt(page_number)+1 %></a></li>
+                        <li><a href="/?page_number=<%- parseInt(page_number)+2 %>"><%- parseInt(page_number)+2 %></a></li>
+                        <li id="liEnd">
+                            <a href="/?page_number=<%- parseInt(page_number)+1 %>" aria-label="Next">
                               <span aria-hidden="true">&raquo;</span>
                             </a>
                         </li>
@@ -143,7 +141,6 @@
     </div>
     
     <!-- End footer -->
-
     <script>
         var search = function(){
             var option = document.getElementsByTagName("option");
@@ -164,15 +161,13 @@
                 return false;
             }
         }
+
+        if(<%- page_number %> == 1) {
+            $('#liPrev').addClass("disabled") ;
+            $("a[href='/?page_number=<%- parseInt(page_number)-1 %>']").attr('href', '#')
+        }
     </script>
 
-    <!-- <script>
-        var searchText = function() {
-            var text = document.getElementById('searchText').value;
-            window.location.href = `/searchText?text=${text}`;
-            return false;
-        }
-    </script> -->
- 
+
 </body>
 </html>

@@ -7,6 +7,7 @@ const productHistories = new schema({
   histories: [{
     username: String,
     price: Number,
+    time: Date
   }],
   maxPrice: Number,
 });

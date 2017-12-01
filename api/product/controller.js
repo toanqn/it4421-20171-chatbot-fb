@@ -29,7 +29,7 @@ const getProductsOfUser = function (username) {
 };
 
 const getProductWithCate = function (cateId) {
-  return product.find({ category_id: cateId });
+  return product.find({ category: cateId });
 };
 
 const getProductByName = function (text) {

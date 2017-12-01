@@ -73,7 +73,7 @@ app.use('/api/user', userRoute);
 app.use('/api/product', productRoute);
 
 app.get('/', (req, res) => {
-  const page_number =  req.query.page_number; // eslint-disable-line
+  const page_number =  req.query.page_number || 1; // eslint-disable-line
   productController.get8Products(page_number)
     .then((success) => {
       const filteredProduct = [];
@@ -95,6 +95,7 @@ app.get('/', (req, res) => {
             login: req.isAuthenticated(),
             username: req.user ? req.user.username : '',
             products: filteredProduct,
+            page_number
           });
         });
     })
