@@ -58,6 +58,7 @@ const connectSocket = function (socket, io) {
         if(!dateValidate.compareDate(product.end_time)){
           productHistoriesController.getProductHistoryById(id)
            .then((history) => {
+             sockt.emit("result of auction");
            });
         } else {
           socket.emit("cannot check now");
