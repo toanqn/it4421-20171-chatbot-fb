@@ -74,7 +74,7 @@ app.use('/api/product', productRoute);
 
 app.get('/', (req, res) => {
   const page_number =  req.query.page_number; // eslint-disable-line
-  productController.get6Products(page_number)
+  productController.get8Products(page_number)
     .then((success) => {
       const filteredProduct = [];
       success.forEach((e) => {
@@ -228,10 +228,28 @@ http.listen(config.PORT, (err) => {
 
 
 app.get('/userProfile', (req, res) => {
-  res.render('userProfile', {
-    login: req.isAuthenticated(),
-    username: req.user ? req.user.username : '',
-  });
+  const { username } = req.query;
+  userController.findUserByUsername(username)
+  .then((user) => {
+    productController.getProductsOfUser(user.username)
+    .then((success) => {
+      var products = []
+      success.forEach((e) => {
+        if(dateValidate.compareDate(e.end_time)){
+          products.push(e);
+        }
+      })
+      res.render('userProfile', {
+        login: req.isAuthenticated(),
+        username: req.user ? req.user.username : '',
+        user: user,
+        products: products
+      });
+    })
+  })
+  .catch((err) => {
+    res.send(err);
+  })
 });
 
 app.get('/bidHistory', (req, res) => {
@@ -271,11 +289,20 @@ app.get('/managePurchases', (req, res) => {
 });
 
 app.get('/manageSales', (req, res) => {
-  productController.getProductsOfUser(req.user._id)
+  productController.getProductsOfUser(req.user.username)
     .then((success) => {
+      var sellingProducts = [];
+      var soldProducts = [];
+      success.forEach((e) => {
+        if (dateValidate.compareDate(e.end_time)){
+          sellingProducts.push(e);
+        } else {
+          soldProducts.push(e);
+        }
+      });
       res.render('manageSales', {
-        products: success,
-        nop: success.length,
+        sellingProducts,
+        soldProducts,
         login: req.isAuthenticated(),
         username: req.user ? req.user.username : '',
         menu: 'manageSales',

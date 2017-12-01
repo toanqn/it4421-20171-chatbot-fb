@@ -27,12 +27,12 @@
                 <!-- NAV LEFT -->
                 <%- include('partition/navLeft.ejs') %>
 
-                    <div class="col-md-9">
+                    <div class="col-md-9 contentRight">
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <div class="row">
                                     <div class="col-md-9">
-                                        <h3>Selling items</h3>
+                                        <h3>Selling Items</h3>
                                     </div>
                                     <div class="col-md-3">
                                         <a href="/sellNewProduct" class="btn btn-info btn-lg">Sell New Product</a>
@@ -40,10 +40,11 @@
                                 </div>
                             </div>
                             <div class="panel-body">
-                                <p>You have <%- nop %> products are in selling:</p>
+                                <p>You have
+                                    <%- sellingProducts.length %> products are in selling:</p>
                                 <div class="row">
                                     <!-- For each here -->
-                                    <% products.forEach((product) => { %>
+                                    <% sellingProducts.forEach((product) => { %>
                                         <div class="col-sm-6 col-md-4 col-lg-4">
                                             <div class="table-bordered productPreview">
                                                 <img src="<%- product.image %>" alt="http://i.ebayimg.com/images/g/EowAAOSwSclXMEe4/s-l1600.jpg" class="img-display table-bordered img-responsive">
@@ -79,17 +80,21 @@
                                 <!-- ./row -->
 
 
-                                <% products.forEach((product) => { %>
+                                <% sellingProducts.forEach((product) => { %>
                                     <div class="modal fade" id="delete-<%-product._id%>">
                                         <form role="form" method="POST" action="/api/product/deleteProduct">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h4>Delete <%- product.name %></h4>
+                                                        <h4>Delete
+                                                            <%- product.name %>
+                                                        </h4>
                                                     </div>
                                                     <div class="modal-body">
                                                         <p>This action cannot redo. Are you sure delete item:
-                                                            <b><%- product.name %></b>?</p>
+                                                            <b>
+                                                                <%- product.name %>
+                                                            </b>?</p>
                                                     </div>
                                                     <input type="hidden" name="idProduct" value="<%- product._id %>">
                                                     <div class="modal-footer">
@@ -101,7 +106,7 @@
                                         </form>
 
                                     </div>
-                                <% }) %>
+                                    <% }) %>
                             </div>
                         </div>
                         <!-- ./panel -->
@@ -111,58 +116,64 @@
                             <div class="panel-heading">
                                 <div class="row">
                                     <div class="col-md-9">
-                                        <h3>Selled items</h3>
+                                        <h3>Expired items</h3>
                                     </div>
                                 </div>
                             </div>
                             <div class="panel-body">
-                                <p>You have 1 products being sold and was end of time.</p>
+                                <p>You have
+                                    <%- soldProducts.length %> products being sold and was expired.</p>
                                 <div class="row">
                                     <!-- For each here -->
-                                    
+                                    <% soldProducts.forEach((product) => { %>
                                         <div class="col-sm-6 col-md-4 col-lg-4">
                                             <div class="table-bordered productPreview">
-                                                <img src="http://i.ebayimg.com/images/g/EowAAOSwSclXMEe4/s-l1600.jpg" alt="http://i.ebayimg.com/images/g/EowAAOSwSclXMEe4/s-l1600.jpg" class="img-display table-bordered img-responsive">
+                                                <img src="<%- product.image %>" alt="http://i.ebayimg.com/images/g/EowAAOSwSclXMEe4/s-l1600.jpg" class="img-display table-bordered img-responsive">
                                                 <div class="caption">
-                                                    <a href="/detail?id">
+                                                    <a href="/detail?id=<%-product._id%>">
                                                         <h4 class="textPreview">
-                                                            Tên sản phẩm
+                                                            <%- product.name %>
                                                         </h4>
                                                     </a>
                                                     <div class="bidTimePreview">
-                                                        <h4> Price: 2$ </h4>
-                                                        <div id="StartTime"> Start Time: 333
+                                                        <h4> Price:
+                                                            <%- product.price %>$ </h4>
+                                                        <div id="StartTime"> Start Time:
+                                                            <%- product.start_time %>
                                                         </div>
                                                         <div id="EndTime"> End Time:
+                                                            <%- product.end_time %>
                                                         </div>
                                                     </div>
                                                     <div class="row">
                                                         <div class="col-md-12">
-                                                            <a href="#delete-1" data-toggle="modal" class="btn btn-danger btnEdit">Delete</a>
+                                                            <a href="#delete-<%-product._id%>" data-toggle="modal" class="btn btn-danger btnEdit">Delete</a>
                                                         </div>
-                                                        
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
- 
+                                        <% }) %>
                                 </div>
                                 <!-- ./row -->
 
-
-                               
-                                    <div class="modal fade" id="delete-1">
+                                <% soldProducts.forEach((product) => { %>
+                                    <div class="modal fade" id="delete-<%-product._id%>">
                                         <form role="form" method="POST" action="/api/product/deleteProduct">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h4>Delete ProductName</h4>
+                                                        <h4>Delete
+                                                            <%- product.name %>
+                                                        </h4>
                                                     </div>
                                                     <div class="modal-body">
                                                         <p>This action cannot redo. Are you sure delete item:
-                                                            <b>name</b>?</p>
+                                                            <b>
+                                                                <%- product.name %>
+                                                            </b>?</p>
                                                     </div>
-                                                    <input type="hidden" name="idProduct" value="id1">
+                                                    <input type="hidden" name="idProduct" value="<%- product._id %>">
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                                                         <button type="submit" class="btn btn-danger">Delete</button>
@@ -172,7 +183,7 @@
                                         </form>
 
                                     </div>
-                               
+                                    <% }) %>
                             </div>
                         </div>
                         <!-- ./panel -->

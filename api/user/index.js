@@ -50,9 +50,10 @@ route.post('/updateProfile', isAuthenticated, (req, res) => {
       success.phone = req.body.phone;
       success.gender = req.body.gender === 'Male'? true: false;
       success.address = req.body.address;
+      success.aboutme = req.body.aboutme;
       success.save((err) => {
         if (err) throw err;
-        console.log('Update profile successful!')
+        console.log('Update profile of '+ username +' successful!')
       });
       // console.log(success);
       // console.log(username);
@@ -78,7 +79,7 @@ route.post('/changePassword', isAuthenticated, (req, res) =>{
           user.password = encodePassword;
           user.save((err) => {
             if(err) throw err;
-            console.log('Change password sucessfull!');
+            console.log('Change password of '+ username +'sucessfull!');
           });
         res.redirect('/userInfo');
         })
@@ -96,4 +97,16 @@ route.post('/changePassword', isAuthenticated, (req, res) =>{
   })
 });
 
+route.post('/updateAvatar', (req, res) => {
+  const username = req.user.username;
+  controller.findUserByUsername(username)
+  .then((success) => {
+    success.image = req.body.avatar;
+    success.save((err) => {
+      if(err) throw err;
+      console.log('Change avatar of '+ username +' successfull!');
+      res.redirect('/userInfo');
+    })
+  })
+})
 module.exports = route;

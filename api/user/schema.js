@@ -29,7 +29,9 @@ var userSchema = new schema({
   phone: String,
   address: String,
   name: String,
-  gender: Boolean
+  gender: Boolean,
+  aboutme: String,
+  image: String,
 });
 
 userSchema.methods.validPassword = function(password){
