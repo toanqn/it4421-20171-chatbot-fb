@@ -33,10 +33,16 @@ route.post('/sellProduct', (req, res) => {
     end_time: req.body.Etime,
   };
   controller.createItem(item)
-    .then((success) => {
+    .then((e) => {
+      const productHistories = {
+        productId: e[0]._id,  //eslint-disable-line
+        maxPrice: e[0].price,
+        histories: [],
+      }
       console.log('Upload a new product successfull!');
-      res.redirect('/sellNewProduct');
+      return controllerPH.saveProductHistory(productHistories);
     })
+    .then(ok => res.redirect('/sellNewProduct'))
     .catch(err => res.send(err));
 });
 
