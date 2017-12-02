@@ -19,6 +19,7 @@ const bcryptUtility = require('./utility/bcrypt');
 const isAuthenticated = require('./utility/isAuthenticated');
 const dateValidate = require('./utility/dateValidate');
 const connectSocket = require('./utility/socket');
+const moment = require('moment');
 
 app.use(express.static(`${__dirname}/public`));
 app.set('view engine', 'ejs');
@@ -74,7 +75,8 @@ app.use('/api/product', productRoute);
 
 app.get('/', (req, res) => {
   const page_number =  req.query.page_number || 1; // eslint-disable-line
-  productController.get8Products(page_number)
+  const now = new Date();
+  productController.get8Products(page_number, now)
     .then((success) => {
       const filteredProduct = [];
       success.forEach((e) => {
@@ -95,7 +97,8 @@ app.get('/', (req, res) => {
             login: req.isAuthenticated(),
             username: req.user ? req.user.username : '',
             products: filteredProduct,
-            page_number
+            page_number,
+            moment,
           });
         });
     })
@@ -130,6 +133,8 @@ app.get('/search', (req, res) => {
               login: req.isAuthenticated(),
               username: req.user ? req.user.username : '',
               products: filteredProduct,
+              page_number: 1,
+              moment,
             });
           } else {
             filteredProduct.forEach((e) => {
@@ -141,6 +146,8 @@ app.get('/search', (req, res) => {
               login: req.isAuthenticated(),
               username: req.user ? req.user.username : '',
               products: filteredProductWithPrice,
+              page_number: 1,
+              moment, 
             });
           }
         });
@@ -161,6 +168,8 @@ app.get('/searchText', (req, res) => {
         login: req.isAuthenticated(),
         username: req.user ? req.user.username : '',
         products: filteredProduct,
+        page_number: 1,
+        moment,
       });
     })
     .catch((err) => {
@@ -260,7 +269,10 @@ app.get('/bidHistory', (req, res) => {
       console.log('product', product);
       console.log('history', history);
       res.render('bidHistory', {
-        login: req.isAuthenticated(), username: req.user ? req.user.username : '', product, history,
+        login: req.isAuthenticated(), 
+        username: req.user ? req.user.username : '', 
+        product, history,
+        moment,
       });
     });
 });
@@ -307,6 +319,7 @@ app.get('/manageSales', (req, res) => {
         login: req.isAuthenticated(),
         username: req.user ? req.user.username : '',
         menu: 'manageSales',
+        moment,
       });
     })
     .catch((err) => {

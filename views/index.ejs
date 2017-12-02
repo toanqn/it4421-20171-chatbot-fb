@@ -94,8 +94,8 @@
                                     </a>
                                     <div class="bidTimePreview">
                                         <h4> Current Bid: <%- product.maxPrice %>$ </h4>
-                                        <div id="StartTime"> Start Time: <%- product.start_time %></div>
-                                        <div id="EndTime"> End Time: <%- product.end_time %></div>
+                                        <div id="StartTime"> Start Time: <%- moment(product.start_time).format('HH:mm:ss DD-MM-YYYY') %></div>
+                                        <div id="EndTime"> End Time: <%- moment(product.end_time).format('HH:mm:ss DD-MM-YYYY') %></div>
                                     </div>
                                 </div>
                             </div>
