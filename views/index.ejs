@@ -112,9 +112,11 @@
                               <span aria-hidden="true">&laquo;</span>
                             </a>
                         </li>
-                        <li class="active"><a href="/?page_number=<%- page_number %>"><%- page_number %></a></li>
-                        <li><a href="/?page_number=<%- parseInt(page_number)+1 %>"><%- parseInt(page_number)+1 %></a></li>
-                        <li><a href="/?page_number=<%- parseInt(page_number)+2 %>"><%- parseInt(page_number)+2 %></a></li>
+                        <li class="li_1"><a href="/?page_number=1">1</a></li>
+                        <li class="li_2"><a href="/?page_number=2">2</a></li>
+                        <li class="li_3"><a href="/?page_number=3">3</a></li>
+                        <li class="li_4"><a href="/?page_number=4">4</a></li>
+                        <li class="li_5"><a href="/?page_number=5">5</a></li>
                         <li id="liEnd">
                             <a href="/?page_number=<%- parseInt(page_number)+1 %>" aria-label="Next">
                               <span aria-hidden="true">&raquo;</span>
@@ -162,10 +164,23 @@
             }
         }
 
+        
         if(<%- page_number %> == 1) {
             $('#liPrev').addClass("disabled") ;
-            $("a[href='/?page_number=<%- parseInt(page_number)-1 %>']").attr('href', '#')
+            $("a[href='/?page_number=<%- parseInt(page_number)-1 %>']").attr('href', '#liPrev') ;
         }
+        
+        if(<%- parseInt(page_number) %> >5) {
+            $("li.li_1").replaceWith('<li class="li_<%- page_number %>"><a href="/?page_number=<%- page_number %>"><%- page_number %></a></li>') ;
+            $("li.li_2").replaceWith('<li class="li_<%- parseInt(page_number)+1 %>"><a href="/?page_number=<%- parseInt(page_number)+1 %>"><%- parseInt(page_number)+1 %></a></li>') ;
+            $("li.li_3").replaceWith('<li class="li_<%- parseInt(page_number)+2 %>"><a href="/?page_number=<%- parseInt(page_number)+2 %>"><%- parseInt(page_number)+2 %></a></li>') ;  
+            $("li.li_4").replaceWith('<li class="li_<%- parseInt(page_number)+3 %>"><a href="/?page_number=<%- parseInt(page_number)+3 %>"><%- parseInt(page_number)+3 %></a></li>') ; 
+            $("li.li_5").replaceWith('<li class="li_<%- parseInt(page_number)+4 %>"><a href="/?page_number=<%- parseInt(page_number)+4 %>"><%- parseInt(page_number)+4 %></a></li>') ;
+
+        }
+
+        $("li.li_<%- page_number %>").addClass("active");
+        
     </script>
 
 
