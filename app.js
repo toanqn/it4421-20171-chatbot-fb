@@ -336,6 +336,7 @@ app.get('/editItem', (req, res) => {
         login: req.isAuthenticated(),
         username: req.user ? req.user.username : '',
         menu: 'manageSales',
+        moment,
       });
     })
     .catch((err) => {
