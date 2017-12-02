@@ -5,8 +5,8 @@ const saveMultipleProduct = function (arrProducts) {
   return product.insertMany(arrProducts);
 };
 
-const get8Products = function (pageNumber) {
-  return product.find({}).skip((pageNumber - 1) * 8).limit(8).sort({ start_time: -1 });
+const get8Products = function (pageNumber, now) {
+  return product.find({'end_time': {'$gte': now}}).skip((pageNumber - 1) * 8).limit(8).sort({ start_time: -1 });
 };
 
 const getProductById = function (id) {

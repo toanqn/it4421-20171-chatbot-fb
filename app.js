@@ -75,7 +75,8 @@ app.use('/api/product', productRoute);
 
 app.get('/', (req, res) => {
   const page_number =  req.query.page_number || 1; // eslint-disable-line
-  productController.get8Products(page_number)
+  const now = new Date();
+  productController.get8Products(page_number, now)
     .then((success) => {
       const filteredProduct = [];
       success.forEach((e) => {
