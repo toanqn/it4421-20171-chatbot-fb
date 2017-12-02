@@ -147,7 +147,7 @@
                     <span style="color:green;">Waiting for pay</span>
                     <hr>
                     <h4>You have 2 days to complete buy this item by click following link: </h4>
-                    <a href="/buyItem"> Go to buy this item</a>
+                    <a href="/buyItem?id=<%-product._id%>"> Go to buy this item</a>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -191,12 +191,14 @@
             }
         }
         var checkStatus = function() {
+            console.log('aaa');
             socket.emit("check status", "<%- product.id %>");
         }
         socket.on("cannot check now", () => {
             alert("This product is still in auction process!");
         });
         socket.on("result of auction", (result) => {
+            console.log('bbb');
             document.getElementById("checkStt").setAttribute("data-target","#modalCheckStt");
             $("#checkStatus").click();
         })
