@@ -111,10 +111,11 @@
         <br>
     </div>
 </body>
+<script src="/resources/js/moment.js"></script>
 <script>
 
-    var timeNow = new Date().toISOString() ;
-    timeNow = timeNow.substring(0, timeNow.length - 8) ;
+    var timeNow = moment().format('YYYY-MM-DDTHH:mm:ss');
+    // timeNow = timeNow.substring(0, timeNow.length - 8) ;
     $("input[type='datetime-local']").attr('min',timeNow) ;
     $("input[type='datetime-local']").attr('value',timeNow) ;
     
