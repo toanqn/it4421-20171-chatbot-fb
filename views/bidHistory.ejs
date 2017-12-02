@@ -49,9 +49,9 @@
                         <tbody>
                             <% history.histories.forEach((e) => { %>
                                 <tr>
-                                    <td> <a href="#"><%- e.username %></a> </td>
+                                    <td> <a href="/userProfile?username=<%=e.username%>"><%- e.username %></a> </td>
                                     <td> US $<%- e.price %></td>
-                                    <td class="bidtime"><%- e.time %></td>
+                                    <td> <%- moment(e.time).format('HH:mm:ss DD-MM-YYYY') %></td>
                                 </tr>
                             <%}) %>
                         </tbody>
@@ -65,13 +65,6 @@
             </div>
         </div> 
         <!-- End container -->
-
-        <script>
-            const end_time = "<%- product.end_time %>";
-            var bidtime = $(".bidtime").html();
-            bidtime = bidtime.substr(0,31);
-            $(".bidtime").html(bidtime);
-        </script>
         <script src="/resources/js/moment.js"></script>
         <script src="/resources/js/bidHistory.js"></script>
 
