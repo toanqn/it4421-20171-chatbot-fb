@@ -51,7 +51,7 @@
                                 <tr>
                                     <td> <a href="/userProfile?username=<%=e.username%>"><%- e.username %></a> </td>
                                     <td> US $<%- e.price %></td>
-                                    <td> <%- e.time %></td>
+                                    <td> <%- moment(e.time).format('HH:mm:ss DD-MM-YYYY') %></td>
                                 </tr>
                             <%}) %>
                         </tbody>
