@@ -1,5 +1,4 @@
 const express = require('express');
-
 const app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
@@ -15,6 +14,7 @@ const userController = require('./api/user/controller');
 const productRoute = require('./api/product');
 const productController = require('./api/product/controller');
 const productHistory = require('./api/productHistory.js/controller');
+const productPurchaseController = require('./api/productPurchase/controller');
 const bcryptUtility = require('./utility/bcrypt');
 const isAuthenticated = require('./utility/isAuthenticated');
 const dateValidate = require('./utility/dateValidate');
@@ -286,11 +286,26 @@ app.get('/sellNewProduct', (req, res) => {
 });
 
 app.get('/buyItem', isAuthenticated, (req, res) => {
-  res.render('buyItem', {
-    login: req.isAuthenticated(),
-    username: req.user ? req.user.username : '',
-    menu: 'sellProduct',
-  });
+  const purchase = {
+    productId: req.query.id,
+    owner: req.user.username,
+    status: "unpaid",
+  }
+  console.log(purchase);
+  productPurchaseController.savePurchase(purchase)
+  .then((success) => {
+    res.render("buyItem",{
+      login: req.isAuthenticated(),
+      username: req.user ? req.user.username : '',
+      menu: 'sellNewProduct',
+      productId: req.query.id,
+      owner: req.user.username,
+    });
+  })
+  .catch((err) => {
+    res.send(err);
+  })
+  
 });
 
 app.get('/managePurchases', (req, res) => {
@@ -343,4 +358,11 @@ app.get('/editItem', (req, res) => {
       res.send(err);
     });
 });
+
+app.post('/saveBill', (req, res) => {
+  console.log('aaa',req.body.data);
+  productPurchaseController.updatePurchase(req.body.data)
+  .then(success => res.send('ok'))
+  .catch(err => res.send(err));
+})
 

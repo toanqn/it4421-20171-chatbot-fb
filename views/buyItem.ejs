@@ -31,7 +31,7 @@
                     <div class="panel-body">
 
                         <!-- form -->
-                        <form class="form-horizontal" role="form" method="post" action="">
+                        <form class="form-horizontal" role="form">
 
                             <div class="form-group">
                                 <label class="control-label col-sm-3">Receiver Email:</label>
@@ -81,7 +81,7 @@
                                     <div class="col-sm-3"></div>
                                     <div class="col-sm-3">
                                         <label class="radio-inline">
-                                            <input type="radio" name="payment" checked>
+                                            <input type="radio" name="payment" class="radio-payment" checked>
                                             <span>Paypal</span>
                                         </label>
                                         <br>
@@ -90,7 +90,7 @@
                                     
                                     <div class="col-sm-3">
                                         <label class="radio-inline">
-                                            <input type="radio" name="payment">
+                                            <input type="radio" name="payment" class="radio-payment">
                                             <span>ATM</span>
                                         </label>
                                         <br>
@@ -99,7 +99,7 @@
 
                                     <div class="col-sm-3">
                                         <label class="radio-inline">
-                                            <input type="radio" name="payment">
+                                            <input type="radio" name="payment" class="radio-payment">
                                             <span>Master Card</span>
                                         </label>
                                         <br>
@@ -114,7 +114,7 @@
                             </div>
                             <br>
                             <div>
-                                <button type="submit" class="btn btn-lg btn-info"><span class="glyphicon glyphicon-send"></span> Order This Item</button>
+                                <button onclick="orderThisItem(event)" class="btn btn-lg btn-info"><span class="glyphicon glyphicon-send"></span> Order This Item</button>
                             </div>
                         </form>
                         <hr>
@@ -175,6 +175,45 @@
         </div>
         <!-- ./row -->
     </div>
+
+    <script>
+        var orderThisItem = function() {
+            const info = document.getElementsByClassName("form-control");
+            const radioPayment = document.getElementsByClassName("radio-payment");
+            let data = {
+                info: {
+                    recieverEmail: info[1].value,
+                    recieverName: info[2].value,
+                    country: info[3].value,
+                    city: info[4].value,
+                    phone: info[5].value,
+                    shippingAddress: info[6].value,
+                },
+                status: "ordering",
+                productId: "<%-productId%>",
+                owner: "<%-owner%>",
+            }
+            if(radioPayment[0].checked) {
+                data.status = "paypal";
+            } else if(radioPayment[1].checked) {
+                data.status = "atm";
+            } else {
+                data.status = "mastercard";
+            }
+
+            if(data.info.recieverEmail === '' || data.info.recieverName === '' || data.info.country === '' || data.info.city === '' || data.info.phone === '' || data.info.shippingAddress === ''){
+                alert('Vui lòng nhập đủ thông tin');
+            }
+            else {
+                console.log(data);
+                $.post("http://localhost:8080/saveBill", { data }, function(){
+                window.location.replace("http://localhost:8080");
+                });
+                event.preventDefault();
+            }
+            
+        }
+    </script>
     
 </body>
 </html>
