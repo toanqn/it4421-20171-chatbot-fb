@@ -45,7 +45,6 @@ const productSchema = new schema({
   category: {
     type: String,
     required: true,
-    enum: ['0000001', '0000002', '0000003', '0000004'],
   },
   is_sold: Boolean,
   image: {
@@ -53,11 +52,11 @@ const productSchema = new schema({
     required: true,
   },
   start_time: {
-    type: String,
+    type: Date,
     required: true,
   },
   end_time: {
-    type: String,
+    type: Date,
     required: true,
   },
 });

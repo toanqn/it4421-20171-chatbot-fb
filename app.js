@@ -19,6 +19,7 @@ const bcryptUtility = require('./utility/bcrypt');
 const isAuthenticated = require('./utility/isAuthenticated');
 const dateValidate = require('./utility/dateValidate');
 const connectSocket = require('./utility/socket');
+const moment = require('moment');
 
 app.use(express.static(`${__dirname}/public`));
 app.set('view engine', 'ejs');
@@ -130,6 +131,7 @@ app.get('/search', (req, res) => {
               login: req.isAuthenticated(),
               username: req.user ? req.user.username : '',
               products: filteredProduct,
+              page_number: 1
             });
           } else {
             filteredProduct.forEach((e) => {
@@ -141,6 +143,7 @@ app.get('/search', (req, res) => {
               login: req.isAuthenticated(),
               username: req.user ? req.user.username : '',
               products: filteredProductWithPrice,
+              page_number: 1 
             });
           }
         });
@@ -161,6 +164,7 @@ app.get('/searchText', (req, res) => {
         login: req.isAuthenticated(),
         username: req.user ? req.user.username : '',
         products: filteredProduct,
+        page_number: 1
       });
     })
     .catch((err) => {
