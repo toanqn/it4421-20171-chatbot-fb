@@ -5,3 +5,4 @@ module.exports = function (req, res, next) {
     res.send('not authenticated');
   }
 };
+

@@ -17,6 +17,7 @@ const productHistory = require('./api/productHistory.js/controller');
 const productPurchaseController = require('./api/productPurchase/controller');
 const bcryptUtility = require('./utility/bcrypt');
 const isAuthenticated = require('./utility/isAuthenticated');
+const checkBuyAuthenticate = require('./utility/checkBuyAuthen');
 const dateValidate = require('./utility/dateValidate');
 const connectSocket = require('./utility/socket');
 const moment = require('moment');
@@ -285,7 +286,7 @@ app.get('/sellNewProduct', (req, res) => {
   });
 });
 
-app.get('/buyItem', isAuthenticated, (req, res) => {
+app.get('/buyItem', isAuthenticated, checkBuyAuthenticate, (req, res) => {
   const purchase = {
     productId: req.query.id,
     owner: req.user.username,
