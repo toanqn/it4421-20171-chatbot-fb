@@ -73,8 +73,10 @@
                                 <select class="form-control" name="categoryId">
                                     <option value="0000001">Electronic</option>
                                     <option value="0000002">Fashion</option>
-                                    <option value="0000003">Watches</option>
-                                    <option value="0000004">Others</option>
+                                    <option value="0000003">Sporting</option>
+                                    <option value="0000004">Toys</option>
+                                    <option value="0000005">Musical</option>
+                                    <option value="0000006">Others</option>
                                 </select>
                             </div>
 
@@ -115,7 +117,6 @@
 <script>
 
     var timeNow = moment().format('YYYY-MM-DDTHH:mm');
-    // timeNow = timeNow.substring(0, timeNow.length - 8) ;
     $("input[type='datetime-local']").attr('min',timeNow) ;
     $("input[type='datetime-local']").attr('value',timeNow) ;
     
