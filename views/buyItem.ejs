@@ -194,11 +194,11 @@
                 owner: "<%-owner%>",
             }
             if(radioPayment[0].checked) {
-                data.status = "paypal";
+                data.payment = "paypal";
             } else if(radioPayment[1].checked) {
-                data.status = "atm";
+                data.payment = "atm";
             } else {
-                data.status = "mastercard";
+                data.payment = "mastercard";
             }
 
             if(data.info.recieverEmail === '' || data.info.recieverName === '' || data.info.country === '' || data.info.city === '' || data.info.phone === '' || data.info.shippingAddress === ''){
