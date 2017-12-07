@@ -40,7 +40,7 @@
                                                 <div class="table-bordered productPreview">
                                                     <img src="<%- item.image %>" alt="http://i.ebayimg.com/images/g/EowAAOSwSclXMEe4/s-l1600.jpg" class="img-display table-bordered img-responsive">
                                                     <div class="caption">
-                                                        <a href="/detail?id=<%-item._id%>">
+                                                        <a href="/buyItem?id=<%-item._id%>">
                                                             <h4 class="textPreview">
                                                                 <%- item.name %>
                                                             </h4>
@@ -53,6 +53,11 @@
                                                             </div>
                                                             <div id="EndTime"> End Time:
                                                                 <%- moment(item.end_time).format('HH:mm:ss DD-MM-YYYY') %>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <a href="/buyItem?id=<%-item._id%>" class="btn btn-primary btnEdit">Buy</a>
                                                             </div>
                                                         </div>
                                                     </div>

@@ -67,21 +67,31 @@ route.post('/updateProduct', (req, res) => {
 
 route.post('/deleteProduct', (req, res) => {
   const idProduct = req.body.idProduct;
-  controller.deleteItem(idProduct)
-    .then((success) => {
-      console.log(`Remove item ${idProduct} from products successfull!`);
-    // res.redirect('/manageSales');
-    })
-    .catch((err) => {
-      res.send(err);
-    });
-  controllerPH.deleteItemById(idProduct)
-    .then((success) => {
-      console.log(`Remove ${idProduct} from product histories successfull!`);
-      res.redirect('/manageSales');
-    })
-    .catch((err) => {
-      res.send(err);
-    });
+  controller.getProductById(idProduct)
+  .then((success) => {
+    if(success.provider == req.user.username){
+      controller.deleteItem(idProduct)
+      .then((success) => {
+        console.log(`Remove item ${idProduct} from products successfull!`);
+      // res.redirect('/manageSales');
+      })
+      .catch((err) => {
+        res.send(err);
+      });
+    controllerPH.deleteItemById(idProduct)
+      .then((success) => {
+        console.log(`Remove ${idProduct} from product histories successfull!`);
+        res.redirect('/manageSales');
+      })
+      .catch((err) => {
+        res.send(err);
+      });
+    } else {
+      res.send('Bạn không có quyền xóa!');
+    }
+  })
+  .catch((err) => {
+    res.send(err);
+  })
 });
 module.exports = route;
