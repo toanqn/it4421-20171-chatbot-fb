@@ -6,7 +6,7 @@ module.exports = function (req, res, next) {
   productController.getProductById(req.query.id)
     .then((product) => {
       if (!dateValidate.compareDate(product.end_time)) {
-        productHistoriesController.getProductHistoryById(id)
+        productHistoriesController.getProductHistoryById(req.query.id)
           .then((history) => {
             if(history.histories.pop().username !== req.user.username){
                 res.send('Bạn không có quyền truy cập')
@@ -19,6 +19,7 @@ module.exports = function (req, res, next) {
       }
     })
     .catch((err) => {
+        console.log(err);
         res.send('Có lỗi xảy ra');
     });
 };
