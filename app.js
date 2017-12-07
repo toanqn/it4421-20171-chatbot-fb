@@ -310,11 +310,36 @@ app.get('/buyItem', isAuthenticated, checkBuyAuthenticate, (req, res) => {
 });
 
 app.get('/managePurchases', isAuthenticated, (req, res) => {
-  res.render('managePurchases', {
-    login: req.isAuthenticated(),
-    username: req.user ? req.user.username : '',
-    menu: 'managePurchases',
-  });
+  productPurchaseController.getProductsByOwner(req.user.username)
+  .then((success) => {
+    const unpaidItems = [];
+    const orderingItems = [];
+    const receivedItems = [];
+    Promise.all(success.map(item => productController.getProductById(item.productId)))
+    .then((result) => {
+      for(let i = 0; i < success.length; i++){
+        if(success[i].status == 'unpaid'){
+          unpaidItems.push(result[i]);
+        } else if(success[i].status == 'ordering'){
+          orderingItems.push(result[i]);
+        } else {
+          receivedItems.push(result[i]);
+        }
+      }
+      res.render('managePurchases', {
+        login: req.isAuthenticated(),
+        username: req.user ? req.user.username : '',
+        menu: 'managePurchases',
+        moment,
+        unpaidItems,
+        orderingItems,
+        receivedItems
+      });
+    });
+  })
+  .catch((err) => {
+    res.send(err);
+  })
 });
 
 app.get('/manageSales', isAuthenticated,(req, res) => {

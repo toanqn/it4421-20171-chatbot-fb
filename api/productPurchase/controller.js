@@ -24,7 +24,12 @@ const updatePurchase = function (purchase) {
   );
 }
 
+const getProductsByOwner = function(owner){
+  return schema.find({owner: owner});
+}
+
 module.exports = {
   savePurchase,
   updatePurchase,
+  getProductsByOwner,
 };

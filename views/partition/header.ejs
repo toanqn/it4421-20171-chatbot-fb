@@ -33,7 +33,7 @@
             <ul class="nav navbar-nav navbar-right navbar-collapse collapse navCollapse">
                 <li style="display:<%if(login) {%> none <%}%>"><a href="/signup"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
                 <li style="display:<%if(login) {%> none <%}%>"><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-                <li style="display:<%if(!login) {%> none <%}%>"><a href="#">Hi: <%-username%></a></li>
+                <li style="display:<%if(!login) {%> none <%}%>"><a href="/userInfo">Hi: <%-username%></a></li>
                 <li class="dropdown" style="display:<%if(!login) {%> none <%}%>"><a class="dropdown-toggle" data-toggle="dropdown" href="#"> My Account<span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a class="glyphicon glyphicon-open" href="/sellNewProduct"> SellNewProduct</a></li>
