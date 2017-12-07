@@ -278,7 +278,7 @@ app.get('/bidHistory', (req, res) => {
     });
 });
 
-app.get('/sellNewProduct', (req, res) => {
+app.get('/sellNewProduct', isAuthenticated,(req, res) => {
   res.render('sellNewProduct', {
     login: req.isAuthenticated(),
     username: req.user ? req.user.username : '',
@@ -309,7 +309,7 @@ app.get('/buyItem', isAuthenticated, checkBuyAuthenticate, (req, res) => {
   
 });
 
-app.get('/managePurchases', (req, res) => {
+app.get('/managePurchases', isAuthenticated, (req, res) => {
   res.render('managePurchases', {
     login: req.isAuthenticated(),
     username: req.user ? req.user.username : '',
@@ -317,7 +317,7 @@ app.get('/managePurchases', (req, res) => {
   });
 });
 
-app.get('/manageSales', (req, res) => {
+app.get('/manageSales', isAuthenticated,(req, res) => {
   productController.getProductsOfUser(req.user.username)
     .then((success) => {
       var sellingProducts = [];
@@ -343,17 +343,21 @@ app.get('/manageSales', (req, res) => {
     });
 });
 
-app.get('/editItem', (req, res) => {
+app.get('/editItem', isAuthenticated, (req, res) => {
   const { id } = req.query;
   productController.getProductById(id)
     .then((success) => {
-      res.render('editItem', {
-        product: success,
-        login: req.isAuthenticated(),
-        username: req.user ? req.user.username : '',
-        menu: 'manageSales',
-        moment,
-      });
+      if(success.provider == req.user.username){
+        res.render('editItem', {
+          product: success,
+          login: req.isAuthenticated(),
+          username: req.user ? req.user.username : '',
+          menu: 'manageSales',
+          moment,
+        });
+      } else {
+        res.send('Bạn không có quyền truy cập!');
+      } 
     })
     .catch((err) => {
       res.send(err);
