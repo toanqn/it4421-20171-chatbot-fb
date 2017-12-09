@@ -295,13 +295,18 @@ app.get('/buyItem', isAuthenticated, checkBuyAuthenticate, (req, res) => {
   console.log(purchase);
   productPurchaseController.savePurchase(purchase)
   .then((success) => {
-    res.render("buyItem",{
-      login: req.isAuthenticated(),
-      username: req.user ? req.user.username : '',
-      menu: 'sellNewProduct',
-      productId: req.query.id,
-      owner: req.user.username,
-    });
+    Promise.all([productController.getProductById(req.query.id), productHistory.getMaxPrice(req.query.id)])
+    .then(([product, price]) => {
+      res.render("buyItem",{
+        login: req.isAuthenticated(),
+        username: req.user ? req.user.username : '',
+        menu: 'sellNewProduct',
+        productId: req.query.id,
+        owner: req.user.username,
+        product,
+        price: price.maxPrice,
+      });
+    })
   })
   .catch((err) => {
     res.send(err);

@@ -149,25 +149,19 @@
                 <div class="panel panel-default">
                     <div class="panel-heading"><b>Item Information</b></div>
                         <div class="panel-body">
-                            <img src="http://i.ebayimg.com/images/g/EowAAOSwSclXMEe4/s-l1600.jpg" alt="http://i.ebayimg.com/images/g/EowAAOSwSclXMEe4/s-l1600.jpg" class="img-display table-bordered img-responsive">
+                            <img src="<%- product.image %>" alt="http://i.ebayimg.com/images/g/EowAAOSwSclXMEe4/s-l1600.jpg" class="img-display table-bordered img-responsive">
                             <br>
                             <div class="row">
                                 <div class="itemTitle col-sm-4">Item: </div>
                                 <div class="col-sm-8">
-                                    <a href="#"> Vintage Sterling Silver Silpada </a>
+                                    <a href="#"> <%- product.name %> </a>
                                 </div>
-                            
                                 <div class="itemTitle col-sm-4">Price: </div>
-                                <div class="col-sm-8" style="font-size:20px;color:red;"> US $560</div>
+                                <div class="col-sm-8" style="font-size:20px;color:red;"> US $<%- price %></div>
                                 <div class="itemTitle col-sm-4">Shipping: </div>
                                 <div class="col-sm-8"> Free</div>
-                                
-                                <div class="itemTitle col-sm-4">Seller: </div>
-                                <div class="col-sm-8"><a href="/userProfile">Minhnb</a> </div>
-                                 
                             </div> 
                         </div>
-                        <div class="panel-footer"><b>Total: <span style="font-size:20px;color:red;"> $560</span></b> </div>
                     </div>
                 </div>
             </div>
