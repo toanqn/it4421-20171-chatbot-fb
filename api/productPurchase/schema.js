@@ -10,6 +10,8 @@ const productPurechaseSchema = new schema({
     city: String,
     phone: String,
     shippingAddress: String,
+    price: String,
+    image: String,
   },
   productId: String,
   owner: String,
