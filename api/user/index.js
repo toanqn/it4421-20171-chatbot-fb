@@ -4,6 +4,7 @@ const passport = require('passport');
 const isAuthenticated = require('./../../utility/isAuthenticated');
 const route = express.Router();
 const controller = require('./controller');
+const flash = require('connect-flash');
 
 route.post('/createUser', (req, res) => {
   const userInfo = {
@@ -19,15 +20,12 @@ route.post('/createUser', (req, res) => {
       controller.createUser(userInfo)
         .then((success) => {
           console.log('Đăng kí thành công!');
-          res.redirect('/');
+          req.flash('msg_signup', 'Đăng ký thành công!');
+          res.redirect('/login');
         })
         .catch((err) => {
-          res.render('login', { 
-            login: false, 
-            username: '', 
-            message: 'Đăng kí thất bại!',
-            isSignup: true,
-          });
+          req.flash('msg_signup', 'Đăng kí thất bại!');
+          res.redirect('/signup');
         });
     });
 });
@@ -53,11 +51,13 @@ route.post('/updateProfile', isAuthenticated, (req, res) => {
       success.aboutme = req.body.aboutme;
       success.save((err) => {
         if (err) throw err;
-        console.log('Update profile of '+ username +' successful!')
+        console.log('Update profile of '+ username +' successful!');
+        
       });
       // console.log(success);
       // console.log(username);
       // console.log(req.user.username);
+      req.flash('update_profile', 'Cập nhật thông tin tài khoản thành công!');
       res.redirect('/userInfo');
     })
     .catch((err) => {
@@ -80,6 +80,7 @@ route.post('/changePassword', isAuthenticated, (req, res) =>{
           user.save((err) => {
             if(err) throw err;
             console.log('Change password of '+ username +'sucessfull!');
+            req.flash('update_profile', 'Cập nhật mật khẩu thành công!');
           });
         res.redirect('/userInfo');
         })
@@ -88,10 +89,12 @@ route.post('/changePassword', isAuthenticated, (req, res) =>{
         })
       } else {
         console.log('Password is empty or confirm password not match!');
+        req.flash('update_profile', 'Mật khẩu rỗng hoặc không khớp!');
         res.redirect('/userInfo');
       }
     }else{
       console.log('Invalid password!');
+      req.flash('update_profile', 'Mật khẩu sai!');
       res.redirect('/userInfo');
     }
   })

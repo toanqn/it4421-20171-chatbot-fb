@@ -17,6 +17,9 @@
     <body>
         <!-- Header -->
         <%- include('partition/header.ejs') %>
+        <% if(message) { %>
+            <div class="alert"><%= message %></div>
+        <% } %>
         
         <div class="content container">
 
@@ -115,7 +118,6 @@
            
                 
         </div>
-        
     <!-- End container -->
     </body>
 </html>

@@ -20,6 +20,9 @@
 <body>
     <!-- Header -->
     <%- include('partition/header.ejs') %>
+    <% if(message) { %>
+        <div class="alert"><%= message %></div>
+    <% } %>
 
         <!-- Content -->
         <div class="content container">

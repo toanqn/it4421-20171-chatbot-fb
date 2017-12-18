@@ -1,4 +1,5 @@
 const express = require('express');
+
 const app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
@@ -21,16 +22,21 @@ const checkBuyAuthenticate = require('./utility/checkBuyAuthen');
 const dateValidate = require('./utility/dateValidate');
 const connectSocket = require('./utility/socket');
 const moment = require('moment');
+const flash = require('connect-flash');
 
 app.use(express.static(`${__dirname}/public`));
 app.set('view engine', 'ejs');
 app.set('views', 'views');
 app.use(bodyParser.json({ extended: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(flash());
 app.use(session({
   secret: 'secret',
   saveUninitialized: true,
   resave: true,
+  cookie: {
+    maxAge: 1000 * 60 * 5 * 10000000000, // khoang thoi gian luu cookie
+  },
 }));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -186,7 +192,7 @@ app.get('/login', (req, res) => {
   res.render('login', {
     login: req.isAuthenticated(),
     username: req.user ? req.user.username : '',
-    message: false,
+    message: req.flash('msg_signup'),
     isSignup: false,
   });
 });
@@ -195,7 +201,7 @@ app.get('/signup', (req, res) => {
   res.render('login', {
     login: req.isAuthenticated(),
     username: req.user ? req.user.username : '',
-    message: false,
+    message: req.flash('msg_signup'),
     isSignup: true,
   });
 });
@@ -226,6 +232,7 @@ app.get('/userInfo', isAuthenticated, (req, res) => {
     username: req.user ? req.user.username : '',
     user: req.user,
     menu: 'userInfo',
+    message: req.flash('update_profile'),
   });
 });
 
@@ -245,26 +252,26 @@ http.listen(config.PORT, (err) => {
 app.get('/userProfile', (req, res) => {
   const { username } = req.query;
   userController.findUserByUsername(username)
-  .then((user) => {
-    productController.getProductsOfUser(user.username)
-    .then((success) => {
-      var products = []
-      success.forEach((e) => {
-        if(dateValidate.compareDate(e.end_time)){
-          products.push(e);
-        }
-      })
-      res.render('userProfile', {
-        login: req.isAuthenticated(),
-        username: req.user ? req.user.username : '',
-        user: user,
-        products: products
-      });
+    .then((user) => {
+      productController.getProductsOfUser(user.username)
+        .then((success) => {
+          let products = [];
+          success.forEach((e) => {
+            if (dateValidate.compareDate(e.end_time)) {
+              products.push(e);
+            }
+          });
+          res.render('userProfile', {
+            login: req.isAuthenticated(),
+            username: req.user ? req.user.username : '',
+            user,
+            products,
+          });
+        });
     })
-  })
-  .catch((err) => {
-    res.send(err);
-  })
+    .catch((err) => {
+      res.send(err);
+    });
 });
 
 app.get('/bidHistory', (req, res) => {
@@ -274,19 +281,21 @@ app.get('/bidHistory', (req, res) => {
       console.log('product', product);
       console.log('history', history);
       res.render('bidHistory', {
-        login: req.isAuthenticated(), 
-        username: req.user ? req.user.username : '', 
-        product, history,
+        login: req.isAuthenticated(),
+        username: req.user ? req.user.username : '',
+        product,
+history,
         moment,
       });
     });
 });
 
-app.get('/sellNewProduct', isAuthenticated,(req, res) => {
+app.get('/sellNewProduct', isAuthenticated, (req, res) => {
   res.render('sellNewProduct', {
     login: req.isAuthenticated(),
     username: req.user ? req.user.username : '',
     menu: 'sellNewProduct',
+    message: req.flash('msg_upload'),
   });
 });
 
@@ -294,65 +303,70 @@ app.get('/buyItem', isAuthenticated, checkBuyAuthenticate, (req, res) => {
   const purchase = {
     productId: req.query.id,
     owner: req.user.username,
-    status: "unpaid",
-  }
+    status: 'unpaid',
+  };
   console.log(purchase);
   productPurchaseController.savePurchase(purchase)
-  .then((success) => {
-    res.render("buyItem",{
-      login: req.isAuthenticated(),
-      username: req.user ? req.user.username : '',
-      menu: 'sellNewProduct',
-      productId: req.query.id,
-      owner: req.user.username,
+    .then((success) => {
+      Promise.all([productController.getProductById(req.query.id), productHistory.getMaxPrice(req.query.id)])
+        .then(([product, price]) => {
+          res.render('buyItem', {
+            login: req.isAuthenticated(),
+            username: req.user ? req.user.username : '',
+            menu: 'sellNewProduct',
+            productId: req.query.id,
+            owner: req.user.username,
+            product,
+            price: price.maxPrice,
+          });
+        });
+    })
+    .catch((err) => {
+      res.send(err);
     });
-  })
-  .catch((err) => {
-    res.send(err);
-  })
-  
+
 });
 
 app.get('/managePurchases', isAuthenticated, (req, res) => {
   productPurchaseController.getProductsByOwner(req.user.username)
-  .then((success) => {
-    const unpaidItems = [];
-    const orderingItems = [];
-    const receivedItems = [];
-    Promise.all(success.map(item => productController.getProductById(item.productId)))
-    .then((result) => {
-      for(let i = 0; i < success.length; i++){
-        if(success[i].status == 'unpaid'){
-          unpaidItems.push(result[i]);
-        } else if(success[i].status == 'ordering'){
-          orderingItems.push(result[i]);
-        } else {
-          receivedItems.push(result[i]);
-        }
-      }
-      res.render('managePurchases', {
-        login: req.isAuthenticated(),
-        username: req.user ? req.user.username : '',
-        menu: 'managePurchases',
-        moment,
-        unpaidItems,
-        orderingItems,
-        receivedItems
-      });
+    .then((success) => {
+      const unpaidItems = [];
+      const orderingItems = [];
+      const receivedItems = [];
+      Promise.all(success.map(item => productController.getProductById(item.productId)))
+        .then((result) => {
+          for (let i = 0; i < success.length; i++) {
+            if (success[i].status == 'unpaid') {
+              unpaidItems.push(result[i]);
+            } else if (success[i].status == 'ordering') {
+              orderingItems.push(result[i]);
+            } else {
+              receivedItems.push(result[i]);
+            }
+          }
+          res.render('managePurchases', {
+            login: req.isAuthenticated(),
+            username: req.user ? req.user.username : '',
+            menu: 'managePurchases',
+            moment,
+            unpaidItems,
+            orderingItems,
+            receivedItems,
+          });
+        });
+    })
+    .catch((err) => {
+      res.send(err);
     });
-  })
-  .catch((err) => {
-    res.send(err);
-  })
 });
 
-app.get('/manageSales', isAuthenticated,(req, res) => {
+app.get('/manageSales', isAuthenticated, (req, res) => {
   productController.getProductsOfUser(req.user.username)
     .then((success) => {
-      var sellingProducts = [];
-      var soldProducts = [];
+      let sellingProducts = [];
+      let soldProducts = [];
       success.forEach((e) => {
-        if (dateValidate.compareDate(e.end_time)){
+        if (dateValidate.compareDate(e.end_time)) {
           sellingProducts.push(e);
         } else {
           soldProducts.push(e);
@@ -365,6 +379,7 @@ app.get('/manageSales', isAuthenticated,(req, res) => {
         username: req.user ? req.user.username : '',
         menu: 'manageSales',
         moment,
+        message: req.flash('update_product'),
       });
     })
     .catch((err) => {
@@ -376,7 +391,7 @@ app.get('/editItem', isAuthenticated, (req, res) => {
   const { id } = req.query;
   productController.getProductById(id)
     .then((success) => {
-      if(success.provider == req.user.username){
+      if (success.provider == req.user.username) {
         res.render('editItem', {
           product: success,
           login: req.isAuthenticated(),
@@ -386,7 +401,7 @@ app.get('/editItem', isAuthenticated, (req, res) => {
         });
       } else {
         res.send('Bạn không có quyền truy cập!');
-      } 
+      }
     })
     .catch((err) => {
       res.send(err);
@@ -394,9 +409,9 @@ app.get('/editItem', isAuthenticated, (req, res) => {
 });
 
 app.post('/saveBill', (req, res) => {
-  console.log('aaa',req.body.data);
+  console.log('aaa', req.body.data);
   productPurchaseController.updatePurchase(req.body.data)
-  .then(success => res.send('ok'))
-  .catch(err => res.send(err));
-})
+    .then(success => res.send('ok'))
+    .catch(err => res.send(err));
+});
 
