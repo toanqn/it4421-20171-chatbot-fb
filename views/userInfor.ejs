@@ -17,9 +17,7 @@
     <body>
         <!-- Header -->
         <%- include('partition/header.ejs') %>
-        <% if(message) { %>
-            <div class="alert"><%= message %></div>
-        <% } %>
+        <%- include('partition/message.ejs') %>
         
         <div class="content container">
 

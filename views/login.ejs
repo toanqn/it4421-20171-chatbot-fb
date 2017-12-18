@@ -43,9 +43,8 @@
     <body>
         <!-- header -->
         <%- include('partition/header.ejs') %>
-        <% if(message) { %>
-            <div class="alert"><%= message %></div>
-        <% } %>
+        <%- include('partition/message.ejs') %>
+
         <!-- Sign Up/Login Tab -->
         <div id="signupLoginTab" class="well">
             <ul class="nav nav-tabs nav-pills nav-justified">
@@ -97,6 +96,7 @@
         </div>
         <!-- End Tab -->
     </body>
+
     <% if(!isSignup) { %>
         <script>
             $('#signup').removeClass("in");
@@ -105,4 +105,5 @@
             $('.loginTab').addClass("active");
         </script>
     <% } %>
+
 </html>
