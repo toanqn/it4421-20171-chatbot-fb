@@ -148,26 +148,18 @@
     <!-- End footer -->
     <script>
         var search = function(){
-            var option = document.getElementsByTagName("option");
+            var categoryId = $('#selectCateSearch option:selected').val() ;
             var range = document.getElementsByClassName("range");
             var min = range[0].value;
             var max = range[1].value;
+            
+            window.location.href = `/search?id=${categoryId}&min=${min}&max=${max}`
+            return false;
 
-            if(option[0].selected){
-                window.location.href = `/search?id=0000001&min=${min}&max=${max}`;
-                return false;
-            } 
-            else if(option[1].selected){
-                window.location.href = `/search?id=0000002&min=${min}&max=${max}`;
-                return false;
-            } 
-            else {
-                window.location.href = `/search?id=0000003&min=${min}&max=${max}`;
-                return false;
-            }
         }
 
-        
+        $("#selectCateSearch").val("<%- selectedCateId  %>");
+
         if(<%- page_number %> == 1) {
             $('#liPrev').addClass("disabled") ;
             $("a[href='/?page_number=<%- parseInt(page_number)-1 %>']").attr('href', '#liPrev') ;

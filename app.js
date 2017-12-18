@@ -100,6 +100,7 @@ app.get('/', (req, res) => {
             products: filteredProduct,
             page_number,
             moment,
+            selectedCateId: 0000001 ,
           });
         });
     })
@@ -136,6 +137,7 @@ app.get('/search', (req, res) => {
               products: filteredProduct,
               page_number: 1,
               moment,
+              selectedCateId: cateId,
             });
           } else {
             filteredProduct.forEach((e) => {
@@ -148,7 +150,8 @@ app.get('/search', (req, res) => {
               username: req.user ? req.user.username : '',
               products: filteredProductWithPrice,
               page_number: 1,
-              moment, 
+              moment,
+              selectedCateId: cateId,
             });
           }
         });
@@ -171,6 +174,7 @@ app.get('/searchText', (req, res) => {
         products: filteredProduct,
         page_number: 1,
         moment,
+        selectedCateId: 0000001,
       });
     })
     .catch((err) => {
