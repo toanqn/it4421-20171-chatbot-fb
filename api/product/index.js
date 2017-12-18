@@ -40,6 +40,7 @@ route.post('/sellProduct', (req, res) => {
         histories: [],
       }
       console.log('Upload a new product successfull!');
+      req.flash('msg_upload', 'Đăng sản phẩm thành công!');
       return controllerPH.saveProductHistory(productHistories);
     })
     .then(ok => res.redirect('/sellNewProduct'))
@@ -61,6 +62,7 @@ route.post('/updateProduct', (req, res) => {
         if (err) throw err;
         console.log(`Update product ${idProduct} successfull!`);
       });
+      req.flash('update_product', 'Cập nhật sản phẩm thành công!');
       res.redirect('/manageSales');
     });
 });

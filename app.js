@@ -22,12 +22,14 @@ const checkBuyAuthenticate = require('./utility/checkBuyAuthen');
 const dateValidate = require('./utility/dateValidate');
 const connectSocket = require('./utility/socket');
 const moment = require('moment');
+const flash = require('connect-flash');
 
 app.use(express.static(`${__dirname}/public`));
 app.set('view engine', 'ejs');
 app.set('views', 'views');
 app.use(bodyParser.json({ extended: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(flash());
 app.use(session({
   secret: 'secret',
   saveUninitialized: true,
@@ -186,7 +188,7 @@ app.get('/login', (req, res) => {
   res.render('login', {
     login: req.isAuthenticated(),
     username: req.user ? req.user.username : '',
-    message: false,
+    message: req.flash('msg_signup'),
     isSignup: false,
   });
 });
@@ -195,7 +197,7 @@ app.get('/signup', (req, res) => {
   res.render('login', {
     login: req.isAuthenticated(),
     username: req.user ? req.user.username : '',
-    message: false,
+    message: req.flash('msg_signup'),
     isSignup: true,
   });
 });
@@ -226,6 +228,7 @@ app.get('/userInfo', isAuthenticated, (req, res) => {
     username: req.user ? req.user.username : '',
     user: req.user,
     menu: 'userInfo',
+    message: req.flash('update_profile'),
   });
 });
 
@@ -288,6 +291,7 @@ app.get('/sellNewProduct', isAuthenticated, (req, res) => {
     login: req.isAuthenticated(),
     username: req.user ? req.user.username : '',
     menu: 'sellNewProduct',
+    message: req.flash('msg_upload'),
   });
 });
 
@@ -371,6 +375,7 @@ app.get('/manageSales', isAuthenticated, (req, res) => {
         username: req.user ? req.user.username : '',
         menu: 'manageSales',
         moment,
+        message: req.flash('update_product'),
       });
     })
     .catch((err) => {
